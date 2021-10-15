@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    
+     <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"  rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/css/tether.min.css"  rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="/assets/css/home.css"  rel="stylesheet">
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+   
+   
+    
+   
+<!----------------------------- API -------------------------- -->
+   
+    <title>HomePage</title>
+   
+</head>
+<body>
+  
+  
+    <!-- Food search  -->
+    <div class="bar">
+      <!-- Create a binding between the searchString model and the text field -->
+      <input type="text" id="search" v-model="searchString" placeholder="Enter your search terms" />
+  </div>  
+
+
+ 
+
+
+    <!-- Side Nav Bar   -->
+    <div id="wrapper">
+      <div class="overlay"></div>
+       
+           <!-- Sidebar -->
+       <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+          <div class="sidebar-header">
+          <div class="sidebar-brand">
+            <a href="#">Brand</a></div></div>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#team">Team</a></li>
+          <li class="dropdown">
+          <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Works <span class="caret"></span></a>
+        <ul class="dropdown-menu animated fadeInLeft" role="menu">
+         <div class="dropdown-header">Dropdown heading</div>
+         <li><a href="#pictures">Pictures</a></li>
+         <li><a href="#videos">Videeos</a></li>
+         <li><a href="#books">Books</a></li>
+         <li><a href="#art">Art</a></li>
+         <li><a href="#awards">Awards</a></li>
+         </ul>
+         </li>
+         <li><a href="#services">Services</a></li>
+         <li><a href="#contact">Contact</a></li>
+         <li><a href="#followme">Follow me</a></li>
+         </ul>
+     </nav>
+           <!-- /#sidebar-wrapper -->
+   
+           <!-- Page Content -->
+           <div id="page-content-wrapper">
+               <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+                   <span class="hamb-top"></span>
+             <span class="hamb-middle"></span>
+           <span class="hamb-bottom"></span>
+               </button>
+               <div class="container">
+
+
+                <div class="row">
+                  <div class="container">
+                    <h2>What you feel like eating:</h2>
+                    <div id="carouselExample" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
+                   <!-- <div class="carousel-indicators">
+                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+                   </div> -->
+                   <div class="carousel-inner" id="searchCarousel">
+                     
+                   </div>
+
+                  </div>
+                  </div>
+
+                  <div id="myDIV">
+                    This is my DIV element.
+                    </div>
+              
+
+              </div>
+
+                   <div class="row">
+                       <div class="col-lg-8 col-lg-offset-2">
+                           <h1>Feeling Hungry Again?</h1>
+                           <p>Bacon ipsum dolor sit amet tri-tip shoulder tenderloin shankle. Bresaola tail pancetta ball tip doner meatloaf corned beef. Kevin pastrami tri-tip prosciutto ham hock pork belly bacon pork loin salami pork chop shank corned beef tenderloin meatball cow. Pork bresaola meatloaf tongue, landjaeger tail andouille strip steak tenderloin sausage chicken tri-tip. Pastrami tri-tip kielbasa sausage porchetta pig sirloin boudin rump meatball andouille chuck tenderloin biltong shank </p>
+                           <p>Pig meatloaf bresaola, spare ribs venison short loin rump pork loin drumstick jowl meatball brisket. Landjaeger chicken fatback pork loin doner sirloin cow short ribs hamburger shoulder salami pastrami. Pork swine beef ribs t-bone flank filet mignon, ground round tongue. Tri-tip cow turducken shank beef shoulder bresaola tongue flank leberkas ball tip.</p>
+                       
+                       </div>
+                   </div>
+
+                   <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                    <canvas id="myChart" width="400" height="200"></canvas>
+                  </div>
+                  </div>
+               </div>
+           </div>
+           <!-- /#page-content-wrapper -->
+   
+       </div>
+       <!-- /#wrapper -->
+    <!-- End Side Nav Bar -->
+
+    
+  
+
+
+
+<script>
+
+
+////////Side Nav Bar ////////////////////////////
+$(document).ready(function () {
+  var trigger = $('.hamburger'),
+      overlay = $('.overlay'),
+     isClosed = false;
+
+    trigger.click(function () {
+      hamburger_cross();      
+    });
+
+    function hamburger_cross() {
+
+      if (isClosed == true) {          
+        overlay.hide();
+        trigger.removeClass('is-open');
+        trigger.addClass('is-closed');
+        isClosed = false;
+      } else {   
+        overlay.show();
+        trigger.removeClass('is-closed');
+        trigger.addClass('is-open');
+        isClosed = true;
+      }
+  }
+  
+  $('[data-toggle="offcanvas"]').click(function () {
+        $('#wrapper').toggleClass('toggled');
+  });  
+});
+/////// End Side Bar//////////////////
+
+
+
+//apiKeyScheme.apiKey = "ebfaf77b0edf47158b8732692a87bde4"
+//bf474c18dfd04d1ab99f22a87c496ed2
+
+
+
+function myFunction(id){
+  document.getElementById("myDIV").innerHTML = ""
+
+  https://api.spoonacular.com/recipes/{id}/nutritionLabel
+
+  $.ajax({
+                type: 'get',
+                url: "https://api.spoonacular.com/recipes/"+ id+"/nutritionLabel?apiKey=bf474c18dfd04d1ab99f22a87c496ed2",  
+                beforeSend: function(xhr) { 
+                  xhr.setRequestHeader("Content-Type", "application/json"); 
+                },      
+                success:function(response)
+                { console.log(response);
+               document.getElementById("myDIV").innerHTML += response
+
+                  },
+                  error : function(xhr, status, error)
+                  {
+                      console.log("Status of error message" + status + "Error is" + error);
+                  }} ) 
+
+
+                $.ajax({
+                type: 'get',
+                url: "https://api.spoonacular.com/recipes/"+ id +"/summary?apiKey=bf474c18dfd04d1ab99f22a87c496ed2",  
+                beforeSend: function(xhr) { 
+                  xhr.setRequestHeader("Content-Type", "application/json"); 
+                },      
+                success:function(response)
+                { console.log(response);
+                  var x = document.getElementById("myDIV");
+                  $('.recipebtn').click(function() {
+                      $('#myDIV').toggle('slow');
+                  });
+  document.getElementById("myDIV").innerHTML += response.summary
+
+                  },
+                  error : function(xhr, status, error)
+                  {
+                      console.log("Status of error message" + status + "Error is" + error);
+                  }  
+      });}
+
+    
+
+
+///////////////////// Search Food /////////////////////////
+
+var search = document.getElementById("search");
+
+// Execute a function when the user releases a key on the keyboard
+search.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    var q = search.value
+    $.ajax({
+    type: 'get',
+    
+    url: "https://api.spoonacular.com/recipes/complexSearch?query="+q+"&maxFat=25&number=5&apiKey=bf474c18dfd04d1ab99f22a87c496ed2",  
+    beforeSend: function(xhr) { 
+      xhr.setRequestHeader("Content-Type", "application/json"); 
+    },      
+    success:function(response)
+    {
+
+        console.log(response.results);
+        var carousel = document.getElementById("searchCarousel")
+        carousel.innerHTML = ""
+      for (var i = 0; i<response.results.length; i++){
+        if ( i == 0){
+          var active = "active"
+        }
+        else{
+          var active = ""
+        }
+        
+        carousel.innerHTML += ` <div class="carousel-item ${active}">
+                       <div class="col-md-3" style="float:left">
+                         <div class="card mb-2">
+                           <img class="card-img-top"
+                             src="${response.results[i].image}" alt="Card image cap">
+                           <div class="card-body">
+                             <h4 class="card-title">${response.results[i].title}</h4>
+                             <p class="card-text">This dish has </p>
+                               <p class="card-text">You can from the find their recipe and nutrition value at the button </p>
+                             <a class="btn btn-primary recipebtn" onclick="myFunction(${response.results[i].id})">Button</a>
+                           </div>
+                         </div>
+                       </div>
+                      </div>`
+    }
+
+    
+     
+      
+
+      //https://api.spoonacular.com/food/products/{id}/nutritionLabe
+      
+      // document.getElementById("carouselExample").innerHTML =    ` <button class="carousel-control-prev" data-bs-target="#carouselExample" type="button" data-bs-slide="prev">
+      //                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      //                <span class="visually-hidden">Previous</span>
+      //              </button>
+      //              <button class="carousel-control-next" data-bs-target="#carouselExample" type="button" data-bs-slide="next">
+      //                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      //                <span class="visually-hidden">Next</span>
+      //              </button>`
+
+    },
+
+    error : function(xhr, status, error)
+    {
+        console.log("Status of error message" + status + "Error is" + error);
+    }   
+
+});
+  }
+});
+
+
+
+
+//////Near by food API//////////////////
+
+// $.ajax({
+//     type: 'get',
+//     url: "https://api.spoonacular.com/recipes/search?apiKey=ebfaf77b0edf47158b8732692a87bde4&number=1&query=sandwich",  
+//     beforeSend: function(xhr) { 
+//       xhr.setRequestHeader("Content-Type", "application/json"); 
+//     },      
+//    // data: '{"query":"{ mealPlan { day date calories meals { meal recipe { name } } } }"}',           
+
+//     success:function(response)
+//     {
+//         console.log(response);
+//     },
+
+//     error : function(xhr, status, error)
+//     {
+//         console.log("Status of error message" + status + "Error is" + error);
+//     }   
+
+// });
+
+
+
+
+// axios.get("https://platform.fatsecret.com/rest/server.api?food_id=33691&method=food.get.v2&oauth_consumer_key=9a1a6fd1fff5433f9dd77daa4587bf5d&oauth_nonce=1234&oauth_signature=sAyYTJiIxOGkvFpBcH8L%2BlFQRCQ%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1245126631&oauth_version=1.0",{
+            
+//   headers: { 
+//     "Access-Control-Allow-Origin": "*",
+// "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+// "Access-Control-Allow-Headers": "Authorization, Content-Type",
+// "Content-Type": "application/json"
+
+//               },     
+// })
+//             .then(response=>{
+//                 console.log(response.data);
+
+//                 }
+            
+//             )
+//             .catch(error=>{
+//                 alert("wrong");
+//                 console.log(error)
+//             })
+
+
+
+//var user1 = [{},{},{},{},{}]
+
+var total_calories = []
+var average_calories = []
+
+var ctx = document.getElementById("myChart");
+var chart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" ],
+    datasets: [
+      {
+        type: "bar",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
+        label: "Total Calories intake",
+        data: total_calories
+      },
+
+      {
+        type: "line",
+        label: "Average",
+        data: average_calories,
+        lineTension: 0, 
+        fill: true 
+      }
+    ]
+  }
+});
+
+
+
+// $.ajax({
+//     url: "https://api.foodai.org/v4.1/classify",
+//     data: { 
+//       image_url: "https://www.seriouseats.com/thmb/Q8owQ-WUKl5XULrUnIXBaPrfFI4=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2013__08__20130624-257009-chicken-rice-set-edit-ba8ce18fa35d4493927d91b6e7d25a02.jpg",
+//                 num_tag: "10",
+//                   api_key: "925f091c5e11186b960a4c83e217f8611ae2bd1e"
+//     },
+//     cache: false,
+//     type: "POST",
+//     success: function(response) {
+//       console.log(response)
+//     },
+//     error: function(xhr) {
+
+//     }
+// });
+
+
+            
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

@@ -21,7 +21,7 @@
         if ($status)
         { 
             $_SESSION["username"] = $username;
-            header("Location: ../index.html");
+            header("Location: ../home.html");
             return;
         }
         else

@@ -42,11 +42,13 @@
                       </div>
                     </nav> 
             <div id= "container">
-          <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
+<!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
           
 
 
- <!------------------------------ CODE HERE ------------------------------->
+<!------------------------------ CODE HERE ------------------------------->
+
+<div id="map-canvas" style="height:500px ;width:500px; "></div>
 
 
 
@@ -57,13 +59,16 @@
                 </div>
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
               <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-<!---------------------FOOTER (DUN TOUCH HERE)-------------------->    
+             
+              <!---------------------FOOTER (DUN TOUCH HERE)-------------------->    
           <script>
 /////////////////////////////////CODE JS HERE///////////////////////    
+
+var locations = [];
   $.ajax({
-    type: "POST",
+    type: "GET",
     dataType: "json",
-    url: "http://localhost/wad-2-project/data/places.geojson",
+    url: "http://127.0.0.1:5500/data/places.geojson",
     //crossDomain: true,
 //     beforeSend: function(request) {
 //     request.setRequestHeader("apikey", "Hbjt6beOzjpqSGAq9KKKbVBf5YtyzozN");
@@ -77,19 +82,129 @@
       console.log(response.features[0].geometry.coordinates)
       console.log(response.features[0].properties.Name)
       console.log(response.features[0].properties.description)
+      for (var i = 0; i<response.features.length; i++){
+        var arrays = [response.features[i].properties.Name, response.features[i].properties.description, response.features[i].geometry.coordinates[0],response.features[i].geometry.coordinates[1] ]
+       locations.push(arrays)
+
+      }
     },
     error: function(xhr) {
       console.log(xhr)
     }
   });
+  //AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ
+  console.log(locations)
+
+  window.onload = getMyLocation;
+
+  var map;
+  function getMyLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(displayLocation);
+    } else {
+      alert('Oops, no geolocation support');
+    }
+  }
+  
+  //This function is inokved asynchronously by the HTML5 geolocation API.
+  function displayLocation(position) {
+    //The latitude and longitude values obtained from HTML 5 API.
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+  
+    //Creating a new object for using latitude and longitude values with Google map.
+    var latLng = new google.maps.LatLng(latitude, longitude);
+  
+    showMap(latLng);
+  
+    
+    createMarker(latLng);
+  
+    //Also setting the latitude and longitude values in another div.
+    var div = document.getElementById('location');
+    div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
+  }
+  
+  function showMap(latLng) {
+    //Setting up the map options like zoom level, map type.
+    var mapOptions = {
+      center: latLng,
+      zoom: 18,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+  
+    //Creating the Map instance and assigning the HTML div element to render it in.
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  }
+  
+
+
+ //map()
+ 
+  
+ 
+  
+  function createMarker(latLng, placeResult) {
+   
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {  
+    console.log(locations[i][2])
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][3], locations[i][2]),
+        map: map,
+        animation: google.maps.Animation.DROP,
+        clickable: true
+      });
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+    //console.log(latLng)
+    var markerOptions = {
+      position: latLng,
+      map: map,
+      animation: google.maps.Animation.DROP,
+      clickable: true
+    }
+    //Setting up the marker object to mark the location on the map canvas.
+    var marker = new google.maps.Marker(markerOptions);
+  
+    if (placeResult) {
+      var content = placeResult.name+'<br/>'+placeResult.vicinity+'<br/>'+placeResult.types;
+      addInfoWindow(marker, latLng, content);
+    }
+    else {
+      var content = 'You are here: ' + latLng.lat() + ', ' + latLng.lng();
+      addInfoWindow(marker, latLng, content);
+    }
+  
+  }
+  
+  function addInfoWindow(marker, latLng, content) {
+    var infoWindowOptions = {
+      content: content,
+      position: latLng
+    };
+  
+    var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+  
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open(map);
+    });
+  }
 
 
 
+  
 
 
 /////////////////////////////////END CODE JS HERE///////////////////////
           </script>
-          
+        
             </body>
       
           
@@ -102,11 +217,16 @@
 
    
 
-
-
+          <script type='text/javascript'
+          src='https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places,weather'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-</body>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ&callback=initialize_map">
+    </script>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ&callback=initMap">
+</script> 
+  </body>
 
 
 </html>

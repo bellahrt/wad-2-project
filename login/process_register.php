@@ -51,7 +51,7 @@ $status = $dao->create($new_user);
 if ( $status ) {
 
     $_SESSION["login_page"] = $username;
-    header("Location: ../index.html");
+    header("Location: ../profiling.html");
     exit();
 }
 else

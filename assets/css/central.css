@@ -1,5 +1,5 @@
 body{
-    background-image:url(/wad-2-project/assets/img/bg.jpg);
+    background-image:url(/assets/img/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -8,8 +8,16 @@ body{
     background-color: white;
 }
 
-#headerOne, #divLogo {
+#headerOne {
     background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 42px;
+}
+#divLogo {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -20,7 +28,8 @@ body{
 #headlineLogo {
     font-family: 'Abril Fatface', cursive;
     font-size: 25px;
-    color: #8aff75; 
+    color: #6ac25a; 
+    margin-top:0;
     /* margin-left: 25px; */
 }
 

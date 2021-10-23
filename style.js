@@ -54,3 +54,25 @@ app.component('home-navbar', {
                 </div>`
 } )
 app.mount('#homenav')
+
+// index to html calorie tracker section
+app.component('trackers-content', {
+
+    props: ['iclass', 'dvalue', 'delayvalue', 'title', 'context', 'iconcolour','link' ],
+
+    template: `
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" :data-aos-delay="delayvalue">
+                    <div :class='iconcolour'>
+                    <div class="icon">
+                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="none" stroke-width="0" fill="#f5f5f5" :d=dvalue></path>
+                        </svg>
+                        <i :class='iclass'></i>
+                    </div>
+                    <h4><a :href=link>{{title}}</a></h4>
+                    <p>{{context}}</p>
+                    </div>
+                </div>
+            `
+} )
+app.mount('#content')

@@ -11,7 +11,28 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!---------------------- END BASIC CSS (DUN TOUCH HERE) -------------------------->
-    <link href="assets/css/home.css"  rel="stylesheet">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@next"></script>
+
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+     <!-- VueJs -->
+    <script src="https://unpkg.com/vue@next"></script>
 
     
     <title>Walking-trail</title>
@@ -19,7 +40,10 @@
 <body>
 
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
-        <nav class="navbar navbar-expand-lg navbar-light m-1" id="navbar">
+<div id='navHead'>
+  <navhead></navhead>
+</div>
+        <!-- <nav class="navbar navbar-expand-lg navbar-light m-1" id="navbar">
             <div class="container-fluid">
                 <header id="headerOne">	
                     <div id="divLogo">
@@ -40,31 +64,42 @@
                 </ul>
               </div>
             </div>
-          </nav> 
-  <div id= "container">
+          </nav>  -->
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
 
 
 
 <!------------------------------ CODE HERE ------------------------------->
+<div id= "container">
+   
+    <div class="text-dark bg-warning text-center mb-0 ">
+        <h3>Zoom out to view the Monuments Markers</h3 >     
+        <p class='bg-dark text-info mb-0'>Enable map location access to tell us where your location is right now!</p>
+        <p class='bg-dark text-warning mb-0'> Click on a monument marker to select a place you like to visit!</p>
 
-  <div class = 'img-fluid' id="map-canvas"  style="height:500px ;width:800px;">
+    </div>
+
+    <div class = 'img-fluid mt-0' id="map-canvas"  style="height:500px ;width:1176px;"></div>
+    
+    </div>
+</div>
+<div class='container'>
+<br/>
+  <div class="card text-dark bg-dark mb-3" >
+    <!-- <div class="card-header">Path</div> -->
+    <div class="card-body ">
+      <h5 class="card-title text-info mb-0 text-center">Distance Walk, Calories Burn</h5>
+      <p id='location'class="card-text text-warning text-center"></p>
+    </div>
 
 </div>
-  <div class="card text-dark bg-success mb-3" >
-      <div class="card-header">Calories Burn</div>
-      <div class="card-body">
-        <h5 class="card-title">Distance</h5>
-        <p id='location' class="card-text"></p>
-  </div>
-
-
 
 
 
 <!------------------------------ CODE HERE HERE ------------------------------->            
 <!---------------------FOOTER (DUN TOUCH HERE)-------------------->          
-</div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
    
@@ -101,7 +136,6 @@ console.log(xhr)
 }
 });
 //AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ
-console.log(locations)
 
 window.onload = getMyLocation;
 
@@ -122,7 +156,6 @@ var longitude = position.coords.longitude;
 
 //Creating a new object for using latitude and longitude values with Google map.
 var latLng = new google.maps.LatLng(latitude, longitude);
-
 showMap(latLng);
 
 
@@ -154,7 +187,7 @@ map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 function createMarker(latLng, latitude, longitude, placeResult) {
     
-
+console.log(placeResult)
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 for (i = 0; i < locations.length; i++) {  
@@ -170,10 +203,11 @@ return function() {
 infowindow.setContent(locations[i][0]);
 
 console.log(locations[i][0])                                                    // name of the place
+var destination = locations[i][0]
 var lat1 = locations[i][3]                                                      // destination lat
 var lon2 = locations[i][2]                                                      // destination long
 
-directionService(latitude,longitude, lat1, lon2)
+directionService(latitude,longitude, lat1, lon2, destination)
 
 infowindow.open(map, marker);
 }
@@ -214,7 +248,7 @@ infoWindow.open(map);
 }
 
 // Display path from location A to B
-function directionService(latitude,longitude, lat1, lon2){
+function directionService(latitude,longitude, lat1, lon2, destination){
 
     let directionsService = new google.maps.DirectionsService();
     let directionsRenderer = new google.maps.DirectionsRenderer();
@@ -235,13 +269,15 @@ function directionService(latitude,longitude, lat1, lon2){
         } else {
             directionsRenderer.setDirections(response); // Add route to the map
             console.log(response)
+            console.log(response.routes[0].summary
+            )
             var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
             if (!directionsData) {
             window.alert('Directions request failed');
             return;
             }
             else {
-            document.getElementById('location').innerHTML += "<br/> Walking distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
+            document.getElementById('location').innerHTML += "<br/><b>Destination:</b> " + destination + "<br/>Walking distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
             
             //Nutrition API get distance travelled to calculate calorie burned
             var distance = directionsData.distance.text
@@ -250,6 +286,7 @@ function directionService(latitude,longitude, lat1, lon2){
       }
     });
 }
+var pathCount = 1
 
 function nutritionCalorie(distance) {
   
@@ -279,11 +316,12 @@ function nutritionCalorie(distance) {
     .then(response => response.text())
     .then(result => {
     var data = JSON.parse(result)
-    //console.log(data.exercises[0])                      // Datas 
+    console.log(data.exercises[0])                      // Datas 
     var calorie = data.exercises[0]['nf_calories']      // calories burned
     var duration = data.exercises[0]['duration_min']    // duration
-    var calorieResult = `<br/>Congratulation! You have burned ` + calorie + ` calories in ` + duration +' minutes'
-    console.log(calorieResult)
+    var name = data.exercises[0]['name'] 
+    var calorieResult = `<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +' minutes<br/>'
+    pathCount++
     document.getElementById('location').innerHTML += calorieResult
 
     })
@@ -311,6 +349,20 @@ src='https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places,weathe
 <script async
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ&callback=initMap">
 </script> 
+
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<!-- Vue Component Styling -->
+<script src="style.js"></script>
+
 </body>
 
 

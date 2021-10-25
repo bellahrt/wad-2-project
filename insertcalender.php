@@ -3,19 +3,21 @@
     require_once 'model/getcalenderDAO.php';
 
 
-    // $username = $_POST["username"];
+// $username = $_POST["username"];
     // $password = $_POST["password"];
 
-$username = "j";
+//$username = "j";
 
-   $title = "cake" ;
-   $descriptions = "calories:200" ;
-   $starts = 2021-10-07;
-   $ends = 2021-10-07;
-    $className = 'fc-bg-default';
-     $icon = "circle";
+$username = $_GET["username"];
+$foodName = $_GET["title"] ;
+$nutritionCount = $_GET["descriptions"] ;
+$starts = $_GET["starts"];
+$ends = $_GET["ends"];
+$className = $_GET["className"];
+$icon = $_GET["icon"];
 
-$new_user = new calender($username, $title, $descriptions, $starts, $ends, $className, $icon);
+
+$new_user = new calender($username, $foodName, $nutritionCount, $starts, $ends, $className, $icon);
 $dao = new getcalenderDAO();
 
 $status = $dao->create($new_user);

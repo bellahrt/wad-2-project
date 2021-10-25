@@ -12,7 +12,7 @@ class getcalenderDAO {
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
         
-        $sql = "SELECT username, title, descriptions, starts, ends, className, icon  FROM  usercalender WHERE username = :username";
+        $sql = "SELECT username, foodName, nutritionCount, starts, ends, className, icon  FROM  usercalender WHERE username = :username";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
             
@@ -20,7 +20,7 @@ class getcalenderDAO {
         if ( $stmt->execute() ) {
             while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
                // $user = new calender($row["username"], $row["title"],$row["descriptions"],$row["starts"],$row["ends"],$row["className"],$row["icon"]);
-                 array_push($user,new calender($row["username"], $row["title"],$row["descriptions"],$row["starts"],$row["ends"],$row["className"],$row["icon"]));
+                 array_push($user,new calender($row["username"], $row["foodName"],$row["nutritionCount"],$row["starts"],$row["ends"],$row["className"],$row["icon"]));
             }
         }
         else {
@@ -42,7 +42,7 @@ class getcalenderDAO {
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
 
-        $sql = "INSERT INTO usercalender (username, title, descriptions, starts, ends, className, icon) VALUES (:username, :title, :descriptions, :starts, :ends, :className, :icon)";
+        $sql = "INSERT INTO usercalender (username, foodName, nutritionCount, starts, ends, className, icon) VALUES (:username, :title, :descriptions, :starts, :ends, :className, :icon)";
         $stmt = $conn->prepare($sql);
         
         $username = $user->getname();

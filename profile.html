@@ -169,7 +169,7 @@ jQuery(document).ready(function(){
     });
   jQuery("#add-event").submit(function(){
       alert("Submitted");
-      event.preventDefault();
+      // event.preventDefault();
       var values = {};
       $.each($('#add-event').serializeArray(), function(i, field) {
           values[field.name] = field.value;
@@ -177,8 +177,9 @@ jQuery(document).ready(function(){
       var date = values.edate
       var date1 = date.substring(0, date.length-3);
 
-      axios.get("http://localhost/is216/wad-2-project/insertcalender.php",
+      axios.get("http://localhost/healthyou/wad-2-project/insertcalender.php",
       {params:{
+        username: "j",
         className :values.ecolor,
         starts:date1,
         ends: date1,
@@ -203,13 +204,18 @@ jQuery(document).ready(function(){
     // Calendar
     // ------------------------------------------------------ //
     $.ajax({
-    url:"http://localhost/IS216/wad-2-project/getcalender.php",
+    url:"http://localhost/healthyou/wad-2-project/getcalender.php",
+    data: {
+        "username": "j"
+    },
     type:"POST",
     crossDomain:true,
+    
     success:function(msg){
         //id_numbers = msg;
         // id_numbers = JSON.parse(msg);
         var event =  msg
+
     //    var msgs = [
 	// 			{
 	// 				title: 'Barber',
@@ -227,7 +233,7 @@ jQuery(document).ready(function(){
 	// 				className: 'fc-bg-default',
 	// 				icon : "circle"
 	// 			}]
-               // console.log(msgs)
+  
         jQuery(function() {
 		// page is ready
 		jQuery('#calendar').fullCalendar({

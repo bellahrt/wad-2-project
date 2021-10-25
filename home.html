@@ -10,45 +10,23 @@
     <link href="assets/css/central.css"  rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
     <!---------------------- END BASIC CSS (DUN TOUCH HERE) -------------------------->
     <link href="assets/css/home.css"  rel="stylesheet">
 
     
-    <title>Document</title>
+    <title>Home Trail</title>
 </head>
 <body>
 
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
-        <nav class="navbar navbar-expand-lg navbar-light m-1" id="navbar">
-            <div class="container-fluid">
-                <header id="headerOne">	
-                    <div id="divLogo">
-                        <h2 id="headlineLogo" >EATGREENS</h2>           
-                    </div>
-                </header>
-              <button class="navbar-toggler  " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./places.html">Walking-trail</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav> 
+   
+             <!-- nav bar taken from style.js Vue js Component -->
+          <div id='homenav'>
+              <home-navbar></home-navbar>
+          </div>
   <div id= "container">
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
-
-
-
-
-
-
 
       <div class="container">
         <div class="row">
@@ -99,15 +77,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </body>
 
-
-
-
 <script>
-
-
-
-
-
 
 var search = document.getElementById("search");
 
@@ -309,4 +279,5 @@ function myFunction(id){
 
 
 </script>
+<script src='style.js'></script>
 </html>

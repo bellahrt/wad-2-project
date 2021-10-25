@@ -15,23 +15,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Hind+Siliguri|Pattaya" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/profiling.css">	
     <link href="assets/css/central.css"  rel="stylesheet">
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
 
 <body>
-<header id="headerOne">	
-	<div id="divLogo">
-		<h2 id="headlineLogo">EATGREENS</h2>
-		<p id="paragLogo">Your personal nutrition tracker</p>
-	</div>
-
-	<nav id="navUl">
-		<ul id="ulNav">
-			<li class="liNav"><a class="aNav" href="">ABOUT</a></li>
-			<li class="liNav"><a class="aNav" href="">CONTACT</a></li>
-			<li class="liNav"><a class="aNav" href="">LOG IN</a></li>
-		</ul>
-	</nav>
-</header>
+<!-- Navigation bar from style.js (Vue Component) -->
+<div id='nav'>
+    <navbar></navbar>
+</div>
 
 <main id="mainOne">
 	<!-- <div id="divLogIn">
@@ -1380,6 +1371,7 @@
 
 
     </script>
+    <script src="style.js"></script>
 </body>
 
 </html>

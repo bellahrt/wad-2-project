@@ -51,7 +51,12 @@
   <div class = 'img-fluid' id="map-canvas"  style="height:500px ;width:800px;">
 
 </div>
-<div id='location'></div>
+  <div class="card text-dark bg-success mb-3" >
+      <div class="card-header">Calories Burn</div>
+      <div class="card-body">
+        <h5 class="card-title">Distance</h5>
+        <p id='location' class="card-text"></p>
+  </div>
 
 
 
@@ -125,7 +130,7 @@ createMarker(latLng, latitude, longitude);
 
 //Also setting the latitude and longitude values in another div.
 var div = document.getElementById('location');
-div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
+//div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
 }
 
 function showMap(latLng) {

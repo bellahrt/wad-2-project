@@ -1,5 +1,6 @@
 // yk nav bar
 const app = Vue.createApp({
+
 })
 app.component('navbar', {
 
@@ -56,29 +57,34 @@ app.mount('#homenav')
 
 // other pages Vendor navigation bar 
 app.component('navhead', {
+    props: ['index', 'about', 'tracker', 'team', 'contact'],
         
     template: `
         <header id="header" class="d-flex align-items-center">
-          <div class="container d-flex align-items-center">
-        
-            <h1 class="logo me-auto"><a href="index.html">HealthYou</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        
+            <div class="container d-flex align-items-center">
+
+            <h1 class="logo me-auto"><a href="index.html">HealthYou</a></h1>        
             <nav id="navbar" class="navbar">
-              <ul>
-                <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#index.htmlservices">Calories Tracker</a></li>
-                <li><a class="nav-link scrollto " href="index.html#portfolio">Portfolio</a></li>
-                <li><a class="nav-link scrollto" href="index.html#team">Team</a></li>
-                <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
-                <li><a class="getstarted scrollto" href="index.html#about">Get Started</a></li>
-              </ul>
-              <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-          </div>
+                <ul>
+                    <li><a :class="index" href="index.html#hero">Home</a></li>
+                    <li><a :class="about" href="index.html#about">About</a></li>
+                    <li class="dropdown"><a :class="tracker"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                        <li><a href="home.html">Food Calorie Tracker</a></li>
+                        <li><a href="profile.html">Calendar</a></li>
+                        <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+                        </ul>
+                    </li>
+                    <li><a :class="team" href="index.html#team">Team</a></li>
+                    <li><a :class="contact" href="index.html#contact">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+            </div>
         </header>
-            `
+        `
+           
 } )
 app.mount('#navHead')
 

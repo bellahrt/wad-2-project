@@ -23,6 +23,8 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -110,36 +112,40 @@
 
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-      <div class="carousel-inner" role="listbox">
+      <!-- <div id="carousel-inner" role="listbox"> -->
+        <div id="mainCarousel" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+        <div class="carousel-item active" style="background-image: url(assets/img/bg.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">Welcome to <span>HealthYou</span></h2>
-              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <h2 class="animate__animated animate__fadeInDown">{{messages[Math.floor(Math.random()*messages.length)]}}</h2>
+              <p class="animate__animated animate__fadeInUp">Welcome to HEALTHYou
+                <br>With us, we make your dreams into reality by keeping you in check to strive towards your goals.
+              </p>
+              
             </div>
           </div>
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+        <div class="carousel-item" style="background-image: url(assets/img/bg.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+              <h2 class="animate__animated animate__fadeInDown">{{messages[Math.floor(Math.random()*messages.length)]}}</h2>
+              <p class="animate__animated animate__fadeInUp"></p>
+              <a href="#services" class="btn-get-started animate__animated animate__fadeInUp scrollto">Check Out Our Services</a>
             </div>
           </div>
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+        <div class="carousel-item" style="background-image: url(assets/img/bg.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+              <h2 class="animate__animated animate__fadeInDown">{{messages[Math.floor(Math.random()*messages.length)]}}</h2>
+              <p class="animate__animated animate__fadeInUp"></p>
+              <a href="#services" class="btn-get-started animate__animated animate__fadeInUp scrollto">Check Out Our Services</a>
             </div>
           </div>
         </div>

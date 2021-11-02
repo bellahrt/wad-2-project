@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <title>Green Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+  
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <!-- VueJs -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+
+
+      #protein{
+        color:#7ACA25;
+      }
+
+      #fat{
+        color:#FFBE61;
+      }
+      #carbs{
+        color:#F14647;
+      }
+
+      .carousel-control-prev,
+      .carousel-control-next {
+        background-color: #e1e1e1;
+        width: 5vh;
+        height: 5vh;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      img{
+        height:400px;
+        width:100%;
+      }
+      .card-body{
+
+        height:400px;
+
+      }
+
+      
+
+    </style>
+  
+  </head>
+  <body>
+<!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
+<!-- nav bar taken from style.js Vue js Component -->
+<div id="navHead">
+  <navhead></navhead>
+</div>
+<!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
+
+    <div class="container">
+      <div class="row">
+        
+          <h2>What do you want to eat today?</h2>
+          <!---------------------START Search -------------------->
+        <!-- Food search  -->
+        <div class="bar">
+            <!-- Create a binding between the searchString model and the text field -->
+            <input type="text" class="form-control mr-2" id="search" v-model="searchString" placeholder="Enter your food, ingredients" />
+        </div>  
+      <!---------------------END Search -------------------->
+        <div id="carouselExample" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
+
+          <div class="carousel-inner" id="searchCarousel">
+            
+          </div>
+          <div id="searchCarouselButtons"></div>
+        </div>
+        
+
+        
+    
+
+
+          <div class="row">
+            <h2>Find out the nutrition count of the food you're eating!</h2>
+
+            <form action="" method="POST" name="singleDishImageUploadForm"id="singleDishImageUploadForm" enctype="multipart/form-data">   
+              <input type="file" accept="image/*" capture="camera" name="image" id="input-file" />
+      
+              <div class="submit-button">
+                  <input type="submit" name="btnSingleDish" id="btnSingleDish" class="submit" value="Analyze" style="margin-top: 2%">
+              </div>
+            </form>
+            <div id="foodRecognitionCarousel" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
+        
+                <div class="carousel-inner" id="foodRecognitionResults">
+        
+                </div>
+                <div id="foodRecognitionCarouselButtons"></div>
+            </div>
+            <div id="results">
+        
+            </div>
+          </div>
+
+
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</body>
+
+<script>
+
+    var search = document.getElementById("search");
+
+    // Execute a function when the user releases a key on the keyboard
+    search.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      var q = search.value
+    
+      $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ q +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91",
+      crossDomain: true,
+      success: function(response) {
+        console.log(response.hits)
+        
+          var carousel = document.getElementById("searchCarousel")
+          var searchCarouselButtons = document.getElementById("searchCarouselButtons");
+          carousel.innerHTML = ""
+
+        for (var i = 0; i<response.hits.length; i+=2){
+          if ( i == 0){
+            var active = "active"
+          }
+          else{
+            var active = ""
+          }
+
+
+          var ingredientsListOutput1='';
+
+          for(var x=0;x<response.hits[i].recipe.ingredientLines.length;x++){
+            // ingredientsListOutput1+="<li class='list-group-item'>"+ ingredientsList1[x] +"</li>"
+            ingredientsListOutput1 +="<li class='list-group-item'>"+ response.hits[i].recipe.ingredientLines[x]+"</li>";
+          }
+
+
+
+          var ingredientsListOutput2='';
+
+          for(var x=0;x<response.hits[i+1].recipe.ingredientLines.length;x++){
+            ingredientsListOutput2 +="<li class='list-group-item'>"+ response.hits[i+1].recipe.ingredientLines[x]+"</li>";
+          }
+
+          carousel.innerHTML += ` 
+                      <div class="carousel-item ${active}">
+
+
+                        <div class="col-md-6" style="float:left">
+                          <div class="card my-3 mx-3">
+                            <img class="card-img-top"
+                              src="${response.hits[i].recipe.image}" alt="Card image cap">
+                            <div class="card-body">
+                              <h4 class="card-title fs-2">${response.hits[i].recipe.label}</h4>
+                              <p class="card-text fs-3">${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)} Calories </p>
+                              <ul class="my-3">
+                                <li class="protein">Protein: ${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
+                                <li class="fat">Fat: ${(response.hits[i].recipe.totalNutrients.FAT.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
+                                <li class="carbs">Carbs: ${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
+                              </ul>
+                                <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
+                              <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${i}">Recipe</a>
+                              <a class="btn btn-warning locationBtn">Find Location</a>
+                            </div>
+                          </div>
+
+                          <div class="modal fade" id="exampleModal${i}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Ingredients for ${response.hits[i].recipe.label}</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <ul class="list-group">
+                                    ${ingredientsListOutput1}
+                                  </ul>
+                                </div>
+                                <div class="modal-footer">
+                                  <a href="${response.hits[i].recipe.url}" class="btn btn-info" role="button">Link Button</a>
+                                  <button type="button" class="btn btn-primary">Submit Calorie Count</button>
+
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        
+                        <div class="col-md-6 " style="float:left">
+                          <div class="card my-3">
+                            <img class="card-img-top"
+                              src="${response.hits[i+1].recipe.image}" alt="Card image cap">
+                            <div class="card-body">
+                              <h4 class="card-title fs-2">${response.hits[i+1].recipe.label}</h4>
+                              <p class="card-text fs-3">${(response.hits[i+1].recipe.calories/ response.hits[i+1].recipe.yield).toFixed(0)} Calories </p>
+                              <ul class="my-3">
+                                <li class="protein">Protein: ${(response.hits[i+1].recipe.totalNutrients.PROCNT.quantity/ response.hits[i+1].recipe.yield).toFixed(0)}</li>
+                                <li class="fat">Fat: ${(response.hits[i+1].recipe.totalNutrients.FAT.quantity/ response.hits[i+1].recipe.yield).toFixed(0)}</li>
+                                <li class="carbs">Carbs: ${(response.hits[i+1].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i+1].recipe.yield).toFixed(0)}</li>
+                              </ul>
+                              <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
+                              <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${i+1}">Recipe</a>
+                              <a class="btn btn-warning locationBtn">Find Location</a>
+                            </div>
+                          </div>
+                          <div class="modal fade" id="exampleModal${i+1}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Ingredients for ${response.hits[i+1].recipe.label}</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <ul class="list-group">
+                                    ${ingredientsListOutput2}
+                                  </ul>
+                                </div>
+                                <div class="modal-footer">
+                                  <a href="${response.hits[i+1].recipe.url}" class="btn btn-info" role="button">Link Button</a>
+                                  <button type="button" class="btn btn-primary">Submit Calorie Count</button>
+
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                          
+                        </div>
+                      </div>`
+
+          searchCarouselButtons.innerHTML+=`          
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>`
+      }
+
+      },
+
+      error : function(xhr, status, error)
+      {
+          console.log("Status of error message" + status + "Error is" + error);
+      }   
+
+    });
+    }
+    });
+
+    $("#singleDishImageUploadForm").on('submit',(function(e) {
+    e.preventDefault();
+
+    var form_data = new FormData();
+    var file = $('#input-file')[0].files[0];
+    console.log(file)
+    form_data.append("image", file);
+
+    var settings = {
+        "url": "https://api.logmeal.es/v2/image/recognition/complete",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
+            "Authorization": "Bearer dc7d7907cff2b2b9576fd2fe7afa0c28bec97b3d"
+            // "Authorization": "Bearer 87fa0a2477fbe157f8f7b8cf36fb94ffe3d8a62f"
+            // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
+            // "Authorization": "Bearer 28fa9984eb944a62334884094defed6f23c450ca  "
+        },
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form_data
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(JSON.parse(response).recognition_results);
+
+        var possibleDishes =[];
+        for(indResult of JSON.parse(response).recognition_results){
+            var probability= indResult.prob;
+            if(probability>0.10){
+                possibleDishes.push(indResult);
+            }
+        }
+        
+        var confirmedDish;
+        for(individualDish of possibleDishes){
+            if(confirm("Is this "+ individualDish.name +"?")){
+                confirmedDish=individualDish.name;
+                break;
+            }
+            
+
+        } 
+        if(confirmedDish==null){
+            alert("Can't identify dish, please use a better photo");
+        }else{            
+            var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
+            var foodRecognitionResults = document.getElementById('foodRecognitionResults');
+            foodRecognitionResults.innerHTML = ""
+
+            var foodDatabaseUrl ="https://api.edamam.com/api/recipes/v2?type=public&q="+ confirmedDish +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91"
+            axios.get(foodDatabaseUrl)
+                .then(response=>{
+                    console.log(response);
+
+
+                    for (var i = 0;i<response.data.hits.length;i+=2){
+                            console.log(response.data.hits[i]);
+
+                            if ( i == 0){
+                                var active = "active"
+                            }
+                            else{
+                                var active = ""
+                            }
+                            foodRecognitionResults.innerHTML+=`
+
+                            <div class="carousel-item ${active}">
+
+                                <div class="col-md-6" style="float:left">
+                                    <div class="card my-3 mx-3">
+                                        <img class="card-img-top" src="${response.data.hits[i].recipe.image}" alt="Card image cap">
+                                        
+                                        <div class="card-body">
+                                            <h4 class="card-title fs-2">${response.data.hits[i].recipe.label}</h4>
+
+                                            <p class="card-text fs-3">${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)} Calories </p>
+                                                <ul class="my-3">
+                                                    <li class="protein">Protein: ${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                    <li class="fat">Fat: ${(response.data.hits[i].recipe.totalNutrients.FAT.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                    <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                </ul>
+                                            </p>
+                                            <button type="button" class="btn btn-primary">Submit Calorie Count</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="float:left">
+                                    <div class="card my-3 mx-3">
+                                        <img class="card-img-top" src="${response.data.hits[i+1].recipe.image}" alt="Card image cap">
+                                        
+                                        <div class="card-body">
+                                            <h4 class="card-title fs-2">${response.data.hits[i+1].recipe.label}</h4>
+
+                                            <p class="card-text fs-3">${(response.data.hits[i+1].recipe.calories/ response.data.hits[i+1].recipe.yield).toFixed(0)} Calories </p>
+                                                <ul class="my-3">
+                                                    <li class="protein">Protein: ${(response.data.hits[i+1].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i+1].recipe.yield).toFixed(0)}</li>
+                                                    <li class="fat">Fat: ${(response.data.hits[i+1].recipe.totalNutrients.FAT.quantity/ response.data.hits[i+1].recipe.yield).toFixed(0)}</li>
+                                                    <li class="carbs">Carbs: ${(response.data.hits[i+1].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i+1].recipe.yield).toFixed(0)}</li>
+                                                </ul>
+                                            </p>                                         
+                                            <button type="button" class="btn btn-primary">Submit Calorie Count</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+                        `;
+                        
+                    }
+                foodRecognitionCarouselButtons.innerHTML+=`
+                <button class="carousel-control-prev" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+                
+                
+                `
+                    
+                }).catch(error=>{
+
+                    console.log(error)
+                })
+
+        }
+
+
+        });
+
+}));
+
+
+  </script>
+  </body>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+  crossorigin="anonymous"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src='style.js'></script>
+</html>

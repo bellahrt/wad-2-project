@@ -1,6 +1,10 @@
 // yk nav bar
 const app = Vue.createApp({
+    data(){
+        return {
 
+        }
+    }
 })
 app.component('navbar', {
 
@@ -109,3 +113,44 @@ app.component('trackers-content', {
             `
 } )
 app.mount('#content')
+
+
+const test = Vue.createApp({
+    data() {
+        return {
+            messages: [],
+            // carouselOutput:''
+            newpage : Math.floor(Math.random()*21)
+        }
+    },
+    created() { // created is a hook that executes as soon as Vue instance is created
+        axios.get('https://bodybuilding-quotes1.p.rapidapi.com/quotes',{
+            headers:{
+                "x-rapidapi-host": "bodybuilding-quotes1.p.rapidapi.com",
+                "x-rapidapi-key": "640bb4b515mshf3e831708c5a3e9p10a21bjsnee89eb2b6ed8"
+            },
+            params:{
+                page: this.newpage
+                // page:'4'
+            }
+
+        })
+        .then(response => {
+
+            for(quoteObject in response.data){
+                this.messages.push(response.data[quoteObject].quote);
+            }
+            // console.log(JSON.stringify(this.messages));
+            console.log(response.data);
+
+
+        })
+        .catch(error => {
+            console.log(error)
+            this.messages = [{ entry: 'There was an error: ' + error.message }]
+        })
+    }
+})
+test.mount('#mainCarousel')
+
+

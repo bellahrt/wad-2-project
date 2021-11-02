@@ -80,11 +80,11 @@ class getcalenderDAO {
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
 
-        $sql = " select username, foodName, nutritionCount, starts, ends, className, icon from usercalender where monthname(starts)= :date AND username = :username;";
+        $sql = " select username, foodName, nutritionCount, starts, ends, className, icon from usercalender where month(starts)= :date AND username = :username;";
         $stmt = $conn->prepare($sql);
  
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+        $stmt->bindParam(":date", $date, PDO::PARAM_INT);
     
         $nul = array();
         if ( $stmt->execute() ) {

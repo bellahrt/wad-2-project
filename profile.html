@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,17 +67,13 @@
   <div class="wrapper">
     <div class="profile-card js-profile-card">
       <div class="profile-card__img">
-        <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg" alt="profile card">
+        <img src="./data/downloadss.jpg" alt="profile card">
       </div>
   
       <div class="profile-card__cnt js-profile-cnt">
-        <div class="profile-card__name">Muhammed Erdem</div>
+        <div class="profile-card__name" id="username">Muhammed Erdem</div>
         <div class="profile-card__txt">This is your Monthly Nultrition Count:</div>
-        <div class="profile-card-loc">
-          <span class="profile-card-loc__icon">
-            <svg class="icon"><use xlink:href="#icon-location"></use></svg>
-          </span>
-        </div>
+     
   
         <div class="profile-card-inf">
           <div class="profile-card-inf__item">
@@ -101,7 +98,11 @@
         </div>
   
 <!-------------------------- Start of Chart -------------------------------------------->
-    <canvas id="myChart" width="400" height="200"></canvas>
+    
+  <canvas id="oilChart" width="600" height="400"></canvas> <br><br>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+    
 <!-------------------------- End Of Chart ---------------------------------------------->
 
 
@@ -519,6 +520,7 @@ $("#oncam").click(function(){
 
 localStorage.setItem("username", "kim");
 var username = localStorage.getItem("username");
+document.getElementById("username").innerHTML = username
 
 jQuery(document).ready(function(){
   jQuery('.datetimepicker').datepicker({
@@ -654,10 +656,11 @@ var username = localStorage.getItem("username");
 localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
 var username = localStorage.getItem("username");
 const today = new Date()
-today.toLocaleString('default', { month: 'long' })
-var date = today
+
+var date = today.getMonth() +1
+console.log(date)
 $.ajax({
-    url:"getcalender.php",
+    url:"getnultrition.php",
     data: {
         "username": username,
         "date": date,
@@ -671,7 +674,7 @@ $.ajax({
         var TotalCarb = 0
         
         msg = JSON.parse(msg)
-        console.log(msg)
+        
         for (let i = 0; i < msg.length; i++){
           var eachNultrition = JSON.parse(msg[i].description)
           TotalCalories += parseFloat(eachNultrition.Calories)
@@ -737,6 +740,76 @@ var chart = new Chart(ctx, {
     ]
   }
 });
+
+
+
+
+
+
+
+localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
+var username = localStorage.getItem("username");
+const today1 = new Date()
+var date = today1.getMonth() +1
+console.log(date)
+var pieData = []
+$.ajax({
+    url:"getnultrition.php",
+    data: {
+        "username": username,
+        "date": date,
+    },
+    type:"POST",
+    crossDomain:true,
+    
+    success:function(msg){
+      var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
+        
+        msg = JSON.parse(msg)
+        
+        for (let i = 0; i < msg.length; i++){
+          var eachNultrition = JSON.parse(msg[i].description)
+          TotalCalories += parseFloat(eachNultrition.Calories)
+          TotalProtein += parseFloat(eachNultrition.Protein)
+          TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+
+        }
+        pieData.push(TotalCalories,TotalProtein,TotalCarb)
+        console.log(pieData)
+        var oilCanvas = document.getElementById("oilChart");
+
+var oilData = {
+    labels: [
+        "Calories",
+        "Protein",
+        "Carbohydrates"
+    ],
+    datasets: [
+        {
+            data: pieData,
+            backgroundColor: [
+                "#FF6384",
+                "#63FF84",
+                "#84FF63"
+
+            ]
+        }]
+};
+
+var pieChart = new Chart(oilCanvas, {
+  type: 'pie',
+  data: oilData
+});
+    }
+
+  });
+
+
+
+
+
     </script>
    
   

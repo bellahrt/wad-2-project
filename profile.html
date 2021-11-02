@@ -71,14 +71,10 @@
   
       <div class="profile-card__cnt js-profile-cnt">
         <div class="profile-card__name">Muhammed Erdem</div>
-        <div class="profile-card__txt">Front-end Developer from <strong>Mesopotamia</strong></div>
+        <div class="profile-card__txt">This is your Monthly Nultrition Count:</div>
         <div class="profile-card-loc">
           <span class="profile-card-loc__icon">
             <svg class="icon"><use xlink:href="#icon-location"></use></svg>
-          </span>
-  
-          <span class="profile-card-loc__txt">
-            Istanbul, Turkey
           </span>
         </div>
   
@@ -89,17 +85,17 @@
           </div>
   
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title">6512</div>
-            <div class="profile-card-inf__txt">Calories</div>
+            <div class="profile-card-inf__title" id= "TotalCalories"></div>
+            <div class="profile-card-inf__txt" >Calories</div>
           </div>
   
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title">4123</div>
+            <div class="profile-card-inf__title" id= "TotalProtein"></div>
             <div class="profile-card-inf__txt">Protein</div>
           </div>
   
           <div class="profile-card-inf__item">
-            <div class="profile-card-inf__title">8125</div>
+            <div class="profile-card-inf__title" id= "TotalCarb"></div>
             <div class="profile-card-inf__txt">Carbohydrate</div>
           </div>
         </div>
@@ -232,9 +228,18 @@ data() {
         crossDomain: false,
         success: function(response) {
           console.log(response)
+          if (response.hits.length == 0){
+            localStorage.setItem('Carbohydrates', " ");
+          localStorage.setItem('Calories', "  " )
+          localStorage.setItem('Protein', "  ")
+          }
+          else{
           localStorage.setItem('Carbohydrates', response.hits[0].recipe.totalNutrients.CHOCDF.quantity);
           localStorage.setItem('Calories', response.hits[0].recipe.totalNutrients.ENERC_KCAL.quantity )
           localStorage.setItem('Protein', +response.hits[0].recipe.totalNutrients.PROCNT.quantity)
+          }
+
+         
         },
 
         error : function(xhr, status, error)
@@ -420,9 +425,17 @@ $("#oncam").click(function(){
         crossDomain: false,
         success: function(response) {
           console.log(response)
-          document.getElementById("Carbohydrates").value = response.hits[0].recipe.totalNutrients.CHOCDF.quantity;
+          if (response.hit.length == 0){
+            document.getElementById("Carbohydrates").value = ""
+            document.getElementById("Calories").value =""
+          document.getElementById("Protein").value = ""
+          }
+          else{
+            document.getElementById("Carbohydrates").value = response.hits[0].recipe.totalNutrients.CHOCDF.quantity;
           document.getElementById("Calories").value = response.hits[0].recipe.totalNutrients.ENERC_KCAL.quantity 
-          document.getElementById("Protein").value = +response.hits[0].recipe.totalNutrients.PROCNT.quantity
+          document.getElementById("Protein").value = response.hits[0].recipe.totalNutrients.PROCNT.quantity
+          }
+          
         },
 
         error : function(xhr, status, error)
@@ -502,9 +515,10 @@ $("#oncam").click(function(){
 
 
 
+///////////////////////////////Insert Calender///////////////////////////////////////
 
-
-
+localStorage.setItem("username", "kim");
+var username = localStorage.getItem("username");
 
 jQuery(document).ready(function(){
   jQuery('.datetimepicker').datepicker({
@@ -526,9 +540,9 @@ jQuery(document).ready(function(){
       var date = values.edate
       var date1 = date.substring(0, date.length-3);
 
-      axios.get("http://localhost/healthyou/wad-2-project/insertcalender.php",
+      axios.get("insertcalender.php",
       {params:{
-        username: "j",
+        username: username,
         className :values.ecolor,
         starts:date1,
         ends: date1,
@@ -547,15 +561,25 @@ jQuery(document).ready(function(){
   });
 });
 
+///////////////////////////////End Insert Calender///////////////////////////////////////
+
+
+
+
+///////////////////////////////Get Calender///////////////////////////////////////
+
+localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
+var username = localStorage.getItem("username");
+
 (function () {    
     'use strict';
     // ------------------------------------------------------- //
     // Calendar
     // ------------------------------------------------------ //
     $.ajax({
-    url:"http://localhost/healthyou/wad-2-project/getcalender.php",
+    url:"getcalender.php",
     data: {
-        "username": "j"
+        "username": username
     },
     type:"POST",
     crossDomain:true,
@@ -563,25 +587,22 @@ jQuery(document).ready(function(){
     success:function(msg){
         //id_numbers = msg;
         // id_numbers = JSON.parse(msg);
-        var event =  msg
+        console.log(msg)
+        var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
 
-    //    var msgs = [
-	// 			{
-	// 				title: 'Barber',
-	// 				description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-	// 				start: '2021-10-07',
-	// 				end: '2021-10-07',
-	// 				className: 'fc-bg-default',
-	// 				icon : "circle"
-	// 			},
-    //             {
-	// 				title: 'Barber',
-	// 				description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-	// 				start: '2021-10-07',
-	// 				end: '2021-10-07',
-	// 				className: 'fc-bg-default',
-	// 				icon : "circle"
-	// 			}]
+        // for (let i = 0; i < msg.length; i++){
+        //   var eachNultrition = JSON.parse(msg[i].description)
+        //   TotalCalories += parseFloat(eachNultrition.Calories)
+        //   TotalProtein += parseFloat(eachNultrition.Protein)
+        //   TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+
+        // }
+        // document.getElementById("TotalCalories").innerHTML = TotalCalories.toFixed(0)
+        // document.getElementById("TotalProtein").innerHTML = TotalProtein.toFixed(0)
+        // document.getElementById("TotalCarb").innerHTML = TotalCarb.toFixed(0)
+        var event =  msg
   
         jQuery(function() {
 		// page is ready
@@ -608,50 +629,83 @@ jQuery(document).ready(function(){
 				jQuery('#modal-view-event-add').modal();
 			},
 			eventClick: function(event, jsEvent, view) {
-			        jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
+        console.log(JSON.parse(event.description))
+        var details = JSON.parse(event.description)
+			    jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 					jQuery('.event-title').html(event.title);
-					jQuery('.event-body').html(event.description);
+					jQuery('.event-body').html("Calories: "+details.Calories+"<br>Protein: " + details.Protein +"<br>Carbohydrates:"+ details.Carbohydrates );
 					jQuery('.eventUrl').attr('href',event.url);
 					jQuery('#modal-view-event').modal();
 			},
 		})
 	});
-console.log(msg)
+
     },
     dataType:"json"
 });
-
-
-
-
-
-
-
-
-
-// [
-// 				{
-// 					title: 'Barber',
-// 					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 					start: '2019-07-07',
-// 					end: '2019-07-07',
-// 					className: 'fc-bg-default',
-// 					icon : "circle"
-// 				}]
-    
-				
-
-  
 })(jQuery);
 ///////////////////////////////End Calender///////////////////////////////////////
 
 
+///////////////////////////////Get Nultrition///////////////////////////////////////
+
+
+
+localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
+var username = localStorage.getItem("username");
+const today = new Date()
+today.toLocaleString('default', { month: 'long' })
+var date = today
+$.ajax({
+    url:"getcalender.php",
+    data: {
+        "username": username,
+        "date": date,
+    },
+    type:"POST",
+    crossDomain:true,
+    
+    success:function(msg){
+      var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
+        
+        msg = JSON.parse(msg)
+        console.log(msg)
+        for (let i = 0; i < msg.length; i++){
+          var eachNultrition = JSON.parse(msg[i].description)
+          TotalCalories += parseFloat(eachNultrition.Calories)
+          TotalProtein += parseFloat(eachNultrition.Protein)
+          TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+
+        }
+        document.getElementById("TotalCalories").innerHTML = TotalCalories.toFixed(0)
+        document.getElementById("TotalProtein").innerHTML = TotalProtein.toFixed(0)
+        document.getElementById("TotalCarb").innerHTML = TotalCarb.toFixed(0)
+    }
+
+  });
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////Get Nultrition//////////////////////////////////////////
 
 
 ///////////////////////////////////Chart JS//////////////////////////////////////////

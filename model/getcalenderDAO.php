@@ -74,17 +74,18 @@ class getcalenderDAO {
         return $result;
     }
 
-    function getnul($username, $date ) {
+    function getnul($username, $date, $year ) {
         $result = true;
 
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
 
-        $sql = " select username, foodName, nutritionCount, starts, ends, className, icon from usercalender where month(starts)= :date AND username = :username;";
+        $sql = " select username, foodName, nutritionCount, starts, ends, className, icon from usercalender where month(starts)= :date AND year(starts) = :year AND username = :username;";
         $stmt = $conn->prepare($sql);
  
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->bindParam(":date", $date, PDO::PARAM_INT);
+        $stmt->bindParam(":year", $year, PDO::PARAM_INT);
     
         $nul = array();
         if ( $stmt->execute() ) {

@@ -1,0 +1,328 @@
+<!-- AIzaSyBu_mnfuXeGT-T1TtzJIBsU79jaKiRAlC8 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ"></script>  -->
+    <title>Document</title>
+  </head>
+<body>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation">
+  Get Location 
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Places in Singapore</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id style="height: 20022px;">
+        <div class="container-fluid">
+          <div class="row"  style="height: 100%; width: 100%; margin: 0px; padding: 0px">
+            <div id="map" style="height: 300px;"></div>
+            <div id="distance" ></div>
+          </div>
+          <br><br><br>
+          
+          <div class="row bg-dark text-warning mb-0" style="border-style: solid" >
+            <div class="col-sm-12" id="locationresult" >
+              List of places:
+     
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ"></script>
+
+    <script>
+
+
+
+      
+
+$("#getlocation").click(function(){
+
+
+
+  var food = "hokkien mee"        //////////////////////////////////////////////////////////////////////////////CHANGE THE VARIABLE NAME HERE/////////////////////////////////////////
+
+  
+   $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "https://tih-api.stb.gov.sg/content/v1/food-beverages/search?keyword="+ food +"&language=en&apikey=Hbjt6beOzjpqSGAq9KKKbVBf5YtyzozN",
+    crossDomain: true,
+//     beforeSend: function(request) {
+//     request.setRequestHeader("apikey", "Hbjt6beOzjpqSGAq9KKKbVBf5YtyzozN");
+//   },
+//     data: {
+//         keyword : "chicken rice",
+
+//     },
+    success: function(response) {
+      console.log(response)
+      var locations = []
+      for (i in response.data){
+        document.getElementById('locationresult').innerHTML += ` <div class="row" style="border-top-style: solid" >
+                                                                    <div class="col-8 col-sm-8"  style="border-right-style: solid">
+                                                                      <strong>`+response.data[i].name +` </strong> -  <i> `+response.data[i].description +` </i> <br><br> `+response.data[i].body +`
+                                                                    </div>
+                                                                    <div class="col-4 col-sm-4"  >
+                                                                      `+response.data[i].address.streetName +` ` + response.data[i].address.postalCode + ` <br>
+                                                                      <button type="button" onclick="getthere(`+response.data[i].location.latitude+`,`+response.data[i].location.longitude +`,'`+response.data[i].name +`')" 
+                                                                      class="btn btn-primary">Get there</button>
+                                                                    </div>
+                                                                  </div>`
+        locations.push([response.data[i].name, response.data[i].location.latitude,  response.data[i].location.longitude,i+1])      
+      }
+
+          var geocoder;
+          var map;
+          var directionsDisplay;
+          var directionsService = new google.maps.DirectionsService();
+          console.log(locations)
+
+                directionsDisplay = new google.maps.DirectionsRenderer();
+
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            center: new google.maps.LatLng(1.301591, 103.861949),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+          
+        
+
+          
+          directionsDisplay.setMap(map);
+          var infowindow = new google.maps.InfoWindow();
+
+          function addMarker(props){
+              var marker1 = new google.maps.Marker({
+                position:props.coords,
+                map:map,
+                icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                animation: google.maps.Animation.DROP
+              });
+            }
+
+          if (navigator.geolocation) {
+            var infowindow = new google.maps.InfoWindow();
+              navigator.geolocation.getCurrentPosition(function(position) {
+              var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+              localStorage.setItem("latitude",pos.lat)
+              localStorage.setItem("longitude",pos.lng)
+              infowindow.setPosition(pos);
+              addMarker({
+                coords: pos,
+                content:'YOU ARE HERE'
+              });  
+              // if you want this, center the map.  Else remove next line
+              map.setCenter(pos);          
+            })
+      }
+
+     
+
+
+
+
+
+
+          var marker, i;
+          var request = {
+            travelMode: google.maps.TravelMode.DRIVING
+          };
+          for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+              map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+                console.log(this.position)
+                
+
+                let directionsService = new google.maps.DirectionsService();
+                let directionsRenderer = new google.maps.DirectionsRenderer();
+                directionsRenderer.setMap(null);
+                directionsRenderer.setMap(map);
+
+                  // request.origin = marker.getPosition();
+                  // request.destination = marker.getPosition();
+                  // console.log(marker.getPosition())
+                  var latitude = localStorage.getItem("latitude")
+                  var longitude = localStorage.getItem("longitude")
+                  console.log(latitude)
+                  const route = {
+                    
+                    origin:  {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+                    destination:{lat: this.position.lat(), lng: this.position.lng()},
+                    travelMode: 'DRIVING'
+                  }
+
+                  directionsService.route(route,
+        function(response, status) { // anonymous function to capture directions
+        if (status !== 'OK') {
+            window.alert('Directions request failed due to ' + status);
+            return;
+        } else {
+            directionsRenderer.setDirections(response); // Add route to the map
+            console.log(response)
+            console.log(response.routes[0].summary
+            )
+            var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
+            if (!directionsData) {
+            window.alert('Directions request failed');
+            return;
+            }
+            else {
+            document.getElementById('distance').innerHTML += "<br/><b>Destination:</b> " +  + "<br/>Walking distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
+            
+            //Nutrition API get distance travelled to calculate calorie burned
+            // var distance = directionsData.distance.text
+            // nutritionCalorie(distance)
+            }
+      }
+    });
+               
+              }
+            })(marker, i));
+      }
+    
+
+    },
+    error: function(xhr) {
+
+    }
+  });
+  
+});
+
+
+function getthere(markerlatitude,markerlongitude,name){
+  var name= name
+  var map = new google.maps.Map(document.getElementById('map'))
+        let directionsService = new google.maps.DirectionsService();
+                let directionsRenderer = new google.maps.DirectionsRenderer();
+                directionsRenderer.setMap(null);
+                directionsRenderer.setMap(map);
+
+                  // request.origin = marker.getPosition();
+                  // request.destination = marker.getPosition();
+                  // console.log(marker.getPosition())
+                  var latitude = localStorage.getItem("latitude")
+                  var longitude = localStorage.getItem("longitude")
+                  console.log(latitude)
+                  const route = {
+                    
+                    origin:  {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+                    destination:{lat: markerlatitude, lng: markerlongitude},
+                    travelMode: 'DRIVING'
+                  }
+
+                  directionsService.route(route,
+        function(response, status) { // anonymous function to capture directions
+        if (status !== 'OK') {
+            window.alert('Directions request failed due to ' + status);
+            return;
+        } else {
+            directionsRenderer.setDirections(response); // Add route to the map
+            console.log(response)
+            console.log(response.routes[0].summary
+            )
+            var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
+            if (!directionsData) {
+            window.alert('Directions request failed');
+            return;
+            }
+            else {
+            document.getElementById('distance').innerHTML = "<br/><b>Destination:</b> " + name + "<br/>Driving distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
+            
+            //Nutrition API get distance travelled to calculate calorie burned
+            // var distance = directionsData.distance.text
+            // nutritionCalorie(distance)
+            }
+      }
+    });  
+    }
+
+
+
+//     const userAction = async () => {
+//   const response = await fetch('https://api.foodai.org/v4.1/classify', {
+//     method: 'POST',
+//     body:  {
+//           image_url: "https://cdn.theculturetrip.com/wp-content/uploads/2017/12/28647388561_dd40e5be0d_k.jpg",
+//           num_tag: 5,
+//     api_key:"03123fb19ceaba0f1a7c658a23fb610af005c2a0"
+//         }, // string or object
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   });
+//   const myJson = await response.json(); //extract JSON from the http response
+//   // do something with myJson
+//   console.log(myJson)
+// }
+    
+    
+    // $.ajax({
+    //     type: "POST",
+    //     dataType: "json",
+    //     url: "https://api.foodai.org/v4.1/classify",
+    //     crossDomain: true,
+    //     data: {
+    //       image_url: "https://cdn.theculturetrip.com/wp-content/uploads/2017/12/28647388561_dd40e5be0d_k.jpg",
+    //       num_tag: 5,
+    // api_key:"03123fb19ceaba0f1a7c658a23fb610af005c2a0"
+    //     },
+    //     success: function(respones){
+    //       console.log(respones)
+    //     },
+    //     error: function(error){
+    //       console.log(error)
+    //     }
+    //   });</script>
+     
+
+
+     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzGdZTNEZqzQ5qV6RcOVtFZV6dE03gzFU&callback=initMap" async defer></script> -->
+    
+     
+  <script>
+  
+    </script>
+      
+</body>
+</html>
+
+
+
+
+
+

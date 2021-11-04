@@ -656,7 +656,7 @@ var username = localStorage.getItem("username");
 localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
 var username = localStorage.getItem("username");
 const today = new Date()
-
+var year = today.getFullYear()
 var date = today.getMonth() +1
 console.log(date)
 $.ajax({
@@ -664,6 +664,7 @@ $.ajax({
     data: {
         "username": username,
         "date": date,
+        "year": year
     },
     type:"POST",
     crossDomain:true,
@@ -680,7 +681,6 @@ $.ajax({
           TotalCalories += parseFloat(eachNultrition.Calories)
           TotalProtein += parseFloat(eachNultrition.Protein)
           TotalCarb += parseFloat(eachNultrition.Carbohydrates)
-
         }
         document.getElementById("TotalCalories").innerHTML = TotalCalories.toFixed(0)
         document.getElementById("TotalProtein").innerHTML = TotalProtein.toFixed(0)
@@ -712,8 +712,58 @@ $.ajax({
 
 
 ///////////////////////////////////Chart JS//////////////////////////////////////////
-        var total_calories = [45,54,65,32,46]
-var average_calories = [20,25,60,35,25]
+ 
+
+
+
+var username = localStorage.getItem("username");
+const today2 = new Date()
+var date = today2.getMonth() +1
+var year = today2.getFullYear()
+console.log(year)
+var total_calories = [];
+var average_calories = [];
+var num = 0;
+      for (let z = 1; z <= 12; z++){   
+        var TotalCalories = 0
+                $.ajax({
+                    url:"getnultrition.php",
+                    data: {
+                        "username": username,
+                        "date": z,
+                        "year": year
+                    },
+                    type:"POST",
+                    crossDomain:true,
+                    
+                    success:function(msg){ 
+                        msg = JSON.parse(msg)   
+                        
+                        if (msg.length == 0){
+                          total_calories.push(0)
+                        }
+                        else{
+                          TotalCalories = 0
+                          for (let i = 0; i < msg.length; i++){
+                                var eachNultrition = JSON.parse(msg[i].description)
+                                TotalCalories += parseFloat(eachNultrition.Calories)
+                                }
+                                total_calories.push(TotalCalories)
+                            // if (msg.length == 0){
+                            //   average_calories.push(0)
+                            //   total_calories.push(0)
+                            // }
+                            // else{
+                            //   var average = TotalCalories / msg.length;
+                            //   total_calories.push(TotalCalories)
+                            //   //average_calories.push(average)
+                            // }
+                            console.log(average_calories)
+                            console.log(total_calories)
+
+                        }
+                        
+                        
 
 var ctx = document.getElementById("myChart");
 var chart = new Chart(ctx, {
@@ -740,6 +790,13 @@ var chart = new Chart(ctx, {
     ]
   }
 });
+                      }
+                      });
+      }
+     
+      
+      
+
 
 
 
@@ -751,13 +808,15 @@ localStorage.setItem("username", "kim");////////////////////////////////////////
 var username = localStorage.getItem("username");
 const today1 = new Date()
 var date = today1.getMonth() +1
-console.log(date)
+var year = today1.getFullYear()
+console.log(year)
 var pieData = []
 $.ajax({
     url:"getnultrition.php",
     data: {
         "username": username,
         "date": date,
+        "year": year
     },
     type:"POST",
     crossDomain:true,
@@ -777,7 +836,7 @@ $.ajax({
 
         }
         pieData.push(TotalCalories,TotalProtein,TotalCarb)
-        console.log(pieData)
+        //console.log(pieData)
         var oilCanvas = document.getElementById("oilChart");
 
 var oilData = {

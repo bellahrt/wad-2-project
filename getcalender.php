@@ -3,10 +3,10 @@
     require_once 'model/getcalenderDAO.php';
 
 
-    // $username = $_POST["username"];
+    $username = $_POST["username"];
     // $password = $_POST["password"];
 
-$username = "j";
+//$username = "j";
 
 
 //Declare the array

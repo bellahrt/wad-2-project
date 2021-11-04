@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +27,12 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
 
     <link href="assets/css/profile.css"  rel="stylesheet">
+    <link href="assets/css/profile2.css"  rel="stylesheet">
+    
 
     <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -42,7 +47,7 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -52,24 +57,56 @@
     
 </head>
 <body>
-
   <div id='navHead'>
     <navhead index='nav-link scrollto' about='nav-link scrollto' tracker='nav-link scrollto active' team='nav-link scrollto' contact='nav-link scrollto'></navhead>
-  </div>
+  </div> 
+
+
+
+
+  <div class="wrapper">
+    <div class="profile-card js-profile-card">
+      <div class="profile-card__img">
+        <img src="./data/downloadss.jpg" alt="profile card">
+      </div>
+  
+      <div class="profile-card__cnt js-profile-cnt">
+        <div class="profile-card__name" id="username">Muhammed Erdem</div>
+        <div class="profile-card__txt">This is your Monthly Nultrition Count:</div>
+     
+  
+        <div class="profile-card-inf">
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title">1598</div>
+            <div class="profile-card-inf__txt">Calories Burnt</div>
+          </div>
+  
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title" id= "TotalCalories"></div>
+            <div class="profile-card-inf__txt" >Calories</div>
+          </div>
+  
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title" id= "TotalProtein"></div>
+            <div class="profile-card-inf__txt">Protein</div>
+          </div>
+  
+          <div class="profile-card-inf__item">
+            <div class="profile-card-inf__title" id= "TotalCarb"></div>
+            <div class="profile-card-inf__txt">Carbohydrate</div>
+          </div>
+        </div>
+  
 <!-------------------------- Start of Chart -------------------------------------------->
-    <canvas id="myChart" width="400" height="200"></canvas>
+    
+  <canvas id="oilChart" width="600" height="400"></canvas> <br><br>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+    
 <!-------------------------- End Of Chart ---------------------------------------------->
 
 
-<div id="app">
-  <strong>How are you feeling today: </strong>
-  <span v-if="rating == 1">☹️Bad.</span>
-<span v-else-if="rating == 2">😐Not good.</span>
-<span v-else-if="rating == 3">🙂Ok</span>
-<span v-else-if="rating == 4">😄Good</span>
-<span v-else>😍Great!</span>  <br>
-<input type="range" min=1 max=5 v-model="rating">
-</div>
+
 
 
 
@@ -86,8 +123,148 @@
     </div>
   </div>
   
+
+  <!-- <div class="form-group">
+    <strong>How are you feeling today: </strong>
+    <span v-if="rating == 1">☹️Bad.</span>
+    <span v-else-if="rating == 2">😐Not good.</span>
+    <span v-else-if="rating == 3">🙂Ok</span>
+    <span v-else-if="rating == 4">😄Good</span>
+    <span v-else>😍Great!</span>  <br>
+    <input type="range" min=1 max=5 v-model="rating">
+ </div>  -->
+
+
   <!------------------------- calendar modal ---------------------------------------------->
-  <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+  
+  
+  <div id="app1">
+    <calenderdiv></calenderdiv>
+ 
+</div>
+
+  <!-----------------------------------------------------End Of calender------------------------------------------------------------------------->
+
+
+
+
+
+  
+
+
+
+    <script>
+
+//   $.ajax({
+//     type: "POST",
+//     dataType: "json",
+//     url: "https://api.foodai.org/v4.1/classify",
+//     crossDomain: true,
+//     headers:{
+//       "Access-Control-Allow-Origin": "*"
+//     },
+//     data: {
+//       image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIpeyTr_Ao9ClVVsewKytiTjBxnxvpUqJ0hA&usqp=CAU",
+//       num_tag: 5,
+// api_key:"03123fb19ceaba0f1a7c658a23fb610af005c2a0"
+//     },
+//     success: function(respones){
+//       console.log(respones)
+//     },
+//     error: function(error){
+//       console.log(error)
+//     }
+//   });
+
+////////////////////////////////Calender///////////////////////////////////////////
+
+
+
+
+
+  
+
+
+
+const app1 = Vue.createApp({
+ 
+});
+
+
+app1.component("calenderdiv",{
+// props:[foodname],
+data() {
+    return{
+    rating: 1,
+    foodname: "",
+    answer: "",
+    Carbohydrates: "",
+    Protein:"",
+    Calories:"",
+    tog: true
+
+
+  }
+  },
+  watch: {
+    // whenever question changes, this function will run
+    foodname: function (newQuestion, oldQuestion) {
+      this.debouncedGetAnswer()
+    }
+  },
+  created: function () {
+
+    
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 900)
+  },
+
+  methods: {
+    getAnswer: function () {
+     console.log(document.getElementById("name").value)
+     
+     $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ this.foodname +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91&",
+        crossDomain: false,
+        success: function(response) {
+          console.log(response)
+          if (response.hits.length == 0){
+            localStorage.setItem('Carbohydrates', " ");
+          localStorage.setItem('Calories', "  " )
+          localStorage.setItem('Protein', "  ")
+          }
+          else{
+          localStorage.setItem('Carbohydrates', response.hits[0].recipe.totalNutrients.CHOCDF.quantity);
+          localStorage.setItem('Calories', response.hits[0].recipe.totalNutrients.ENERC_KCAL.quantity )
+          localStorage.setItem('Protein', +response.hits[0].recipe.totalNutrients.PROCNT.quantity)
+          }
+
+         
+        },
+
+        error : function(xhr, status, error)
+        {
+          console.log("Status of error message" + status + "Error is" + error);
+        }     
+    }); 
+              this.Carbohydrates = localStorage.getItem('Carbohydrates');
+              this.Calories = localStorage.getItem('Calories');
+              this.Protein = localStorage.getItem('Protein');
+        },
+    capture: function(){
+},
+
+    toggle: function(){
+     
+      
+    },
+
+
+
+  },
+template: `
+<div  id="modal-view-event" class="modal modal-top fade calendar-modal">
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                   <div class="modal-body">
@@ -100,25 +277,46 @@
               </div>
           </div>
       </div>
-  
   <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form id="add-event">
           <div class="modal-body">
-          <h4>Add Event Detail</h4>        
+          <h4>Add Food Details</h4>      
             <div class="form-group">
-              <label>Event name</label>
-              <input type="text" class="form-control" name="ename">
+              <label>Food Name</label>
+              <input type="text" class="form-control" v-model="foodname" value={{answer}}  id="name" name="ename">
             </div>
+            <div class="btn btn-primary" id="oncam" >Image Recognition</div>
+            
+            <div id="cam" style="display:none;"> 
+              <video width=320 height=240 id="player" controls autoplay ref="input"></video><br>
+              <div class="btn btn-primary"  id="capture"  >Capture</div>
+              <div class="btn btn-primary"  id="closecam"  >Close</div>
+              <canvas id="canvas" width=320 height=240></canvas> <br>
+              Results: <div class="container"><div id="result" class="row"></div></div>
+            </div>  
+           
             <div class="form-group">
               <label>Event Date</label>
               <input type='text' class="datetimepicker form-control" name="edate">
-            </div>        
+            </div> 
+
+
+
             <div class="form-group">
-              <label>Event Description</label>
-              <textarea class="form-control" name="edesc"></textarea>
+              <label>Calories (kcal)</label>
+              <textarea class="form-control" :value="Calories" id="Calories" name="Calories"></textarea>
             </div>
+            <div class="form-group">
+              <label>Protein (g)</label>
+              <textarea class="form-control" :value="Protein" id="Protein" name="Protein"></textarea>
+            </div>            
+            <div class="form-group">
+              <label>Carbohydrates (g)</label>
+              <textarea class="form-control" :value="Carbohydrates" id="Carbohydrates" name="Carbohydrates"></textarea>
+            </div>
+
             <div class="form-group">
               <label>Event Color</label>
               <select class="form-control" name="ecolor">
@@ -138,81 +336,191 @@
                 <option value="suitcase">suitcase</option>
                 <option value="calendar">calendar</option>
               </select>
-            </div>        
+            </div>  
         </div>
           <div class="modal-footer">
           <button type="submit" class="btn btn-primary" >Save</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>        
-        </div>
+          </div>
         </form>
       </div>
     </div>
   </div>
   
 
-  <!-----------------------------------------------------End Of calender------------------------------------------------------------------------->
+  `
+})
+app1.mount('#app1')
 
 
 
-
-
-
-
-
-
-    <script>
-
-
-////////////////////////////////Calender///////////////////////////////////////////
-
-const app = Vue.createApp({
-  data() {
-    return{
-    rating: 1
-  }
-    
-  }
+$("#closecam").click(function(){
+  $("#cam").fadeOut();
+  player.srcObject.getVideoTracks().forEach(track => track.stop());
 });
 
-app.component('navhead', {
-  props: ['index', 'about', 'tracker', 'team', 'contact'],
+
+
+$("#oncam").click(function(){
+  
+  $("#cam").fadeIn();
+
+          const player = document.getElementById('player');
+          const canvas = document.getElementById('canvas');
+          const context = canvas.getContext('2d');
+          const captureButton = document.getElementById('capture');
+
+
+            const constraints = {
+            video: true,
+          };
+
+          navigator.mediaDevices.getUserMedia(constraints)
+            .then((stream) => {
+              player.srcObject = stream;
+            });
+
+
+          captureButton.addEventListener('click', () => {
+            // Draw the video frame to the canvas.
+            context.drawImage(player, 0, 0, canvas.width, canvas.height);
+            console.log(canvas)
+            var Pic = canvas.toDataURL("image/png");
+            //Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
+          $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "https://api.foodai.org/v4.1/classify",
+          crossDomain: true,
+          data: {
+            image_url: Pic,
+            num_tag: 5,
+            api_key:"03123fb19ceaba0f1a7c658a23fb610af005c2a0"
+          },
+          success: function(respones){
+            console.log(respones)
+            console.log(respones.food_results[0][0])
+            if (respones.food_results[0][0] == "Non Food"){
+              document.getElementById("result").innerHTML =  "<div class='text-danger'>Please capture a proper food leh</div>"
+            }
+            else{
+              document.getElementById("result").innerHTML= ""
+              for (i in respones.food_results){
+              document.getElementById("result").innerHTML += "<div class='col-6 results' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer;vertical-align:middle; max-width: 100px;padding: 5px;text-align: center;'>"+ respones.food_results[i][0] +"</div>"
+            }
+            }
+            
+           
+            $('.results').click(function() {
+              var text = $(this).text();
+              console.log(text)
+              // do something with the text
+              document.getElementById("name").value = text
+
+
+
+              $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ text +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91",
+        crossDomain: false,
+        success: function(response) {
+          console.log(response)
+          if (response.hit.length == 0){
+            document.getElementById("Carbohydrates").value = ""
+            document.getElementById("Calories").value =""
+          document.getElementById("Protein").value = ""
+          }
+          else{
+            document.getElementById("Carbohydrates").value = response.hits[0].recipe.totalNutrients.CHOCDF.quantity;
+          document.getElementById("Calories").value = response.hits[0].recipe.totalNutrients.ENERC_KCAL.quantity 
+          document.getElementById("Protein").value = response.hits[0].recipe.totalNutrients.PROCNT.quantity
+          }
+          
+        },
+
+        error : function(xhr, status, error)
+        {
+          console.log("Status of error message" + status + "Error is" + error);
+        }     
+    }); 
+
+
+
+            });
+           
+            
+          },
+          error: function(error){
+            console.log(error)
+          }
+          });
+
+          });
+   });       
+
+
+
+
+
+
+// const app = Vue.createApp({
+//   data() {
+//     return{
+//     rating: 1
+//   }
+    
+//   }
+// });
+// app.mount('#app')
+
+
+
+
+// app.component('navhead', {
+//   props: ['index', 'about', 'tracker', 'team', 'contact'],
       
-  template: `
-      <header id="header" class="d-flex align-items-center">
-          <div class="container d-flex align-items-center">
+//   template: `
+//       <header id="header" class="d-flex align-items-center">
+//           <div class="container d-flex align-items-center">
 
-          <h1 class="logo me-auto"><a href="index.html">HealthYou</a></h1>        
-          <nav id="navbar" class="navbar">
-              <ul>
-                  <li><a :class="index" href="index.html#hero">Home</a></li>
-                  <li><a :class="about" href="index.html#about">About</a></li>
-                  <li class="dropdown"><a :class="tracker"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
-                      <ul>
-                      <li><a href="home.html">Food Calorie Tracker</a></li>
-                      <li><a href="profile.html">Calendar</a></li>
-                      <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
-                      </ul>
-                  </li>
-                  <li><a :class="team" href="index.html#team">Team</a></li>
-                  <li><a :class="contact" href="index.html#contact">Contact</a></li>
-              </ul>
-              <i class="bi bi-list mobile-nav-toggle"></i>
-          </nav>
+//           <h1 class="logo me-auto"><a href="index.html">HealthYou</a></h1>        
+//           <nav id="navbar" class="navbar">
+//               <ul>
+//                   <li><a :class="index" href="index.html#hero">Home</a></li>
+//                   <li><a :class="about" href="index.html#about">About</a></li>
+//                   <li class="dropdown"><a :class="tracker"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
+//                       <ul>
+//                       <li><a href="home.html">Food Calorie Tracker</a></li>
+//                       <li><a href="profile.html">Calendar</a></li>
+//                       <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+//                       </ul>
+//                   </li>
+//                   <li><a :class="team" href="index.html#team">Team</a></li>
+//                   <li><a :class="contact" href="index.html#contact">Contact</a></li>
+//               </ul>
+//               <i class="bi bi-list mobile-nav-toggle"></i>
+//           </nav>
 
-          </div>
-      </header>
-      `
-         
-} ).mount('#navHead')
-//app.mount('#navHead')
-app.mount('#app')
+//           </div>
+//       </header>
+//       `      
+// } ).mount('#navHead')
+// //app.mount('#navHead')
 
+// app.component("calenderdiv",{
 
-
-
+// })
 
 
 
+
+
+///////////////////////////////Insert Calender///////////////////////////////////////
+
+localStorage.setItem("username", "kim");
+var username = localStorage.getItem("username");
+document.getElementById("username").innerHTML = username
 
 jQuery(document).ready(function(){
   jQuery('.datetimepicker').datepicker({
@@ -226,7 +534,7 @@ jQuery(document).ready(function(){
     });
   jQuery("#add-event").submit(function(){
       alert("Submitted");
-      event.preventDefault();
+      // event.preventDefault();
       var values = {};
       $.each($('#add-event').serializeArray(), function(i, field) {
           values[field.name] = field.value;
@@ -234,12 +542,13 @@ jQuery(document).ready(function(){
       var date = values.edate
       var date1 = date.substring(0, date.length-3);
 
-      axios.get("http://localhost/is216/wad-2-project/insertcalender.php",
+      axios.get("insertcalender.php",
       {params:{
+        username: username,
         className :values.ecolor,
         starts:date1,
         ends: date1,
-        descriptions: values.edesc,
+        descriptions: {"Calories":values.Calories, "Protein":values.Protein, "Carbohydrates":values.Carbohydrates},
         icon: values.eicon,
         title: values.ename
       }}).then(response=>{
@@ -254,37 +563,49 @@ jQuery(document).ready(function(){
   });
 });
 
+///////////////////////////////End Insert Calender///////////////////////////////////////
+
+
+
+
+///////////////////////////////Get Calender///////////////////////////////////////
+
+localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
+var username = localStorage.getItem("username");
+
 (function () {    
     'use strict';
     // ------------------------------------------------------- //
     // Calendar
     // ------------------------------------------------------ //
     $.ajax({
-    url:"http://localhost/IS216/wad-2-project/getcalender.php",
+    url:"getcalender.php",
+    data: {
+        "username": username
+    },
     type:"POST",
     crossDomain:true,
+    
     success:function(msg){
         //id_numbers = msg;
         // id_numbers = JSON.parse(msg);
+        console.log(msg)
+        var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
+
+        // for (let i = 0; i < msg.length; i++){
+        //   var eachNultrition = JSON.parse(msg[i].description)
+        //   TotalCalories += parseFloat(eachNultrition.Calories)
+        //   TotalProtein += parseFloat(eachNultrition.Protein)
+        //   TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+
+        // }
+        // document.getElementById("TotalCalories").innerHTML = TotalCalories.toFixed(0)
+        // document.getElementById("TotalProtein").innerHTML = TotalProtein.toFixed(0)
+        // document.getElementById("TotalCarb").innerHTML = TotalCarb.toFixed(0)
         var event =  msg
-    //    var msgs = [
-	// 			{
-	// 				title: 'Barber',
-	// 				description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-	// 				start: '2021-10-07',
-	// 				end: '2021-10-07',
-	// 				className: 'fc-bg-default',
-	// 				icon : "circle"
-	// 			},
-    //             {
-	// 				title: 'Barber',
-	// 				description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-	// 				start: '2021-10-07',
-	// 				end: '2021-10-07',
-	// 				className: 'fc-bg-default',
-	// 				icon : "circle"
-	// 			}]
-               // console.log(msgs)
+  
         jQuery(function() {
 		// page is ready
 		jQuery('#calendar').fullCalendar({
@@ -310,55 +631,139 @@ jQuery(document).ready(function(){
 				jQuery('#modal-view-event-add').modal();
 			},
 			eventClick: function(event, jsEvent, view) {
-			        jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
+        console.log(JSON.parse(event.description))
+        var details = JSON.parse(event.description)
+			    jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 					jQuery('.event-title').html(event.title);
-					jQuery('.event-body').html(event.description);
+					jQuery('.event-body').html("Calories: "+details.Calories+"<br>Protein: " + details.Protein +"<br>Carbohydrates:"+ details.Carbohydrates );
 					jQuery('.eventUrl').attr('href',event.url);
 					jQuery('#modal-view-event').modal();
 			},
 		})
 	});
-console.log(msg)
+
     },
     dataType:"json"
 });
-
-
-
-
-
-
-
-
-
-// [
-// 				{
-// 					title: 'Barber',
-// 					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-// 					start: '2019-07-07',
-// 					end: '2019-07-07',
-// 					className: 'fc-bg-default',
-// 					icon : "circle"
-// 				}]
-    
-				
-
-  
 })(jQuery);
 ///////////////////////////////End Calender///////////////////////////////////////
 
 
+///////////////////////////////Get Nultrition///////////////////////////////////////
+
+
+
+localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
+var username = localStorage.getItem("username");
+const today = new Date()
+var year = today.getFullYear()
+var date = today.getMonth() +1
+console.log(date)
+$.ajax({
+    url:"getnultrition.php",
+    data: {
+        "username": username,
+        "date": date,
+        "year": year
+    },
+    type:"POST",
+    crossDomain:true,
+    
+    success:function(msg){
+      var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
+        
+        msg = JSON.parse(msg)
+        
+        for (let i = 0; i < msg.length; i++){
+          var eachNultrition = JSON.parse(msg[i].description)
+          TotalCalories += parseFloat(eachNultrition.Calories)
+          TotalProtein += parseFloat(eachNultrition.Protein)
+          TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+        }
+        document.getElementById("TotalCalories").innerHTML = TotalCalories.toFixed(0)
+        document.getElementById("TotalProtein").innerHTML = TotalProtein.toFixed(0)
+        document.getElementById("TotalCarb").innerHTML = TotalCarb.toFixed(0)
+    }
+
+  });
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////Get Nultrition//////////////////////////////////////////
 
 
 ///////////////////////////////////Chart JS//////////////////////////////////////////
-        var total_calories = [45,54,65,32,46]
-var average_calories = [20,25,60,35,25]
+ 
+
+
+
+var username = localStorage.getItem("username");
+const today2 = new Date()
+var date = today2.getMonth() +1
+var year = today2.getFullYear()
+console.log(year)
+var total_calories = [];
+var average_calories = [];
+var num = 0;
+      for (let z = 1; z <= 12; z++){   
+        var TotalCalories = 0
+                $.ajax({
+                    url:"getnultrition.php",
+                    data: {
+                        "username": username,
+                        "date": z,
+                        "year": year
+                    },
+                    type:"POST",
+                    crossDomain:true,
+                    
+                    success:function(msg){ 
+                        msg = JSON.parse(msg)   
+                        
+                        if (msg.length == 0){
+                          total_calories.push(0)
+                        }
+                        else{
+                          TotalCalories = 0
+                          for (let i = 0; i < msg.length; i++){
+                                var eachNultrition = JSON.parse(msg[i].description)
+                                TotalCalories += parseFloat(eachNultrition.Calories)
+                                }
+                                total_calories.push(TotalCalories)
+                            // if (msg.length == 0){
+                            //   average_calories.push(0)
+                            //   total_calories.push(0)
+                            // }
+                            // else{
+                            //   var average = TotalCalories / msg.length;
+                            //   total_calories.push(TotalCalories)
+                            //   //average_calories.push(average)
+                            // }
+                            console.log(average_calories)
+                            console.log(total_calories)
+
+                        }
+                        
+                        
 
 var ctx = document.getElementById("myChart");
 var chart = new Chart(ctx, {
@@ -385,9 +790,102 @@ var chart = new Chart(ctx, {
     ]
   }
 });
+                      }
+                      });
+      }
+     
+      
+      
+
+
+
+
+
+
+
+
+localStorage.setItem("username", "kim");///////////////////////////////////////////////////USERNAME/////////////////////////////
+var username = localStorage.getItem("username");
+const today1 = new Date()
+var date = today1.getMonth() +1
+var year = today1.getFullYear()
+console.log(year)
+var pieData = []
+$.ajax({
+    url:"getnultrition.php",
+    data: {
+        "username": username,
+        "date": date,
+        "year": year
+    },
+    type:"POST",
+    crossDomain:true,
+    
+    success:function(msg){
+      var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
+        
+        msg = JSON.parse(msg)
+        
+        for (let i = 0; i < msg.length; i++){
+          var eachNultrition = JSON.parse(msg[i].description)
+          TotalCalories += parseFloat(eachNultrition.Calories)
+          TotalProtein += parseFloat(eachNultrition.Protein)
+          TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+
+        }
+        pieData.push(TotalCalories,TotalProtein,TotalCarb)
+        //console.log(pieData)
+        var oilCanvas = document.getElementById("oilChart");
+
+var oilData = {
+    labels: [
+        "Calories",
+        "Protein",
+        "Carbohydrates"
+    ],
+    datasets: [
+        {
+            data: pieData,
+            backgroundColor: [
+                "#FF6384",
+                "#63FF84",
+                "#84FF63"
+
+            ]
+        }]
+};
+
+var pieChart = new Chart(oilCanvas, {
+  type: 'pie',
+  data: oilData
+});
+    }
+
+  });
+
+
+
+
+
     </script>
    
   
+     <!-- Vendor JS Files -->
+     <!-- <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+     <!-- <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+     <script src="assets/vendor/php-email-form/validate.js"></script>
+     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script> -->
+   
+     <!-- Template Main JS File -->
+     <script src='style.js'></script>
+     <script src="assets/js/main.js"></script> 
+    
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -397,16 +895,7 @@ var chart = new Chart(ctx, {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script>
-     <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script src='style.js'></script>
 
 </body>
 </html>

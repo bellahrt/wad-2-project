@@ -12,7 +12,7 @@ class getcalenderDAO {
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
         
-        $sql = "SELECT username, title, descriptions, starts, ends, className, icon  FROM  usercalender WHERE username = :username";
+        $sql = "SELECT username, foodName, nutritionCount, starts, ends, className, icon  FROM  usercalender WHERE username = :username";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
             
@@ -20,7 +20,7 @@ class getcalenderDAO {
         if ( $stmt->execute() ) {
             while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
                // $user = new calender($row["username"], $row["title"],$row["descriptions"],$row["starts"],$row["ends"],$row["className"],$row["icon"]);
-                 array_push($user,new calender($row["username"], $row["title"],$row["descriptions"],$row["starts"],$row["ends"],$row["className"],$row["icon"]));
+                 array_push($user,new calender($row["username"], $row["foodName"],$row["nutritionCount"],$row["starts"],$row["ends"],$row["className"],$row["icon"]));
             }
         }
         else {
@@ -42,7 +42,7 @@ class getcalenderDAO {
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
 
-        $sql = "INSERT INTO usercalender (username, title, descriptions, starts, ends, className, icon) VALUES (:username, :title, :descriptions, :starts, :ends, :className, :icon)";
+        $sql = "INSERT INTO usercalender (username, foodName, nutritionCount, starts, ends, className, icon) VALUES (:username, :title, :descriptions, :starts, :ends, :className, :icon)";
         $stmt = $conn->prepare($sql);
         
         $username = $user->getname();
@@ -73,6 +73,41 @@ class getcalenderDAO {
         
         return $result;
     }
+
+    function getnul($username, $date, $year ) {
+        $result = true;
+
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        $sql = " select username, foodName, nutritionCount, starts, ends, className, icon from usercalender where month(starts)= :date AND year(starts) = :year AND username = :username;";
+        $stmt = $conn->prepare($sql);
+ 
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":date", $date, PDO::PARAM_INT);
+        $stmt->bindParam(":year", $year, PDO::PARAM_INT);
+    
+        $nul = array();
+        if ( $stmt->execute() ) {
+            while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+              
+                 array_push($nul,new calender($row["username"], $row["foodName"],$row["nutritionCount"],$row["starts"],$row["ends"],$row["className"],$row["icon"]));
+            }
+        }
+        else {
+            $connMgr->handleError( $stmt, $sql );
+        }
+        
+
+        $stmt = null;
+        $conn = null;        
+        
+        return $nul;
+    }
+
+   
+
+
 }
 
 

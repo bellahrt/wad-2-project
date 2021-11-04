@@ -70,35 +70,43 @@
 
 
 <!------------------------------ CODE HERE ------------------------------->
-<div id= "container">
+<div id= "container" style = 'margin-top:100px;'>
+
    
-    <div class="text-dark bg-warning text-center mb-0 ">
+    <div class="text-dark bg-warning text-center mb-0">
         <h3>Zoom out to view the Monuments Markers</h3 >     
         <p class='bg-dark text-info mb-0'>Enable map location access to tell us where your location is right now!</p>
         <p class='bg-dark text-warning mb-0'> Click on a monument marker to select a place you like to visit!</p>
-
     </div>
+                        <!-- TO DO: take out width -->
+    <div class = 'img-fluid mt-0' id="map-canvas"  style="height:500px;"></div> 
 
-    <div class = 'img-fluid mt-0' id="map-canvas"  style="height:500px ;width:1176px;"></div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+      <h5 class='pt-2'><b id="modeOfTravel">Default Mode: Walking.</b> <b style='color:red;'>Click</b> to select Exercise Mode</h5><br/>    
+      <button class="btn btn-primary me-md-2" type="button" onclick='getTravelValue("WALKING")'>Walking</button>
+      <button class="btn btn-danger me-md-2" type="button" onclick='getTravelValue("JOGGING")'>Jogging</button>
+      <button class="btn btn-success" type="button" onclick='getTravelValue("CYCLING")'>Cycling</button>
+    </div>
+    <br/>
     
-    </div>
 </div>
+
 <div class='container'>
-<br/>
+  <br/>
+
   <div class="card text-dark bg-dark mb-3" >
     <!-- <div class="card-header">Path</div> -->
     <div class="card-body ">
-      <h5 class="card-title text-info mb-0 text-center">Distance Walk, Calories Burn</h5>
+      <h5 class="card-title text-info mb-0 text-center">Distance Travelled, Calories Burn</h5>
       <p id='location'class="card-text text-warning text-center"></p>
     </div>
 
-</div>
+  </div>
 
 
 
 <!------------------------------ CODE HERE HERE ------------------------------->            
 <!---------------------FOOTER (DUN TOUCH HERE)-------------------->          
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
@@ -106,7 +114,6 @@
     <!---------------------FOOTER (DUN TOUCH HERE)-------------------->    
 <script>
 /////////////////////////////////CODE JS HERE///////////////////////    
-
 var locations = [];
 $.ajax({
 type: "GET",
@@ -187,7 +194,6 @@ map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 function createMarker(latLng, latitude, longitude, placeResult) {
     
-console.log(placeResult)
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 for (i = 0; i < locations.length; i++) {  
@@ -258,7 +264,7 @@ function directionService(latitude,longitude, lat1, lon2, destination){
         
         origin: {lat: latitude, lng: longitude},
         destination: {lat: lat1, lng: lon2},
-        travelMode: 'WALKING'
+        travelMode: "WALKING"
     }
 
     directionsService.route(route,
@@ -277,7 +283,7 @@ function directionService(latitude,longitude, lat1, lon2, destination){
             return;
             }
             else {
-            document.getElementById('location').innerHTML += "<br/><b>Destination:</b> " + destination + "<br/>Walking distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
+            document.getElementById('location').innerHTML += "<br/><b>Destination:</b> " + destination + "<br/>Distance is " + directionsData.distance.text + ".";
             
             //Nutrition API get distance travelled to calculate calorie burned
             var distance = directionsData.distance.text
@@ -287,15 +293,23 @@ function directionService(latitude,longitude, lat1, lon2, destination){
     });
 }
 var pathCount = 1
+var travelish = 'WALKING'
+
+function getTravelValue(mode){
+  travelish = mode
+  var modeOfTravel = document.getElementById('modeOfTravel');
+  modeOfTravel.innerHTML='Travel Mode: ' +mode
+}
 
 function nutritionCalorie(distance) {
+  console.log(travelish)
   
     var myHeaders = new Headers();
     myHeaders.append("x-app-id", "931cc72d");
     myHeaders.append("x-app-key", "7fc5d91a151ecaed81346157d6f12d05");
     myHeaders.append("Content-Type", "application/json");
     
-    var queryDistance = "walk " + distance        // exercise in what mode? Walk / Run etc.
+    var queryDistance = travelish + " " + distance        // exercise in what mode? Walk / Run etc.
     console.log(queryDistance)
     var raw = JSON.stringify({
     "query": queryDistance,
@@ -320,7 +334,7 @@ function nutritionCalorie(distance) {
     var calorie = data.exercises[0]['nf_calories']      // calories burned
     var duration = data.exercises[0]['duration_min']    // duration
     var name = data.exercises[0]['name'] 
-    var calorieResult = `<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +' minutes<br/>'
+    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +' minutes<br/>'
     pathCount++
     document.getElementById('location').innerHTML += calorieResult
 
@@ -333,10 +347,29 @@ function nutritionCalorie(distance) {
 /////////////////////////////////END CODE JS HERE///////////////////////
 </script>
 
-  </body>
 
 
-</html>
+
+
+
+
+
+
+
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Vue Component Styling -->
+<script src="style.js"></script>
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+
 
 
 
@@ -349,19 +382,6 @@ src='https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places,weathe
 <script async
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ&callback=initMap">
 </script> 
-
-
-<!-- Vendor JS Files -->
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-<!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
-<!-- Vue Component Styling -->
-<script src="style.js"></script>
 
 </body>
 

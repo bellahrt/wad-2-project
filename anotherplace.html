@@ -334,7 +334,7 @@ function nutritionCalorie(distance) {
     var calorie = data.exercises[0]['nf_calories']      // calories burned
     var duration = data.exercises[0]['duration_min']    // duration
     var name = data.exercises[0]['name'] 
-    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +' minutes<br/>'
+    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +` minutes<br/> <div class="btn btn-warning"onclick="insertCal('` + calorie + `')">Go there now</div><br><br>`
     pathCount++
     document.getElementById('location').innerHTML += calorieResult
 
@@ -343,6 +343,25 @@ function nutritionCalorie(distance) {
 }
 
 
+
+
+
+//////////////////////////////////////Insert Calories Burned//////////////////////////////////
+localStorage.setItem("username", "kim");
+var username = localStorage.getItem("username");
+function insertCal(calorie ){
+  axios.get("insertexercise.php",
+      {params:{
+        username: username,
+        caloriesBurned :calorie
+      }}).then(response=>{
+        console.log(response.data)
+        alert("Calories Burned has been entered into the system")
+      }).catch(error=>{
+        alert(error)
+      })
+}
+////////////////////////////////////End Insert Calories Burned//////////////////////////////////
 
 /////////////////////////////////END CODE JS HERE///////////////////////
 </script>

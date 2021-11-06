@@ -54,7 +54,7 @@ class getcalenderDAO {
         $icon = $user->geticon();
 
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam("title", $title, PDO::PARAM_STR);
+        $stmt->bindParam(":title", $title, PDO::PARAM_STR);
         $stmt->bindParam(":descriptions", $descriptions, PDO::PARAM_STR);
         $stmt->bindParam(":starts", $starts, PDO::PARAM_STR);
         $stmt->bindParam(":ends", $ends, PDO::PARAM_STR);
@@ -104,6 +104,41 @@ class getcalenderDAO {
         
         return $nul;
     }
+
+
+
+
+
+    function insertExercise($user) {
+        $result = true;
+
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        $sql = "INSERT INTO exercise (username, caloriesBurned) VALUES (:username, :caloriesBurned)";
+        $stmt = $conn->prepare($sql);
+        
+        $username = $user->getname();
+        $caloriesBurned = $user->caloriesBurned();
+        
+
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":caloriesBurned", $caloriesBurned, PDO::PARAM_INT);
+     
+        
+
+        $result = $stmt->execute();
+        if (! $result ){ 
+            $parameters = [ "user" => $user, ];
+            $connMgr->handleError( $stmt, $sql, $parameters );
+        }
+        
+        $stmt = null;
+        $conn = null;        
+        
+        return $result;
+    }
+    
 
    
 

@@ -1156,8 +1156,11 @@
 
                 //Adding calories property to user's object with nutrient requrements
                console.log(reqCalories)
+               console.log(userNutReq.reqTotalCarbohydrate)
+               console.log(userNutReq.reqProtein)
                window.localStorage.setItem('reqCalories',reqCalories);
                 userNutReq["reqCalories"] = reqCalories.toFixed(0);
+               
                 
                 //Filling the table "Daily Requirement"
                 let tableReq = document.getElementById("tableDailyRequirement");
@@ -1177,7 +1180,8 @@
 
         //Moving to divQuestion from 
         function next() {
-            window.location.replace("home.html");
+            window.location.replace("index.html");
+            
             // scrollTo(0,0);
             // document.getElementById("divDailyRequirement").style.display = "none";
             // document.getElementById("divQuestion").style.display = "block";  

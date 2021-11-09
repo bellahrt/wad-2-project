@@ -119,14 +119,11 @@ class getcalenderDAO {
         $stmt = $conn->prepare($sql);
         
         $username = $user->getname();
-        $caloriesBurned = $user->caloriesBurned();
-        
+        $caloriesBurned = $user->caloriesBurned();   
 
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":caloriesBurned", $caloriesBurned, PDO::PARAM_INT);
-     
+        $stmt->bindParam(":caloriesBurned", $caloriesBurned, PDO::PARAM_INT);   
         
-
         $result = $stmt->execute();
         if (! $result ){ 
             $parameters = [ "user" => $user, ];
@@ -139,6 +136,55 @@ class getcalenderDAO {
         return $result;
     }
     
+    // private $username;
+    // private $weight;
+    // private $height;
+    // private $age;
+    // private $sex;
+    // private $recoCal;
+    // private $recoCarbs;
+    // private $recoProt;
+
+    function updateUserProfile($user) {
+        //$result = true;
+
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+        $sql = "UPDATE useraccount SET  weight = :weights , height = :height ,age = :age ,sex = :sex ,recommendedCalories = :recoCal ,recommendedCarbs = :recoCarbs ,	recommendedProtein = :recoProt  WHERE username = :username";
+        //$sql = "INSERT INTO exercise (username, caloriesBurned) VALUES (:username, :caloriesBurned)";
+        
+        $stmt = $conn->prepare($sql);
+        
+        $username = $user->getname();
+        $weight = $user->weight(); 
+        $height = $user->height();
+        $age = $user->age(); 
+        $sex = $user->sex();
+        $recoCal = $user->recoCal(); 
+        $recoCarbs = $user->recoCarbs();
+        $recoProt = $user->recoProt();   
+
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":weights", $weight, PDO::PARAM_INT);   
+        $stmt->bindParam(":height", $height, PDO::PARAM_STR);
+        $stmt->bindParam(":age", $age, PDO::PARAM_INT); 
+        $stmt->bindParam(":sex", $sex, PDO::PARAM_STR);
+        $stmt->bindParam(":recoCal", $recoCal, PDO::PARAM_INT); 
+        $stmt->bindParam(":recoCarbs", $recoCarbs, PDO::PARAM_INT);
+        $stmt->bindParam(":recoProt", $recoProt, PDO::PARAM_INT); 
+        
+        $result = $stmt->execute();
+        // if (! $result ){ 
+        //     $parameters = [ "user" => $user, ];
+        //     $connMgr->handleError( $stmt, $sql, $parameters );
+        // }
+        
+        $stmt = null;
+        $conn = null;        
+        
+        return $result;
+    }
+
 
    
 

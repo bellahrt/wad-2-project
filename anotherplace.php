@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset ($_SESSION["username"])){
+  header("Location: login/loginpage.php");
+  return;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -371,6 +378,8 @@ function insertCal(calorie ){
         caloriesBurned :calorie
       }}).then(response=>{
         console.log(response.data)
+        console.log(username)
+        console.log(calorie)
         alert("Calories Burned has been entered into the system")
       }).catch(error=>{
         alert(error)

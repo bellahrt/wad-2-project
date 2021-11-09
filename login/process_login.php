@@ -21,7 +21,7 @@
         if ($status)
         { 
             $_SESSION["username"] = $username;
-            header("Location: ../index.html");
+            header("Location: ../index");
             return;
         }
         else
@@ -30,7 +30,7 @@
             $errors [] = "Invalid password.";
             $_SESSION['errors'] = $errors;
             $_SESSION["login_page"] = $username;
-            header("Location: final.php");
+            header("Location: loginpage.php");
             return;
 
         }
@@ -40,7 +40,7 @@
         $errors [] = "Username does not exist in the database.";
         $_SESSION['errors'] = $errors;
         $_SESSION["login_page"] = $username;
-        header("Location: final.php");
+        header("Location: loginpage.php");
         return;
             
     }

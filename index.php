@@ -1,3 +1,23 @@
+<?php
+//require_once "common.php";
+
+session_start();
+
+
+// if (isset ($_SESSION["username"])){
+//     echo "<h3> Welcome ". $_SESSION["username"] .  ". You have login successfully </h3>";
+// }
+// else
+// {
+//     header("Location: login.php");
+//     return;
+// }
+if (!isset ($_SESSION["username"])){
+  header("Location: login/loginpage.php");
+  return;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,7 +95,7 @@
               <ul>
                 <li><a href="foodCalorieTrackerPage.html">Food Calorie Tracker</a></li>
                 <li><a href="profile.html">Calendar</a></li>
-                <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+                <li><a href="anotherplace.php">Walking Distance Tracker</a></li>
               </ul>
           </li>
           <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> -->
@@ -98,6 +118,7 @@
             </ul> -->
           <!-- </li> -->
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="scrollto" href="login/logout.php">Logout</a></li>
           <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -696,7 +717,7 @@
   <script>
     var username = localStorage.getItem("username");
     if (username === null){
-      window.location.href = "login/final.php";
+      window.location.href = "login/loginpage.php";
     }
     
   </script>

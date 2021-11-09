@@ -36,7 +36,7 @@ require_once "common.php";
         $_SESSION["errorspw"] = $errors;
 
         $_SESSION["register_fail"] = $username;
-        header("Location: final.php"); 
+        header("Location: loginpage.php"); 
         return;
     }
     
@@ -58,7 +58,7 @@ else
 {
     $_SESSION["register_fail"]= $username;
     $errors[] = "Error in registering user.";
-    header("Location: final.php");
+    header("Location: loginpage.php");
     return;
 }
 

@@ -67,20 +67,21 @@ app.component('navhead', {
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="index.html">HealthYou</a></h1>        
+            <h1 class="logo me-auto"><a href="index.php">HealthYou</a></h1>        
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a :class="index" href="index.html#hero">Home</a></li>
-                    <li><a :class="about" href="index.html#about">About</a></li>
+                    <li><a :class="index" href="index.php#hero">Home</a></li>
+                    <li><a :class="about" href="index.php#about">About</a></li>
                     <li class="dropdown"><a :class="tracker"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                        <li><a href="home.html">Food Calorie Tracker</a></li>
+                        <li><a href="foodCalorieTrackerPage.html">Food Calorie Tracker</a></li>
                         <li><a href="profile.html">Calendar</a></li>
-                        <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+                        <li><a href="anotherplace.php">Walking Distance Tracker</a></li>
                         </ul>
                     </li>
-                    <li><a :class="team" href="index.html#team">Team</a></li>
-                    <li><a :class="contact" href="index.html#contact">Contact</a></li>
+                    <li><a :class="team" href="index.php#team">Team</a></li>
+                    <li><a :class="contact" href="index.php#contact">Contact</a></li>
+                    <li><a :class="contact" href="login/logout.php">Logout</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

@@ -237,26 +237,34 @@ var marker = new google.maps.Marker(markerOptions);
 
 if (placeResult) {
 var content = placeResult.name+'<br/>'+placeResult.vicinity+'<br/>'+placeResult.types;
+let origin = false
 addInfoWindow(marker, latLng, content);
 }
 else {
-var content = 'You are here: ' + latLng.lat() + ', ' + latLng.lng();
-addInfoWindow(marker, latLng, content);
-}
+//var content = 'You are here: ' + latLng.lat() + ', ' + latLng.lng();
+var content = 'You are here';
+let origin = true
+addInfoWindow(marker, latLng, content,origin);
 
 }
 
-function addInfoWindow(marker, latLng, content) {
+}
+
+function addInfoWindow(marker, latLng, content,origin) {
 var infoWindowOptions = {
 content: content,
 position: latLng
 };
 
 var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-
+if(origin){
+infoWindow.open(map);
+}
+else{
 google.maps.event.addListener(marker, 'click', function() {
 infoWindow.open(map);
 });
+}
 }
 
 // Display path from location A to B

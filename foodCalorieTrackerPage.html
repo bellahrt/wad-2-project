@@ -67,9 +67,49 @@
 
       }
 
-      
+      #upload {
+    opacity: 0;
+}
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.image-area {
+    border: 2px dashed rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    position: relative;
+}
+
+.image-area::before {
+    content: 'Uploaded image result';
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    position: relative;
+}      
 
     </style>
+    <script>
+      var username = localStorage.getItem("username");
+      if (username === null){
+        window.location.href = "login/final.php";
+      }
+
+    </script>
   
   </head>
   <body>
@@ -125,11 +165,11 @@
 <!------------------------- END LOCATION ---------------------------------------------->
 
 
-=
 
 
 
-        <div id="carouselExample" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
+
+        <div id="carouselExample" class="carousel slide w-100">
 
           <div class="carousel-inner" id="searchCarousel">
             
@@ -143,24 +183,47 @@
             <h2>Find out the nutrition count of the food you're eating!</h2>
 
             <!----------------------- GET IMAGE RECOGNITION -------------------------------------->
-<div class="btn btn-primary" id="oncam" >Image Recognition</div>
-            
-<div id="cam" style="display:none;"> 
-  <video width=320 height=240 id="player" controls autoplay ref="input"></video><br>
-  <div class="btn btn-primary"  id="capture"  >Capture</div>
-  <div class="btn btn-primary"  id="closecam"  >Close</div>
-  <canvas id="canvas" width=320 height=240></canvas> <br>
-  Results: <div class="container"><div id="result" class="row"></div></div>
-</div> 
+              <div class="btn btn-primary" id="oncam" onclick="onCamera()" >Image Recognition</div>
+
+            <div class="col-6">
+              
+              <div id="cam" style="display:none;"> 
+                <video width=320 height=240 id="player" controls autoplay ref="input"></video><br>
+                <div class="btn btn-primary"  id="capture"  >Capture</div>
+                <div class="btn btn-primary"  id="closecam" onclick="closeCamera()" >Close</div>
+
+              </div> 
+            </div>
+            <div class="col-6">
+              <canvas id="canvas" width=320 height=240></canvas> <br>
+            </div>
+            Results: <div class="container"><div id="result" class="row"></div>
 <!----------------------- END GET IMAGE RECOGNITION -------------------------------------->
-            <form action="" method="POST" name="singleDishImageUploadForm"id="singleDishImageUploadForm" enctype="multipart/form-data">   
-              <input type="file" accept="image/*" capture="camera" name="image" id="input-file" />
+
+<!-- <input id="upload" type="file" accept="image/*" onchange="readURL(this);" class="form-control border-0">
+<label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+<div class="input-group-append">
+    <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+</div> -->
+            <div class="row py-4">
+              <div class="col-lg-6 mx-auto">
       
-              <div class="submit-button">
-                  <input type="submit" name="btnSingleDish" id="btnSingleDish" class="submit" value="Analyze" style="margin-top: 2%">
+                  <!-- Upload image input-->
+                  <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                    <form action="" method="POST" name="singleDishImageUploadForm" id="singleDishImageUploadForm" enctype="multipart/form-data">   
+
+                      <input id="input-file" type="file" accept="image/*" onchange="readURL(this);" class="form-control border-0">
+                      <label id="upload-label" for="input-file" class="font-weight-light text-muted"></label>
+
+                    </form>
+                  </div>
+      
+                  <!-- Uploaded image area-->
+                  <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                  <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+      
               </div>
-            </form>
-            <div id="foodRecognitionCarousel" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="3000">
+            <div id="foodRecognitionCarousel" class="carousel slide w-100">
         
                 <div class="carousel-inner" id="foodRecognitionResults">
         
@@ -176,7 +239,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ"></script>
 <script>
-
+    
     var search = document.getElementById("search");
 
     // Execute a function when the user releases a key on the keyboard
@@ -256,9 +319,15 @@
                                   </ul>
                                 </div>
                                 <div class="modal-footer">
-                                  <a href="${response.hits[i].recipe.url}" class="btn btn-info" role="button">Link Button</a>
-                                  <button type="button" class="btn btn-primary">Submit Calorie Count</button>
-
+                                  <a href="${response.hits[i].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
+                                  <form action="insertFoodCalories.php" method="post">
+                                    <input type="hidden" style="display:none;" name="username" value="${username}">
+                                    <input type="hidden" style="display:none;" name="foodName" value="${response.hits[i].recipe.label}">
+                                    <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)}">
+                                    <input type="hidden" style="display:none;" name="protein" value="${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
+                                    <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
+                                    <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                  </form>
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                               </div>
@@ -298,9 +367,15 @@
                                   </ul>
                                 </div>
                                 <div class="modal-footer">
-                                  <a href="${response.hits[i+1].recipe.url}" class="btn btn-info" role="button">Link Button</a>
-                                  <button type="button" class="btn btn-primary">Submit Calorie Count</button>
-
+                                  <a href="${response.hits[i+1].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
+                                  <form action="insertFoodCalories.php" method="post">
+                                    <input type="hidden" style="display:none;" name="username" value="${username}">
+                                    <input type="hidden" style="display:none;" name="foodName" value="${response.hits[i+1].recipe.label}">
+                                    <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[i+1].recipe.calories/ response.hits[i+1].recipe.yield).toFixed(0)}">
+                                    <input type="hidden" style="display:none;" name="protein" value="${(response.hits[i+1].recipe.totalNutrients.PROCNT.quantity/ response.hits[i+1].recipe.yield).toFixed(0)}">
+                                    <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[i+1].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i+1].recipe.yield).toFixed(0)}">
+                                    <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                  </form>
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                               </div>
@@ -330,7 +405,7 @@
     }
     });
 
-    $("#singleDishImageUploadForm").on('submit',(function(e) {
+    $("#singleDishImageUploadForm").on('change',(function(e) {
     e.preventDefault();
 
     var form_data = new FormData();
@@ -344,7 +419,7 @@
         "timeout": 0,
         "headers": {
             // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
-            "Authorization": "Bearer dc7d7907cff2b2b9576fd2fe7afa0c28bec97b3d"
+            "Authorization": "Bearer 1c04875b04746ce36a3e805f561d2624e91a8d00"
             // "Authorization": "Bearer 87fa0a2477fbe157f8f7b8cf36fb94ffe3d8a62f"
             // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
             // "Authorization": "Bearer 28fa9984eb944a62334884094defed6f23c450ca  "
@@ -413,8 +488,14 @@
                                                     <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
                                                 </ul>
                                             </p>
-                                            <button type="button" class="btn btn-primary">Submit Calorie Count</button>
-
+                                            <form action="insertFoodCalories.php" method="post">
+                                              <input type="hidden" style="display:none;" name="username" value="${username}">
+                                              <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
+                                              <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                              <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
+                                              <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                              <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -432,8 +513,14 @@
                                                     <li class="carbs">Carbs: ${(response.data.hits[i+1].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i+1].recipe.yield).toFixed(0)}</li>
                                                 </ul>
                                             </p>                                         
-                                            <button type="button" class="btn btn-primary">Submit Calorie Count</button>
-
+                                            <form action="insertFoodCalories.php" method="post">
+                                              <input type="hidden" style="display:none;" name="username" value="${username}">
+                                              <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i+1].recipe.label}">
+                                              <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i+1].recipe.calories/ response.data.hits[i+1].recipe.yield).toFixed(0)}">
+                                              <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i+1].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i+1].recipe.yield).toFixed(0)}">
+                                              <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i+1].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i+1].recipe.yield).toFixed(0)}">
+                                              <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                            </form>
                                         </div>
 
                                     </div>
@@ -471,9 +558,36 @@
 
 
 
-$("#getlocation").click(function(){
-  alert("hi")
-})
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload').on('change', function () {
+        readURL(input);
+    });
+});
+
+/*  ==========================================
+    SHOW UPLOADED IMAGE NAME
+* ========================================== */
+var input = document.getElementById( 'upload' );
+var infoArea = document.getElementById( 'upload-label' );
+
+input.addEventListener( 'change', showFileName );
+function showFileName( event ) {
+  var input = event.srcElement;
+  var fileName = input.files[0].name;
+  infoArea.textContent = 'File name: ' + fileName;
+}
 
 function getloc (q){
   
@@ -496,6 +610,7 @@ function getloc (q){
     success: function(response) {
       console.log(response)
       var locations = []
+      document.getElementById('locationresult').innerHTML='';
       for (i in response.data){
         document.getElementById('locationresult').innerHTML += ` <div class="row" style="border-top-style: solid" >
                                                                     <div class="col-8 col-sm-8"  style="border-right-style: solid">
@@ -683,13 +798,13 @@ function getthere(markerlatitude,markerlongitude,name){
 
 //////////////////////////////////////////////////FODD IMAGE RECOGNITION///////////////////////////
 
-    $("#closecam").click(function(){
+function closeCamera(){
   $("#cam").fadeOut();
   player.srcObject.getVideoTracks().forEach(track => track.stop());
-});
+};
 
-    $("#oncam").click(function(){
-  
+function onCamera(){
+  console.log('on camera')
   $("#cam").fadeIn();
 
           const player = document.getElementById('player');
@@ -710,7 +825,6 @@ function getthere(markerlatitude,markerlongitude,name){
           captureButton.addEventListener('click', () => {
             // Draw the video frame to the canvas.
             context.drawImage(player, 0, 0, canvas.width, canvas.height);
-            console.log(canvas)
             var Pic = canvas.toDataURL("image/png");
             //Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
           $.ajax({
@@ -721,18 +835,18 @@ function getthere(markerlatitude,markerlongitude,name){
           data: {
             image_url: Pic,
             num_tag: 5,
-            api_key:"03123fb19ceaba0f1a7c658a23fb610af005c2a0"
+            api_key:"62f40985765435783d123372c0bd5dc29a4b5da0"
           },
-          success: function(respones){
-            console.log(respones)
-            console.log(respones.food_results[0][0])
-            if (respones.food_results[0][0] == "Non Food"){
+          success: function(foodAIResponse){
+            console.log(foodAIResponse)
+            console.log(foodAIResponse.food_results[0][0])
+            if (foodAIResponse.food_results[0][0] == "Non Food"){
               document.getElementById("result").innerHTML =  "<div class='text-danger'>Please capture a proper food leh</div>"
             }
             else{
               document.getElementById("result").innerHTML= ""
-              for (i in respones.food_results){
-              document.getElementById("result").innerHTML += "<div class='col-6 results' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer;vertical-align:middle; max-width: 100px;padding: 5px;text-align: center;'>"+ respones.food_results[i][0] +"</div>"
+              for (i in foodAIResponse.food_results){
+              document.getElementById("result").innerHTML += "<div class='col-6 results' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer;vertical-align:middle; max-width: 100px;padding: 5px;text-align: center;'>"+ foodAIResponse.food_results[i][0] +"</div>"
             }
             }
             
@@ -742,6 +856,9 @@ function getthere(markerlatitude,markerlongitude,name){
               console.log(text)
               // do something with the text
              // document.getElementById("name").value = text
+             var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
+            var foodRecognitionResults = document.getElementById('foodRecognitionResults');
+            foodRecognitionResults.innerHTML = ""
 
              var foodDatabaseUrl ="https://api.edamam.com/api/recipes/v2?type=public&q="+ text +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91"
             axios.get(foodDatabaseUrl)
@@ -833,7 +950,7 @@ function getthere(markerlatitude,markerlongitude,name){
           });
 
           });
-   });    
+   };    
 
 
 

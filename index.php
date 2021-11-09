@@ -1,17 +1,5 @@
 <?php
-//require_once "common.php";
-
 session_start();
-
-
-// if (isset ($_SESSION["username"])){
-//     echo "<h3> Welcome ". $_SESSION["username"] .  ". You have login successfully </h3>";
-// }
-// else
-// {
-//     header("Location: login.php");
-//     return;
-// }
 if (!isset ($_SESSION["username"])){
   header("Location: login/loginpage.php");
   return;
@@ -141,7 +129,7 @@ if (!isset ($_SESSION["username"])){
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">{{messages[Math.floor(Math.random()*messages.length)]}}</h2>
-              <p class="animate__animated animate__fadeInUp">Welcome to HEALTHYou
+              <p class="animate__animated animate__fadeInUp">Welcome to HealthYou
                 <br>With us, we make your dreams into reality by keeping you in check to strive towards your goals.
               </p>
               

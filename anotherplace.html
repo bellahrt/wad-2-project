@@ -190,10 +190,7 @@ map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 //map()
 
 
-
-
 function createMarker(latLng, latitude, longitude, placeResult) {
-    
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 for (i = 0; i < locations.length; i++) {  
@@ -206,9 +203,18 @@ clickable: true
 });
 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 return function() {
-infowindow.setContent(locations[i][0]);
+// infowindow.setContent(locations[i][0]); // put name inside the marker
+var locname = locations[i][0]
+// var desc = locations[i][1]
+var lgt = locations[i][2]
+var lat = locations[i][3]
+console.log(lgt)
+console.log(lat)
 
+var htmlimg = `<img src='https://maps.googleapis.com/maps/api/streetview?location=${lat},${lgt}&size=150x150&key=AIzaSyDk-bowbCLTe1Z1WrAd11bRZUSAeuqJxtg'/> ${locname}`
+infowindow.setContent(htmlimg);
 console.log(locations[i][0])                                                    // name of the place
+console.log(locations)
 var destination = locations[i][0]
 var lat1 = locations[i][3]                                                      // destination lat
 var lon2 = locations[i][2]                                                      // destination long
@@ -275,6 +281,7 @@ function directionService(latitude,longitude, lat1, lon2, destination){
         } else {
             directionsRenderer.setDirections(response); // Add route to the map
             console.log(response)
+            console.log(response.geocoded_waypoints[0].place_id)
             console.log(response.routes[0].summary
             )
             var directionsData = response.routes[0].legs[0]; // Get data about the mapped route

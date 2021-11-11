@@ -280,13 +280,20 @@
               </div>
 
               <!-- Uploaded image area-->
-              <div class="image-area mt-4 col-sm-5" style="float:left">
-                <h4 id="uploadedImage"></h4>
-                <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm ">
+              <div class="row">
+                <div class="image-area mt-4 col-sm-5" style="float:left">
+                  <h4 id="uploadedImage"></h4>
+                  <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm ">
+                </div>
+                <div class="col-sm-7 mt-4">
+
+                  <div id="resultsFromLogMealScanning" class="mb-3"></div>
+                  <div id="listOfFoodFromLogMeal"></div>
+
+
+                </div>                
               </div>
-              <div class="col-sm-7 mt-4">
-                Results:<div id="listOfFoodFromLogMeal"></div>
-              </div>
+
 
           
           
@@ -294,7 +301,7 @@
           <div class="tab-pane fade" id="webCamera" role="tabpanel" aria-labelledby="webCamera-tab">
               <!----------------------- GET IMAGE RECOGNITION -------------------------------------->
 
-
+            <div class="row">
               <div class="col-sm-5" style="float:left">
                 <div class="btn btn-primary" id="oncam" onclick="onCamera()" >Image Recognition</div>
 
@@ -311,11 +318,15 @@
               </div>
 
               <div class="col-sm-7">
-                <div class="row">
-                  Results:<div id="listOfFoodFromFoodAI"></div>
 
-                </div>
+                <div id="resultsFromFoodAIScanning" class="mb-3"></div>
+                <div id="listOfFoodFromFoodAI"></div>
+
               </div>
+
+
+            </div>
+
 
           </div>
         </div>      
@@ -543,10 +554,11 @@
           "method": "POST",
           "timeout": 0,
           "headers": {
+              "Authorization": "Bearer 508e03b3ded586a8db21d5d9fe32dfba931a66b7"
               // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
               // "Authorization": "Bearer 1c04875b04746ce36a3e805f561d2624e91a8d00"
               // "Authorization": "Bearer 52744bbf5f50721d4f7acaa191fed7a67d581938"
-              "Authorization": "Bearer 4c2c6c3b5e365fac4b147bb23d03489be58c1bfc "
+              // "Authorization": "Bearer 4c2c6c3b5e365fac4b147bb23d03489be58c1bfc "
               // "Authorization": "Bearer a19e01c759e220b231baad328f1046e72d61d5fa"
               // "Authorization": "Bearer 87fa0a2477fbe157f8f7b8cf36fb94ffe3d8a62f"
               // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
@@ -562,11 +574,33 @@
         var response = JSON.parse(response).recognition_results;
         
 
+        document.getElementById("resultsFromLogMealScanning").innerHTML=`Results:<h4>Click on any text to search for it's list of calorie count!</h4>`;
         document.getElementById("listOfFoodFromLogMeal").innerHTML= ""
+
         for (i in response){
-          document.getElementById("listOfFoodFromLogMeal").innerHTML += "<div class='listOfPossibleFoodLogMeal' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer; max-width: 100px;padding: 5px;text-align: center;'>"+ response[i].name +"</div>"
+
+          var percentage = (response[i].prob).toFixed(2)*100
+
+          var nameOfFood = response[i].name;
+          console.log(response[i])
+          document.getElementById("listOfFoodFromLogMeal").innerHTML += `
+
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h4 class="listOfPossibleFood">${nameOfFood}</h4>
+                  </div>
+                  <div class="progress col-md-8 col-xs-8">
+                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;"></div>
+                  </div>
+                  <div class="col-md-4 col-xs-4">${percentage}</div>
+                </div>
+
+
+
+
+          `;
         }
-        $('.listOfPossibleFoodLogMeal').click(function() {
+        $('.listOfPossibleFood').click(function() {
             var confirmedDish = $(this).text();
             console.log(confirmedDish)                 
             var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
@@ -936,7 +970,9 @@ function onCamera(){
               document.getElementById("listOfFoodFromFoodAI").innerHTML =  "<div class='text-danger'>Please capture a proper food leh</div>"
             }
             else{
+              document.getElementById("resultsFromFoodAIScanning").innerHTML=`Results:<h4>Click on any text to search for it's list of calorie count!</h4>`;
               document.getElementById("listOfFoodFromFoodAI").innerHTML= ""
+
               for (i in foodAIResponse.food_results){
                 // document.getElementById("listOfFoodFromFoodAI").innerHTML += "<div class='listOfPossibleFood' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer;vertical-align:middle; max-width: 100px;padding: 5px;text-align: center;'>"+ foodAIResponse.food_results[i][0] +"</div>"
                 var percentage = (foodAIResponse.food_results[i][1]*100).toFixed(2)
@@ -944,14 +980,14 @@ function onCamera(){
                 document.getElementById("listOfFoodFromFoodAI").innerHTML+=`
 
                 <div class="row">
-                  <div class="col-md-12 col-xs-12">
+                  <div class="col-xs-12">
                     <h4 class="listOfPossibleFood">${nameOfFood}</h4>
                   </div>
                   <div class="progress col-md-8 col-xs-8">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="10" style="width: ${percentage};">
+                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;">
                     </div>
                   </div>
-                  <div class="col-md-3 col-xs-3">${percentage}</div>
+                  <div class="col-md-4 col-xs-4">${percentage}</div>
                 </div>
 
 

@@ -116,8 +116,8 @@ function logout() {
           <li class="dropdown"><a class="nav-link scrollto"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="foodCalorieTrackerPage.html">Food Calorie Tracker</a></li>
-                <li><a href="profile.html">Calendar</a></li>
-                <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="anotherplace.html">Exercise Tracker</a></li>
               </ul>
           </li>
           <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> -->

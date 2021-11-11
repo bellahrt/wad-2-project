@@ -835,7 +835,7 @@ function logout() {
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>enquiry@smu.edu.sg</p>
+                <p>healthyou@gmail.com</p>
               </div>
 
               <div class="phone">

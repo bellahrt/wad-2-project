@@ -1,4 +1,37 @@
+
+ <?php
+//session_start();
+if (!isset ($_SESSION["username"])){
+  header("Location: login/loginpage.php");
+  //return;
+
+  $username = $_SESSION["username"];
+}
+
+
+
+?> 
+
+<!-- 
+        <input type="hidden" id="username" value = "">
+     
+        <script>
+            var username = document.getElementById("username").value
+
+            localStorage.setItem("username", username);
+
+            alert(username);
+            console.log(username)
+           // console.log("yk")
+            
+
+        </script> -->
+
+
 <?php
+
+
+
 
 class UserDAO {
        

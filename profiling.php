@@ -1,3 +1,12 @@
+<?php
+session_start();
+$username = $_SESSION["username"];
+if (!isset ($_SESSION["username"])){
+  header("Location: login/loginpage.php");
+  return;
+}
+?> 
+
 <!DOCTYPE html>
 
 <html>
@@ -20,6 +29,30 @@
 </head>
 
 <body>
+
+<input type="hidden" id="username" value = "<?=$username?>">
+        <script>
+            var username = document.getElementById("username").value
+            localStorage.setItem("username", username);
+
+        </script>
+
+<script>
+ // localStorage.setItem("username", "yk");
+  var username = localStorage.getItem("username");
+    if (username === null){
+      window.location.href = "login/loginpage.php";
+    }
+   
+
+function logout() {
+  localStorage.removeItem('username')  
+  
+  window.location.href = "login/logout.php";
+}
+</script>
+
+
 <!-- Navigation bar from style.js (Vue Component) -->
 <div id='nav'>
     <navbar></navbar>
@@ -414,7 +447,17 @@
 
 
 	<script>
-localStorage.setItem("username", "wong"); /////////////////////////////////////////////USERNAMEEE
+
+var username = localStorage.getItem("username");
+    if (username === null){
+      window.location.href = "login/loginpage.php";
+    }
+    
+
+function logout() {
+  localStorage.removeItem('username')  
+  window.location.href = "login/logout.php";
+}
 
 
 
@@ -1223,7 +1266,7 @@ localStorage.setItem("username", "wong"); //////////////////////////////////////
 
         //Moving to divQuestion from 
         function next() {
-            window.location.replace("index.html");
+            window.location.replace("index.php");
             
             // scrollTo(0,0);
             // document.getElementById("divDailyRequirement").style.display = "none";

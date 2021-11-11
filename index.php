@@ -1,10 +1,11 @@
-<!-- <?php
+ <?php
 session_start();
+$username = $_SESSION["username"];
 if (!isset ($_SESSION["username"])){
   header("Location: login/loginpage.php");
   return;
 }
-?> -->
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,29 @@ if (!isset ($_SESSION["username"])){
 </head>
 
 <body>
+
+<input type="hidden" id="username" value = "<?=$username?>">
+        <script>
+            var username = document.getElementById("username").value
+            localStorage.setItem("username", username);
+
+        </script>
+
+<script>
+ // localStorage.setItem("username", "yk");
+  var username = localStorage.getItem("username");
+    if (username === null){
+      window.location.href = "login/loginpage.php";
+    }
+   
+
+function logout() {
+  localStorage.removeItem('username')  
+  
+  window.location.href = "login/logout.php";
+}
+</script>
+
 
   <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-flex align-items-center">
@@ -106,7 +130,7 @@ if (!isset ($_SESSION["username"])){
             </ul> -->
           <!-- </li> -->
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="scrollto" href="login/logout.php">Logout</a></li>
+          <li><a class="scrollto" onclick="logout()" href="login/logout.php">Logout</a></li>
           <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -703,10 +727,18 @@ if (!isset ($_SESSION["username"])){
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script>
-    var username = localStorage.getItem("username");
-    if (username === null){
-      window.location.href = "login/loginpage.php";
-    }
+  //   localStorage.setItem("username", "yk");
+  //   var username = localStorage.getItem("username");
+  //   if (username === null){
+  //     window.location.href = "login/loginpage.php";
+  //   }
+  //   alert(username)
+
+  //   function logout() {
+  // localStorage.removeItem('username')  
+  
+  // window.location.href = "login/loginpage.php";
+}
     
   </script>
 

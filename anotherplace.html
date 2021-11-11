@@ -113,6 +113,21 @@
    
     <!---------------------FOOTER (DUN TOUCH HERE)-------------------->    
 <script>
+
+var username = localStorage.getItem("username");
+    if (username === null){
+      window.location.href = "login/loginpage.php";
+    }
+    
+
+function logout() {
+  localStorage.removeItem('username')  
+  
+  window.location.href = "login/loginpage.php";
+}
+
+
+
 /////////////////////////////////CODE JS HERE///////////////////////    
 var locations = [];
 $.ajax({
@@ -362,7 +377,7 @@ function nutritionCalorie(distance) {
 
 
 //////////////////////////////////////Insert Calories Burned//////////////////////////////////
-localStorage.setItem("username", "kim");
+
 var username = localStorage.getItem("username");
 function insertCal(calorie ){
   axios.get("insertexercise.php",

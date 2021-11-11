@@ -240,6 +240,23 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ"></script>
 <script>
     
+    var username = localStorage.getItem("username");
+    if (username === null){
+      window.location.href = "login/loginpage.php";
+    }
+  
+
+function logout() {
+  localStorage.removeItem('username')  
+  window.location.href = "login/logout.php";
+}
+
+
+
+
+
+
+
     var search = document.getElementById("search");
 
     // Execute a function when the user releases a key on the keyboard

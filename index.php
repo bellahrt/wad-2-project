@@ -712,11 +712,10 @@ function logout() {
       <h3>HealthYou</h3>
       <p>Eat Healthy. Live Healthy. Be Happy.</p>
       <div class="social-links">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://twitter.com/sporeMOH?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.facebook.com/sghealthministry" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/moh_singapore/?hl=en" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/ministry-of-health-sg/?originalSubdomain=sg" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
       </div>
       <div class="copyright">
         &copy; Copyright <strong><span>HealthYou</span></strong>. All Rights Reserved

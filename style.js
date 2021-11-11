@@ -64,6 +64,20 @@ app.component('navhead', {
     props: ['index', 'about', 'tracker', 'team', 'contact'],
         
     template: `
+        <section id="topbar" class="d-flex align-items-center">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+                <div class="contact-info d-flex align-items-center">
+                    <i class="bi bi-envelope-fill"></i><a href="mailto:elmer.yeo.2020@smu.edu.sg">healthyou@gmail.com</a>
+                    <i class="bi bi-phone-fill phone-icon"></i> +65 6828 0100
+                </div>
+                <div class="social-links d-none d-md-block">
+                    <a href="https://twitter.com/sporeMOH?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="https://www.facebook.com/sghealthministry" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.instagram.com/moh_singapore/?hl=en" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/ministry-of-health-sg/?originalSubdomain=sg" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+                </div>
+            </div>
+        </section>
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center">
 
@@ -87,9 +101,7 @@ app.component('navhead', {
             </nav>
 
             </div>
-        </header>
-        `
-           
+        </header>`
 } )
 app.mount('#navHead')
 

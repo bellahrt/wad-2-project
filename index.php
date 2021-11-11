@@ -75,69 +75,11 @@ function logout() {
 
 
   <!-- ======= Top Bar ======= -->
-  <section id="topbar" class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope-fill"></i><a href="mailto:elmer.yeo.2020@smu.edu.sg">healthyou@gmail.com</a>
-        <i class="bi bi-phone-fill phone-icon"></i> +65 6828 0100
-      </div>
-      <div class="social-links d-none d-md-block">
-        <a href="https://twitter.com/sporeMOH?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="https://www.facebook.com/sghealthministry" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="https://www.instagram.com/moh_singapore/?hl=en" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/ministry-of-health-sg/?originalSubdomain=sg" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-      </div>
-    </div>
-  </section>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-
-      <h1 class="logo me-auto"><a href="index.html">HealthYou</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <!-- <li><a class="nav-link scrollto" href="#services">Calories Tracker</a> -->
-          <li class="dropdown"><a class="nav-link scrollto"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
-              <ul>
-                <li><a href="foodCalorieTrackerPage.html">Food Calorie Tracker</a></li>
-                <li><a href="profile.html">Calendar</a></li>
-                <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
-              </ul>
-          </li>
-          <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> -->
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a> -->
-            <!-- <ul>
-              <li><a href="#">Drop Down 1</a></li> -->
-              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li> -->
-              <!-- <li><a href="home.html">Food Calorie Tracker</a></li>
-              <li><a href="profile.html">Calendar</a></li>
-              <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
-            </ul> -->
-          <!-- </li> -->
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="scrollto" onclick="logout()" href="login/logout.php">Logout</a></li>
-          <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
+  <div id="navHead">
+    <navhead></navhead>
+  </div>
+  
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">

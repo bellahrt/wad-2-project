@@ -364,7 +364,7 @@ function nutritionCalorie(distance) {
     var calorie = data.exercises[0]['nf_calories']      // calories burned
     var duration = data.exercises[0]['duration_min']    // duration
     var name = data.exercises[0]['name'] 
-    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +` minutes<br/> <div class="btn btn-warning"onclick="insertCal('` + calorie + `')">Go there now</div><br><br>`
+    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +` minutes<br/> <br> <div class="btn btn-outline-info text-info"onclick="insertCal('` + calorie + `')">Go there now</div><br><br>`
     pathCount++
     document.getElementById('location').innerHTML += calorieResult
 
@@ -434,6 +434,21 @@ src='https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places,weathe
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk-bowbCLTe1Z1WrAd11bRZUSAeuqJxtg&callback=initMap">
 </script> 
 
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/618c85f46885f60a50bb4533/1fk6emh5m';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
 </body>
 
 

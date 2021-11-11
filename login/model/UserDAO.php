@@ -2,7 +2,7 @@
  <?php
 //session_start();
 if (!isset ($_SESSION["username"])){
-  header("Location: login/loginpage.php");
+  header("Location: loginpage.php");
   //return;
 
   $username = $_SESSION["username"];

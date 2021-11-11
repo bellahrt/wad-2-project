@@ -6,6 +6,8 @@ spl_autoload_register(function($class) {
     
 });
 
+ini_set( 'session.cookie_httponly', 1 );
+ini_set('session.cookie_samesite', 'strict');
 
 session_start();
 

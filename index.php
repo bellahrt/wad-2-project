@@ -1,4 +1,8 @@
 <?php
+ini_set( 'session.cookie_httponly', 1 );
+header('X-Frame-Options: SAMEORIGIN');
+header('X-Content-Type-Options: nosniff');
+
 session_start();
 $username = $_SESSION["username"];
 if (!isset ($_SESSION["username"])){

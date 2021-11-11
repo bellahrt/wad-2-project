@@ -109,20 +109,60 @@ class getcalenderDAO {
 
 
 
+    function getCaloriesBurn($username, $date, $year ) {
+        $result = true;
+
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        $sql = " select username, caloriesBurned, exercise, starts from exercise where month(starts)= :date AND year(starts) = :year AND username = :username;";
+        $stmt = $conn->prepare($sql);
+ 
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":date", $date, PDO::PARAM_INT);
+        $stmt->bindParam(":year", $year, PDO::PARAM_INT);
+    
+        $nul = array();
+        if ( $stmt->execute() ) {
+            while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+              
+                 array_push($nul,new exercise ($row["username"], $row["caloriesBurned"], $row["exercise"],$row["starts"]));
+            }
+        }
+        else {
+            $connMgr->handleError( $stmt, $sql );
+        }
+        
+
+        $stmt = null;
+        $conn = null;        
+        
+        return $nul;
+    }
+
+
+
+
+
+
     function insertExercise($user) {
         $result = true;
 
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
 
-        $sql = "INSERT INTO exercise (username, caloriesBurned) VALUES (:username, :caloriesBurned)";
+        $sql = "INSERT INTO exercise (username, caloriesBurned, exercise, starts) VALUES (:username, :caloriesBurned, :exercise, :starts)";
         $stmt = $conn->prepare($sql);
         
         $username = $user->getname();
         $caloriesBurned = $user->caloriesBurned();   
+        $exercise = $user->exercise();  
+        $starts = $user->starts();  
 
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->bindParam(":caloriesBurned", $caloriesBurned, PDO::PARAM_INT);   
+        $stmt->bindParam(":exercise", $exercise, PDO::PARAM_STR); 
+        $stmt->bindParam(":starts", $starts, PDO::PARAM_STR); 
         
         $result = $stmt->execute();
         if (! $result ){ 

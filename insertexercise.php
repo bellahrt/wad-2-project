@@ -10,10 +10,12 @@
 
 $username = $_GET["username"];
 $caloriesBurned = $_GET["caloriesBurned"] ;
+$exercise = $_GET["exercise"] ;
+$starts = $_GET["starts"] ;
 
 
 
-$new_user = new exercise($username, $caloriesBurned);
+$new_user = new exercise($username, $caloriesBurned,$exercise,$starts);
 $dao = new getcalenderDAO();
 
 $status = $dao->insertExercise($new_user);

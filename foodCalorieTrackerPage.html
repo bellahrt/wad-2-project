@@ -404,7 +404,7 @@
                                       <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)}">
                                       <input type="hidden" style="display:none;" name="protein" value="${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
                                       <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
-                                      <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                      <input type="submit"  type="button" onclick="alert('Calories Consumed has been entered into the system')" class="btn btn-primary" value="Submit Calorie Count">
                                     </form>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                   </div>
@@ -476,7 +476,7 @@
                                       <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[0].recipe.calories/ response.hits[0].recipe.yield).toFixed(0)}">
                                       <input type="hidden" style="display:none;" name="protein" value="${(response.hits[0].recipe.totalNutrients.PROCNT.quantity/ response.hits[0].recipe.yield).toFixed(0)}">
                                       <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[0].recipe.totalNutrients.CHOCDF.quantity/ response.hits[0].recipe.yield).toFixed(0)}">
-                                      <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                      <input type="submit"  type="button" onclick="alert('Calories Consumed has been entered into the system')" class="btn btn-primary" value="Submit Calorie Count">
                                     </form>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                   </div>
@@ -611,7 +611,7 @@
                                               <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
                                               <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
                                               <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="submit"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                              <input type="submit" onclick="alert('Calories Consumed has been entered into the system')"  type="button" class="btn btn-primary" value="Submit Calorie Count">
                                             </form>
                                         </div>
                                     </div>
@@ -997,8 +997,15 @@ function onCamera(){
                                                     <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
                                                 </ul>
                                             </p>
-                                            <button type="button" class="btn btn-primary">Submit Calorie Count</button>
-                                        </div>
+                                            
+                                            <form action="insertFoodCalories.php" method="post">
+                                              <input type="hidden" style="display:none;" name="username" value="${username}">
+                                              <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
+                                              <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                              <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
+                                              <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                              <input type="submit" onclick="alert('Calories Consumed has been entered into the system')"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                            </form>                                        
                                     </div>
                                 </div>
                             </div>

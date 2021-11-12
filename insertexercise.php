@@ -8,10 +8,15 @@
 
 //$username = "j";
 
-$username = $_GET["username"];
-$caloriesBurned = $_GET["caloriesBurned"] ;
-$exercise = $_GET["exercise"] ;
-$starts = $_GET["starts"] ;
+// $username = $_GET["username"];
+// $caloriesBurned = $_GET["caloriesBurned"] ;
+// $exercise = $_GET["exercise"] ;
+// $starts = $_GET["starts"] ;
+
+$username = "yk";
+$caloriesBurned = 454 ;
+$exercise = "jogging" ;
+$starts = "2021-11-12" ;
 
 
 

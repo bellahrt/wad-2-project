@@ -67,12 +67,13 @@
 
   <div class="wrapper">
     <div class="profile-card js-profile-card">
-      <div class="profile-card__img">
+      <!-- <div class="profile-card__img">
         <img src="./data/downloadss.jpg" alt="profile card">
-      </div>
+      </div> -->
   
       <div class="profile-card__cnt js-profile-cnt">
-        <div class="profile-card__name" id="username">Muhammed Erdem</div>
+        <H2>Welcome! </H2>
+        <div class="profile-card__name" id="username"></div>
         <div class="profile-card__txt">This is your Monthly Nultrition Count:</div>
      
   
@@ -450,10 +451,7 @@ $("#oncam").click(function(){
           console.log("Status of error message" + status + "Error is" + error);
         }     
     }); 
-
-            });
-           
-            
+            });                     
           },
           error: function(error){
             console.log(error)
@@ -677,18 +675,20 @@ $.ajax({
       var TotalCalories = 0
         var TotalProtein = 0
         var TotalCarb = 0
-        
+  
         msg = JSON.parse(msg)
-        
-        for (let i = 0; i < msg.length; i++){
+
+        for (var i = 0; i < msg.length; i++){
           var eachNultrition = JSON.parse(msg[i].description)
           TotalCalories += parseFloat(eachNultrition.Calories)
           TotalProtein += parseFloat(eachNultrition.Protein)
           TotalCarb += parseFloat(eachNultrition.Carbohydrates)
-        }
+        
+             }     
         document.getElementById("TotalCalories").innerHTML = TotalCalories.toFixed(0)
         document.getElementById("TotalProtein").innerHTML = TotalProtein.toFixed(0)
         document.getElementById("TotalCarb").innerHTML = TotalCarb.toFixed(0)
+      
     }
 
   });
@@ -746,11 +746,12 @@ const today2 = new Date()
 var date = today2.getMonth() +1
 var year = today2.getFullYear()
 console.log(year)
-var total_calories = [];
-var average_calories = [];
+var Protein = [];
+var Carbohydrates = [];
 var num = 0;
       for (let z = 1; z <= 12; z++){   
-        var TotalCalories = 0
+        var TotalProtein = 0
+        var TotalCarb = 0
                 $.ajax({
                     url:"getnultrition.php",
                     data: {
@@ -763,57 +764,23 @@ var num = 0;
                     
                     success:function(msg){ 
 
-
-
-
-                    var averagecalories = 0
-                    $.ajax({
-                        url:"getCaloriesBurn.php",
-                        data: {
-                            "username": username,
-                            "date": z,
-                            "year": year
-                        },
-                        type:"POST",
-                        crossDomain:true,
-                        
-                        success:function(response){
-                         console.log(JSON.parse(response))
-                         response = JSON.parse(response)
-                          if (response.length == 0){
-                            average_calories.push(0)
-                        }
-                        else{
-                          averagecalories = 0
-                          for (let i = 0; i < response.length; i++){
-                                //var eachNultrition = JSON.parse(response[i].caloriesBurned)
-                                averagecalories += parseFloat(response[i].caloriesBurned)
-                                }
-                                average_calories.push(averagecalories)
-                        }
-                      }
-                      })
-
-
-
-
-
-
-
-
-
                         msg = JSON.parse(msg)   
                         
                         if (msg.length == 0){
-                          total_calories.push(0)
+                          Protein.push(0)
+                          Carbohydrates.push(0)
                         }
                         else{
-                          TotalCalories = 0
+                          TotalProtein = 0
+                          TotalCarb = 0
                           for (let i = 0; i < msg.length; i++){
                                 var eachNultrition = JSON.parse(msg[i].description)
-                                TotalCalories += parseFloat(eachNultrition.Calories)
+                                //TotalCalories += parseFloat(eachNultrition.Calories)
+                                TotalProtein += parseFloat(eachNultrition.Protein)
+                                TotalCarb += parseFloat(eachNultrition.Carbohydrates)
                                 }
-                                total_calories.push(TotalCalories)
+                                Protein.push(TotalProtein)
+                                Carbohydrates.push(TotalCarb)
                             // if (msg.length == 0){
                             //   average_calories.push(0)
                             //   total_calories.push(0)
@@ -823,8 +790,8 @@ var num = 0;
                             //   total_calories.push(TotalCalories)
                             //   //average_calories.push(average)
                             // }
-                            console.log(average_calories)
-                            console.log(total_calories)
+                            // console.log(average_calories)
+                            // console.log(total_calories)
 
                         }
                         
@@ -841,14 +808,14 @@ var chart = new Chart(ctx, {
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,
-        label: "Total Calories intake",
-        data: total_calories
+        label: "Protein",
+        data: Protein
       },
 
       {
-        type: "line",
-        label: "Average",
-        data: average_calories,
+        type: "bar",
+        label: "Carbohydrates",
+        data: Carbohydrates,
         lineTension: 0, 
         fill: true 
       }
@@ -890,31 +857,54 @@ $.ajax({
         var TotalProtein = 0
         var TotalCarb = 0
         
-        msg = JSON.parse(msg)
+        msg = JSON.parse(msg)                    
         
         for (let i = 0; i < msg.length; i++){
           var eachNultrition = JSON.parse(msg[i].description)
           TotalCalories += parseFloat(eachNultrition.Calories)
-          TotalProtein += parseFloat(eachNultrition.Protein)
-          TotalCarb += parseFloat(eachNultrition.Carbohydrates)
+          // TotalProtein += parseFloat(eachNultrition.Protein)
+          // TotalCarb += parseFloat(eachNultrition.Carbohydrates)
 
         }
-        pieData.push(TotalCalories,TotalProtein,TotalCarb)
-        //console.log(pieData)
+        pieData.push(TotalCalories)
+        var CalBurn = 0
+                    $.ajax({
+                        url:"getCaloriesBurn.php",
+                        data: {
+                            "username": username,
+                            "date": date,
+                            "year": year
+                        },
+                        type:"POST",
+                        crossDomain:true,
+                        
+                        success:function(response){
+                         console.log(JSON.parse(response))
+                         response = JSON.parse(response)
+                          if (response.length == 0){
+                            pieData.push(0)
+                        }
+                        else{
+                          CalBurn = 0
+                          for (let i = 0; i < response.length; i++){
+                                //var eachNultrition = JSON.parse(response[i].caloriesBurned)
+                                CalBurn += parseFloat(response[i].caloriesBurned)
+                                }
+                                pieData.push(CalBurn)
+                        }
+                        console.log(pieData)
         var oilCanvas = document.getElementById("oilChart");
 
 var oilData = {
     labels: [
         "Calories",
-        "Protein",
-        "Carbohydrates"
+        "Calories Burned"
     ],
     datasets: [
         {
             data: pieData,
             backgroundColor: [
                 "#FF6384",
-                "#63FF84",
                 "#84FF63"
 
             ]
@@ -925,12 +915,14 @@ var pieChart = new Chart(oilCanvas, {
   type: 'pie',
   data: oilData
 });
+                      }
+                      })
+
+
+
     }
 
   });
-
-
-
 
 
     </script>

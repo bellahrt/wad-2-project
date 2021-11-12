@@ -25,9 +25,9 @@
             $icon = 'circle';
             //<input type="hidden" style="display:none;" name="foodDescription" value="${{"Calories":(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0), "Protein":(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0), "Carbohydrates":(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}}">
 
-            $foodDescription= "{'Calories':'$calories','Protein':'$protein','Carbohydrates':'$carbs'}";
-
-
+            $foodDescription= "{\"Calories\":\".{$calories}\",\"Protein\":\"{$protein}\",\"Carbohydrates\":\"{$carbs}\"}";
+            //echo $name." ".$lastName; // Outputs John Travolta
+            echo$foodDescription;
             $new_user = new calender($username, $foodName, $foodDescription, $date, $date, $className, $icon);
             $dao = new getcalenderDAO();
             

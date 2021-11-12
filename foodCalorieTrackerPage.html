@@ -30,658 +30,745 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- <link href="c.css" rel="stylesheet"> -->
 
-    <!-- VueJs -->
+  <!-- VueJs -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- anime script -->
+    <script src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.2/gsap.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase3.min.js'></script>
+    <script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script>
     <script src="https://unpkg.com/vue@next"></script>
-    <style>
+    <!-- <link href="c.css" rel="stylesheet"> -->
 
-      ul {
-        list-style: none; /* Remove default bullets */
-      }
-
-      ul li.carbs::before {
-        content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-        color: #F14647; /* Change the color */
-        font-weight: bold; /* If you want it to be bold */
-        display: inline-block; /* Needed to add space between the bullet and the text */
-        width: 1em; /* Also needed for space (tweak if needed) */
-        margin-left: -1em; /* Also needed for space (tweak if needed) */
-      }
-      ul li.protein::before {
-        content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-        color: #7ACA25; /* Change the color */
-        font-weight: bold; /* If you want it to be bold */
-        display: inline-block; /* Needed to add space between the bullet and the text */
-        width: 1em; /* Also needed for space (tweak if needed) */
-        margin-left: -1em; /* Also needed for space (tweak if needed) */
-      }
-      ul li.fat::before {
-        content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
-        color: #FFBE61; /* Change the color */
-        font-weight: bold; /* If you want it to be bold */
-        display: inline-block; /* Needed to add space between the bullet and the text */
-        width: 1em; /* Also needed for space (tweak if needed) */
-        margin-left: -1em; /* Also needed for space (tweak if needed) */
-      }
-      
-
-      .carousel-control-prev,
-      .carousel-control-next {
-        background-color: #e1e1e1;
-        width: 5vh;
-        height: 5vh;
-        border-radius: 50%;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      img{
-        height:400px;
-        width:100%;
-        position:relative;
-      }
-
-      img:hover{
-        opacity: 0.7;
-      }
-      .card-body{
-
-        height:400px;
-
-      }
-
-      #upload {
-          opacity: 0;
-      }
-
-      #upload-label {
-          position: absolute;
-          top: 50%;
-          left: 1rem;
-          transform: translateY(-50%);
-      }
-
-      .image-area {
-          border: 2px dashed rgba(255, 255, 255, 0.7);
-          padding: 1rem;
-          position: relative;
-      }
-
-      .image-area::before {
-          content: 'Uploaded image result';
-          color: #fff;
-          font-weight: bold;
-          text-transform: uppercase;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 0.8rem;
-          z-index: 1;
-      }
-
-      .image-area img {
-          z-index: 2;
-          position: relative;
-      }      
-
-      
-
-
-    </style>
-    <script>
-      var username = localStorage.getItem("username");
-      if (username === null){
-        window.location.href = "login/loginpage.php";
-      }
-
-
-      function logout() {
-        localStorage.removeItem('username')  
-        window.location.href = "login/logout.php";
-      }
-
-    </script>
+  <!-- =======================================================
+  * Template Name: Green - v4.6.0
+  * Template URL: https://bootstrapmade.com/green-free-one-page-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
   
-  </head>
-  <body onload="searchForRecipe()">
+</head>
+
+<body>
+
+
+
+
+<style>
+
+  ul {
+    list-style: none; /* Remove default bullets */
+  }
+
+  ul li.carbs::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #F14647; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+  }
+  ul li.protein::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #7ACA25; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+  }
+  ul li.fat::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #FFBE61; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+  }
+  
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    background-color: #e1e1e1;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  img{
+    height:400px;
+    width:100%;
+    position:relative;
+  }
+
+  img:hover{
+    opacity: 0.7;
+  }
+  .card-body{
+
+    height:400px;
+
+  }
+
+  #upload {
+      opacity: 0;
+  }
+
+  #upload-label {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+  }
+
+  .image-area {
+      border: 2px dashed rgba(255, 255, 255, 0.7);
+      padding: 1rem;
+      position: relative;
+  }
+
+  .image-area::before {
+      color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.8rem;
+      z-index: 1;
+  }
+
+  .image-area img {
+      z-index: 2;
+      position: relative;
+  }      
+
+  
+
+  .lds-dual-ring.hidden { 
+    display: none;
+  }
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 5% auto;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0,0,0,.8);
+      z-index: 999;
+      opacity: 1;
+      transition: all 0.5s;
+  }
+
+</style>
+<script>
+  var username = localStorage.getItem("username");
+  if (username === null){
+    window.location.href = "login/loginpage.php";
+  }
+
+
+  function logout() {
+    localStorage.removeItem('username')  
+    window.location.href = "login/logout.php";
+  }
+
+</script>
+
+</head>
+<body onload="searchForRecipe()">
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
 <!-- nav bar taken from style.js Vue js Component -->
-  <div id="navHead">
-    <navhead></navhead>
-  </div>
+<div id="navHead">
+<navhead></navhead>
+</div>
 
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
 
-    <div class="container-xl ">
-      <div class="row">
-        
-          <h1>What do you want to eat today?</h1>
-          <!---------------------START Search -------------------->
-        <!-- Food search  -->
-        <div class="bar my-2">
-            <!-- Create a binding between the searchString model and the text field -->
-            <input type="text" class="form-control " id="searchRecipeString" onchange="searchForRecipe()"  placeholder="Enter your food or ingredients here!" />
-        </div>
-      </div>  
-      <!---------------------END Search -------------------->
+<div class="container-xl ">
+  <div class="row">
+    
+      <h1>What do you want to eat today?</h1>
+      <!---------------------START Search -------------------->
+    <!-- Food search  -->
+    <div class="bar my-2">
+        <!-- Create a binding between the searchString model and the text field -->
+        <input type="text" class="form-control " id="searchRecipeString" onchange="searchForRecipe()"  placeholder="Enter your food or ingredients here!" />
+    </div>
+  </div>  
+  <!---------------------END Search -------------------->
 
 
 <!-------------------- GET LOCATION ------------------------------->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Places in Singapore</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" id="locationModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Places in Singapore</h5>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id style="height: 100%;">
+          <div class="container-fluid">
+            <div class="row"  style="height: 100%; width: 100%; margin: 0px; padding: 0px">
+              <div id="map" style="height: 300px;"></div>
+              
+              <div id="distance" ></div>
+              
             </div>
-            <div class="modal-body" id style="height: 20022px;">
-              <div class="container-fluid">
-                <div class="row"  style="height: 100%; width: 100%; margin: 0px; padding: 0px">
-                  <div id="map" style="height: 300px;"></div>
-                  <div id="distance" ></div>
-                </div>
-                <br><br><br>
+            <br><br><br>
 
-                <div class="row bg-dark text-warning mb-0" style="border-style: solid" >
-                  <div class="col-sm-12" id="locationresult" >
-                    List of places:    
-                  </div>
-                </div>
+            <div class="row bg-dark text-warning mb-0" style="border-style: solid" >
+              <div class="col-sm-12" id="locationresult" >
+                List of places:    
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
+    </div>
+  </div>
 <!------------------------- END LOCATION ---------------------------------------------->
 
 
 
 
 
-      <div class="row my-3">
-        <div id="carouselExample" class="carousel slide w-100 d-flex justify-content-center" data-bs-interval="false">
+  <div class="row my-3">
+    <div id="carouselExample" class="carousel slide w-100 d-flex justify-content-center" data-bs-interval="false">
 
-          <div class="carousel-inner" id="searchCarousel">
-            
-          </div>
-          <div id="searchCarouselButtons"></div>
-        </div>
-      </div>
+      <div class="carousel-inner" id="searchCarousel">
         
-
-
-          <div class="row">
-            <h1>Find out the nutrition count of the food you're eating!</h1>
-
-
-          </div>
-
+      </div>
+      <div id="searchCarouselButtons"></div>
+    </div>
+  </div>
+    
 
 
       <div class="row">
-        <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active foodRecognitionButtons" id="uploadImage-tab" data-bs-toggle="tab" data-bs-target="#uploadImage" type="button" role="tab" aria-controls="uploadImage" aria-selected="true">Upload Image</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link foodRecognitionButtons" id="webCamera-tab" data-bs-toggle="tab" data-bs-target="#webCamera" type="button" role="tab" aria-controls="webCamera" aria-selected="false">On Camera</button>
-          </li>
-
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="uploadImage" role="tabpanel" aria-labelledby="uploadImage-tab">
-        
-              <!-- Upload image input-->
-              <div class="input-group mb-3 px-2 py-2 my-2 rounded-pill bg-white shadow-sm">
-                <form action="" method="POST" name="singleDishImageUploadForm" id="singleDishImageUploadForm" enctype="multipart/form-data">   
-
-                  <input id="input-file" type="file" accept="image/*" onchange="readURL(this);" class="form-control border-0 d-flex justify-content-center">
-                  <label id="upload-label" for="input-file" class="font-weight-light text-muted"></label>
-
-                </form>
-              </div>
-
-              <!-- Uploaded image area-->
-              <div class="row">
-                <div class="image-area mt-4 col-sm-5" style="float:left">
-                  <h4 id="uploadedImage"></h4>
-                  <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm ">
-                </div>
-                <div class="col-sm-7 mt-4">
-
-                  <div id="resultsFromLogMealScanning" class="mb-3"></div>
-                  <div id="listOfFoodFromLogMeal"></div>
+        <h1>Find out the nutrition count of the food you're eating!</h1>
 
 
-                </div>                
-              </div>
-
-
-          
-          
-          </div>
-          <div class="tab-pane fade" id="webCamera" role="tabpanel" aria-labelledby="webCamera-tab">
-              <!----------------------- GET IMAGE RECOGNITION -------------------------------------->
-
-            <div class="row">
-              <div class="col-sm-5" style="float:left">
-                <div class="btn btn-primary" id="oncam" onclick="onCamera()" >Image Recognition</div>
-
-                <div id="cam" style="display:none; "> 
-                  <video id="player" style="height: 150px;"  controls autoplay ref="input"></video>
-                  <canvas id="canvas"></canvas> 
-
-                  <br>
-                  <div class="btn btn-primary"  id="capture"  >Capture</div>
-                  <div class="btn btn-primary"  id="closecam" onclick="closeCamera()" >Close</div>
-
-
-                </div>                
-              </div>
-
-              <div class="col-sm-7">
-
-                <div id="resultsFromFoodAIScanning" class="mb-3"></div>
-                <div id="listOfFoodFromFoodAI"></div>
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-        </div>      
       </div>
-      <div class="row py-4  my-3">
 
-        <div id="foodRecognitionCarousel" class="carousel slide w-100" data-bs-interval="false">
+
+
+  <div class="row">
+    <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active foodRecognitionButtons" id="uploadImage-tab" data-bs-toggle="tab" data-bs-target="#uploadImage" type="button" role="tab" aria-controls="uploadImage" aria-selected="true">Upload Image</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link foodRecognitionButtons" id="webCamera-tab" data-bs-toggle="tab" data-bs-target="#webCamera" type="button" role="tab" aria-controls="webCamera" aria-selected="false">On Camera</button>
+      </li>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="uploadImage" role="tabpanel" aria-labelledby="uploadImage-tab">
     
-            <div class="carousel-inner" id="foodRecognitionResults">
-    
+          <!-- Upload image input-->
+          <div class="input-group mb-3 px-2 py-2 my-2 rounded-pill bg-white shadow-sm">
+            <form action="" method="POST" name="singleDishImageUploadForm" id="singleDishImageUploadForm" enctype="multipart/form-data">   
+
+              <input id="input-file" type="file" accept="image/*" onchange="readURL(this);" class="form-control border-0 d-flex justify-content-center">
+              <label id="upload-label" for="input-file" class="font-weight-light text-muted"></label>
+
+            </form>
+          </div>
+
+          <!-- Uploaded image area-->
+          <div class="row">
+            <div class="image-area mt-4 col-sm-5" style="float:left">
+              <h4 id="uploadedImage"></h4>
+              <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm ">
             </div>
-            <div id="foodRecognitionCarouselButtons"></div>
+            <div class="col-sm-7 mt-4">
+
+              <div id="resultsFromLogMealScanning" class="mb-3"></div>
+              <div id="listOfFoodFromLogMeal"></div>
+
+
+            </div>                
+          </div>
+
+
+      
+      
+      </div>
+      <div class="tab-pane fade" id="webCamera" role="tabpanel" aria-labelledby="webCamera-tab">
+          <!----------------------- GET IMAGE RECOGNITION -------------------------------------->
+
+        <div class="row">
+          <div class="col-sm-5" style="float:left">
+            <div class="btn btn-primary" id="oncam" onclick="onCamera()" >Image Recognition</div>
+
+            <div id="cam" style="display:none; "> 
+              <video id="player" style="height: 150px;"  controls autoplay ref="input"></video>
+              <canvas id="canvas" style="width:200px;height:150px"></canvas> 
+
+              <br>
+              <div class="btn btn-primary"  id="capture"  >Capture</div>
+              <div class="btn btn-primary"  id="closecam" onclick="closeCamera()" >Close</div>
+
+
+            </div>                
+          </div>
+
+          <div class="col-sm-7">
+
+            <div id="resultsFromFoodAIScanning" class="mb-3"></div>
+            <div id="listOfFoodFromFoodAI"></div>
+
+          </div>
+
+
         </div>
 
-      </div>    
+
+      </div>
+    </div>      
+  </div>
+  <div class="row py-4  my-3">
+
+    <div id="foodRecognitionCarousel" class="carousel slide w-100" data-bs-interval="false">
+
+        <div class="carousel-inner" id="foodRecognitionResults">
+
+        </div>
+        <div id="foodRecognitionCarouselButtons"></div>
     </div>
 
+  </div>    
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ"></script>
+
+
+<div id="loader" class="lds-dual-ring hidden overlay"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>   
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCRjmgrxUrnF_MDRInDZ9hRfQSzwdPaxA"></script>
 <script>
-    $(".foodRecognitionButtons").click(function(){
-      var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
-      var foodRecognitionResults = document.getElementById('foodRecognitionResults');
-      foodRecognitionResults.innerHTML = "";
-      foodRecognitionCarouselButtons.innerHTML="";
-    });
-
-    function searchForRecipe() {
-      window.onresize = window.onload = function() {
-        widthOfScreen = this.innerWidth;
-        heightOfScreen = this.innerHeight;
-      }
-      var q = searchRecipeString.value
-      if(q==''){
-        q="Nasi Lemak";
-      }
-
-      $.ajax({
-      type: "GET",
-      dataType: "json",
-      url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ q +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91",
-      crossDomain: true,
-      success: function(response) {
-        console.log(response.hits)
-        
-        var carousel = document.getElementById("searchCarousel")
-        var searchCarouselButtons = document.getElementById("searchCarouselButtons");
-        carousel.innerHTML = ""
-        if(response.hits.length>2){
-          for (var i = 0; i<response.hits.length; i++){
-            if ( i == 0){
-              var active = "active"
-            }
-            else{
-              var active = ""
-            }
-
-
-            var ingredientsListOutput1='';
-
-            for(var x=0;x<response.hits[i].recipe.ingredientLines.length;x++){
-              // ingredientsListOutput1+="<li class='list-group-item'>"+ ingredientsList1[x] +"</li>"
-              ingredientsListOutput1 +="<li class='list-group-item'>"+ response.hits[i].recipe.ingredientLines[x]+"</li>";
-            }
+$(".foodRecognitionButtons").click(function(){
+  var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
+  var foodRecognitionResults = document.getElementById('foodRecognitionResults');
+  foodRecognitionResults.innerHTML = "";
+  foodRecognitionCarouselButtons.innerHTML="";
+});
 
 
 
 
+function searchForRecipe() {
+  window.onresize = window.onload = function() {
+    widthOfScreen = this.innerWidth;
+    heightOfScreen = this.innerHeight;
+  }
+  var q = searchRecipeString.value
+  if(q==''){
+    q="Nasi Lemak";
+  }
 
-            carousel.innerHTML += ` 
-                        <div class="carousel-item ${active}">
-                          <div class="col-md-6 col-sm-12 mx-auto">
-                            <div class="card py-3 px-3 ">
-                              <img class="card-img-top"
-                                src="${response.hits[i].recipe.image}" alt="Card image cap">
-                              <div class="card-body">
-                                <h4 class="card-title fs-2">${response.hits[i].recipe.label}</h4>
-                                <p class="card-text fs-3">${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)} Calories </p>
-                                <ul class="my-3">
-                                  <li class="protein">Protein: ${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
-                                  <li class="fat">Fat: ${(response.hits[i].recipe.totalNutrients.FAT.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
-                                  <li class="carbs">Carbs: ${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
-                                </ul>
-                                  <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
-                                <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${i}">Recipe</a>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[i].recipe.label +`')">Get Location </button>
-                              </div>
+  $.ajax({
+  type: "GET",
+  dataType: "json",
+  url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ q +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91",
+  crossDomain: true,
+  success: function(response) {
+    console.log(response.hits)
+    var carousel = document.getElementById("searchCarousel")
+    var searchCarouselButtons = document.getElementById("searchCarouselButtons");
+    carousel.innerHTML = ""
+    if(response.hits.length>2){
+      for (var i = 0; i<response.hits.length; i++){
+        if ( i == 0){
+          var active = "active"
+        }
+        else{
+          var active = ""
+        }
+
+
+        var ingredientsListOutput1='';
+
+        for(var x=0;x<response.hits[i].recipe.ingredientLines.length;x++){
+          // ingredientsListOutput1+="<li class='list-group-item'>"+ ingredientsList1[x] +"</li>"
+          ingredientsListOutput1 +="<li class='list-group-item'>"+ response.hits[i].recipe.ingredientLines[x]+"</li>";
+        }
+
+
+
+
+
+        carousel.innerHTML += ` 
+                    <div class="carousel-item ${active}">
+                      <div class=" mx-auto">
+                        <div class="card py-3 px-3 ">
+                          <div class="row no-gutter">
+                            <div class="col-xs-12 col-md-5">
+                              <img class="card-img-top" src="${response.hits[i].recipe.image}" alt="Card image cap">
                             </div>
-                        
-                            <div class="modal fade" id="exampleModal${i}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Ingredients for ${response.hits[i].recipe.label}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <ul class="list-group">
-                                      ${ingredientsListOutput1}
-                                    </ul>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <a href="${response.hits[i].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
-                                    <form action="insertFoodCalories.php" method="post">
-                                      <input type="hidden" style="display:none;" name="username" value="${username}">
-                                      <input type="hidden" style="display:none;" name="foodName" value="${response.hits[i].recipe.label}">
-                                      <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)}">
-                                      <input type="hidden" style="display:none;" name="protein" value="${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
-                                      <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
-                                      <input type="submit"  type="button" onclick="alert('Calories Consumed has been entered into the system')" class="btn btn-primary" value="Submit Calorie Count">
-                                    </form>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
+                            <div class="card-body col-xs-12 col-md-7">
+                              <h4 class="card-title fs-2">${response.hits[i].recipe.label}</h4>
+                              <p class="card-text fs-3">${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)} Calories </p>
+                              <ul class="my-3">
+                                <li class="protein">Protein: ${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
+                                <li class="fat">Fat: ${(response.hits[i].recipe.totalNutrients.FAT.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
+                                <li class="carbs">Carbs: ${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
+                              </ul>
+                                <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
+                              <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${i}">Recipe</a>
+                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[i].recipe.label +`')">Get Location </button>
                             </div>
-                            
                           </div>
                         </div>
-                        `
-
-            searchCarouselButtons.innerHTML+=`          
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>`
-        }
-        }else if(response.hits.length==1){
-            var ingredientsListOutput1='';
-
-            for(var x=0;x<response.hits[0].recipe.ingredientLines.length;x++){
-              // ingredientsListOutput1+="<li class='list-group-item'>"+ ingredientsList1[x] +"</li>"
-              ingredientsListOutput1 +="<li class='list-group-item'>"+ response.hits[0].recipe.ingredientLines[x]+"</li>";
-            }
-
-            carousel.innerHTML += ` 
-                        <div class="carousel-item active">
-
-
-                          <div class="d-flex justify-content-center" >
-                            <div class="card my-3  ">
-                              <img class="card-img-top"
-                                src="${response.hits[0].recipe.image}" alt="Card image cap">
-                              <div class="card-body">
-                                <h4 class="card-title fs-2">${response.hits[0].recipe.label}</h4>
-                                <p class="card-text fs-3">${(response.hits[0].recipe.calories/ response.hits[0].recipe.yield).toFixed(0)} Calories </p>
-                                <ul class="my-3">
-                                  <li class="protein">Protein: ${(response.hits[0].recipe.totalNutrients.PROCNT.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
-                                  <li class="fat">Fat: ${(response.hits[0].recipe.totalNutrients.FAT.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
-                                  <li class="carbs">Carbs: ${(response.hits[0].recipe.totalNutrients.CHOCDF.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
+                    
+                        <div class="modal fade" id="exampleModal${i}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ingredients for ${response.hits[i].recipe.label}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <ul class="list-group">
+                                  ${ingredientsListOutput1}
                                 </ul>
-                                  <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
-                                <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${0}">Recipe</a>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[0].recipe.label +`')">Get Location </button>
+                              </div>
+                              <div class="modal-footer">
+                                <a href="${response.hits[i].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
+                                <form action="insertFoodCalories.php" method="post">
+                                  <input type="hidden" style="display:none;" name="username" value="${username}">
+                                  <input type="hidden" style="display:none;" name="foodName" value="${response.hits[i].recipe.label}">
+                                  <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)}">
+                                  <input type="hidden" style="display:none;" name="protein" value="${(response.hits[i].recipe.totalNutrients.PROCNT.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
+                                  <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}">
+                                  <input type="submit"  type="button" onclick="alert('Calories Consumed has been entered into the system')" class="btn btn-primary" value="Submit Calorie Count">
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                               </div>
                             </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    `
 
-                            <div class="modal fade" id="exampleModal${0}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Ingredients for ${response.hits[0].recipe.label}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <ul class="list-group">
-                                      ${ingredientsListOutput1}
-                                    </ul>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <a href="${response.hits[0].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
-                                    <form action="insertFoodCalories.php" method="post">
-                                      <input type="hidden" style="display:none;" name="username" value="${username}">
-                                      <input type="hidden" style="display:none;" name="foodName" value="${response.hits[0].recipe.label}">
-                                      <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[0].recipe.calories/ response.hits[0].recipe.yield).toFixed(0)}">
-                                      <input type="hidden" style="display:none;" name="protein" value="${(response.hits[0].recipe.totalNutrients.PROCNT.quantity/ response.hits[0].recipe.yield).toFixed(0)}">
-                                      <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[0].recipe.totalNutrients.CHOCDF.quantity/ response.hits[0].recipe.yield).toFixed(0)}">
-                                      <input type="submit"  type="button" onclick="alert('Calories Consumed has been entered into the system')" class="btn btn-primary" value="Submit Calorie Count">
-                                    </form>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            
-                          </div>`
+        searchCarouselButtons.innerHTML+=`          
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>`
+    }
+    }else if(response.hits.length==1){
+        var ingredientsListOutput1='';
 
-            searchCarouselButtons.innerHTML=``;
-        }else{
-          console.log("No food recipe available")
-          searchCarouselButtons.innerHTML=``;
-          carousel.innerHTML+=`
-          <div class="carousel-item active">
-            <img class="d-block w-100 h-100" src="https://cdn.dribbble.com/users/1242216/screenshots/9326781/media/6384fef8088782664310666d3b7d4bf2.png?" alt="Sorry! No recipe available">
-          </div>
-          
-          `
+        for(var x=0;x<response.hits[0].recipe.ingredientLines.length;x++){
+          // ingredientsListOutput1+="<li class='list-group-item'>"+ ingredientsList1[x] +"</li>"
+          ingredientsListOutput1 +="<li class='list-group-item'>"+ response.hits[0].recipe.ingredientLines[x]+"</li>";
         }
+
+        carousel.innerHTML += ` 
+                    <div class="carousel-item active">
+
+
+                      <div class="d-flex justify-content-center" >
+                        <div class="card my-3  ">
+                          <div class="row">
+                            <div class="col-xs-12 col-md-5">
+
+                              <img class="card-img-top" src="${response.hits[0].recipe.image}" alt="Card image cap">
+                            </div>
+                            <div class="card-body col-xs-12 col-md-7">
+                              <h4 class="card-title fs-2">${response.hits[0].recipe.label}</h4>
+                              <p class="card-text fs-3">${(response.hits[0].recipe.calories/ response.hits[0].recipe.yield).toFixed(0)} Calories </p>
+                              <ul class="my-3">
+                                <li class="protein">Protein: ${(response.hits[0].recipe.totalNutrients.PROCNT.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
+                                <li class="fat">Fat: ${(response.hits[0].recipe.totalNutrients.FAT.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
+                                <li class="carbs">Carbs: ${(response.hits[0].recipe.totalNutrients.CHOCDF.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
+                              </ul>
+                                <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
+                              <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${0}">Recipe</a>
+                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[0].recipe.label +`')">Get Location </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="modal fade" id="exampleModal${0}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ingredients for ${response.hits[0].recipe.label}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <ul class="list-group">
+                                  ${ingredientsListOutput1}
+                                </ul>
+                              </div>
+                              <div class="modal-footer">
+                                <a href="${response.hits[0].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
+                                <form action="insertFoodCalories.php" method="post">
+                                  <input type="hidden" style="display:none;" name="username" value="${username}">
+                                  <input type="hidden" style="display:none;" name="foodName" value="${response.hits[0].recipe.label}">
+                                  <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[0].recipe.calories/ response.hits[0].recipe.yield).toFixed(0)}">
+                                  <input type="hidden" style="display:none;" name="protein" value="${(response.hits[0].recipe.totalNutrients.PROCNT.quantity/ response.hits[0].recipe.yield).toFixed(0)}">
+                                  <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.hits[0].recipe.totalNutrients.CHOCDF.quantity/ response.hits[0].recipe.yield).toFixed(0)}">
+                                  <input type="submit"  type="button" onclick="alert('Calories Consumed has been entered into the system')" class="btn btn-primary" value="Submit Calorie Count">
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>`
+
+        searchCarouselButtons.innerHTML=``;
+    }else{
+      console.log("No food recipe available")
+      searchCarouselButtons.innerHTML=``;
+      carousel.innerHTML+=`
+      <div class="carousel-item active">
+        <img class="d-block w-100 h-100" src="assets/img/noResultsFound.png" alt="Sorry! No recipe available">
+      </div>
+      
+      `
+    }
+  },
+
+  error : function(xhr, status, error)
+  {
+      console.log("Status of error message" + status + "Error is" + error);
+  }   
+
+});
+};//end of searchRecipeFunction
+
+$("#singleDishImageUploadForm").on('change',(function(e) {
+  e.preventDefault();
+
+  var form_data = new FormData();
+  var file = $('#input-file')[0].files[0];
+  console.log(file)
+  form_data.append("image", file);
+  $('#loader').removeClass('hidden');
+
+  var settings = {
+      "url": "https://api.logmeal.es/v2/image/recognition/complete",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+          // "Authorization": "Bearer 508e03b3ded586a8db21d5d9fe32dfba931a66b7"
+          // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
+          // "Authorization": "Bearer 1c04875b04746ce36a3e805f561d2624e91a8d00"
+          "Authorization": "Bearer 52744bbf5f50721d4f7acaa191fed7a67d581938"
+          // "Authorization": "Bearer 4c2c6c3b5e365fac4b147bb23d03489be58c1bfc "
+          // "Authorization": "Bearer a19e01c759e220b231baad328f1046e72d61d5fa"
+          // "Authorization": "Bearer 87fa0a2477fbe157f8f7b8cf36fb94ffe3d8a62f"
+          // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
+          // "Authorization": "Bearer 28fa9984eb944a62334884094defed6f23c450ca  "
       },
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "data": form_data
+  };
 
-      error : function(xhr, status, error)
-      {
-          console.log("Status of error message" + status + "Error is" + error);
-      }   
+  $.ajax(settings).done(function (response) {
+    var response = JSON.parse(response).recognition_results;
+    
 
-    });
-    };//end of searchRecipeFunction
+    document.getElementById("resultsFromLogMealScanning").innerHTML=`Results:<h4>Click on any title of food to search for it's nutritional count below!</h4>`;
+    document.getElementById("listOfFoodFromLogMeal").innerHTML= ""
 
-    $("#singleDishImageUploadForm").on('change',(function(e) {
-      e.preventDefault();
+    for (i in response){
 
-      var form_data = new FormData();
-      var file = $('#input-file')[0].files[0];
-      console.log(file)
-      form_data.append("image", file);
+      var percentage = (response[i].prob).toFixed(2)*100
 
-      var settings = {
-          "url": "https://api.logmeal.es/v2/image/recognition/complete",
-          "method": "POST",
-          "timeout": 0,
-          "headers": {
-              "Authorization": "Bearer 508e03b3ded586a8db21d5d9fe32dfba931a66b7"
-              // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
-              // "Authorization": "Bearer 1c04875b04746ce36a3e805f561d2624e91a8d00"
-              // "Authorization": "Bearer 52744bbf5f50721d4f7acaa191fed7a67d581938"
-              // "Authorization": "Bearer 4c2c6c3b5e365fac4b147bb23d03489be58c1bfc "
-              // "Authorization": "Bearer a19e01c759e220b231baad328f1046e72d61d5fa"
-              // "Authorization": "Bearer 87fa0a2477fbe157f8f7b8cf36fb94ffe3d8a62f"
-              // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
-              // "Authorization": "Bearer 28fa9984eb944a62334884094defed6f23c450ca  "
-          },
-          "processData": false,
-          "mimeType": "multipart/form-data",
-          "contentType": false,
-          "data": form_data
-      };
+      var nameOfFood = response[i].name;
+      console.log(response[i])
+      document.getElementById("listOfFoodFromLogMeal").innerHTML += `
 
-      $.ajax(settings).done(function (response) {
-        var response = JSON.parse(response).recognition_results;
-        
-
-        document.getElementById("resultsFromLogMealScanning").innerHTML=`Results:<h4>Click on any text to search for it's list of calorie count!</h4>`;
-        document.getElementById("listOfFoodFromLogMeal").innerHTML= ""
-
-        for (i in response){
-
-          var percentage = (response[i].prob).toFixed(2)*100
-
-          var nameOfFood = response[i].name;
-          console.log(response[i])
-          document.getElementById("listOfFoodFromLogMeal").innerHTML += `
-
-                <div class="row">
-                  <div class="col-xs-12">
-                    <h4 class="listOfPossibleFood">${nameOfFood}</h4>
-                  </div>
-                  <div class="progress col-md-8 col-xs-8">
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;"></div>
-                  </div>
-                  <div class="col-md-4 col-xs-4">${percentage}</div>
-                </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 class="listOfPossibleFood">${nameOfFood}</h4>
+              </div>
+              <div class="progress col-md-8 col-xs-8">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;"></div>
+              </div>
+              <div class="col-md-4 col-xs-4">${percentage}%</div>
+            </div>
 
 
 
 
-          `;
-        }
-        $('.listOfPossibleFood').click(function() {
-            var confirmedDish = $(this).text();
-            console.log(confirmedDish)                 
-            var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
-            var foodRecognitionResults = document.getElementById('foodRecognitionResults');
-            foodRecognitionResults.innerHTML = ""
+      `;
+    }
+    setTimeout(function(){ $('#loader').addClass('hidden');; }, 1000);
 
-            var foodDatabaseUrl ="https://api.edamam.com/api/recipes/v2?type=public&q="+ confirmedDish +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91"
-            axios.get(foodDatabaseUrl)
-                .then(response=>{
+    $('.listOfPossibleFood').click(function() {
+        $('#loader').removeClass('hidden');
 
+        var confirmedDish = $(this).text();
+        console.log(confirmedDish)                 
+        var foodRecognitionCarouselButtons = document.getElementById("foodRecognitionCarouselButtons")    
+        var foodRecognitionResults = document.getElementById('foodRecognitionResults');
+        foodRecognitionResults.innerHTML = ""
 
-                    for (var i = 0;i<response.data.hits.length;i++){
-                            console.log(response.data.hits[i]);
+        var foodDatabaseUrl ="https://api.edamam.com/api/recipes/v2?type=public&q="+ confirmedDish +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91"
+        axios.get(foodDatabaseUrl)
+            .then(response=>{
+              setTimeout(function(){ $('#loader').addClass('hidden');; }, 1000);
 
-                            if ( i == 0){
-                                var active = "active"
-                            }
-                            else{
-                                var active = ""
-                            }
-                            foodRecognitionResults.innerHTML+=`
+                for (var i = 0;i<response.data.hits.length;i++){
+                        console.log(response.data.hits[i]);
 
-                            <div class="carousel-item ${active}">
+                        if ( i == 0){
+                            var active = "active"
+                        }
+                        else{
+                            var active = ""
+                        }
+                        foodRecognitionResults.innerHTML+=`
 
-                                <div class="col-md-6 col-sm-12 mx-auto">
-                                    <div class="card my-3 ">
-                                        <img class="card-img-top" src="${response.data.hits[i].recipe.image}" alt="Card image cap">
-                                        
-                                        <div class="card-body">
-                                            <h4 class="card-title fs-2">${response.data.hits[i].recipe.label}</h4>
+                        <div class="carousel-item ${active}">
 
-                                            <p class="card-text fs-3">${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)} Calories </p>
-                                                <ul class="my-3">
-                                                    <li class="protein">Protein: ${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}</li>
-                                                    <li class="fat">Fat: ${(response.data.hits[i].recipe.totalNutrients.FAT.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
-                                                    <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
-                                                </ul>
-                                            </p>
-                                            <form action="insertFoodCalories.php" method="post">
-                                              <input type="hidden" style="display:none;" name="username" value="${username}">
-                                              <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
-                                              <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="submit" onclick="alert('Calories Consumed has been entered into the system')"  type="button" class="btn btn-primary" value="Submit Calorie Count">
-                                            </form>
-                                        </div>
+                            <div class=" mx-auto">
+                                <div class="card my-3 ">
+                                  <div class="row">
+                                    <div class="col-xs-12 col-md-5">
+                                      <img class="card-img-top" src="${response.data.hits[i].recipe.image}" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body col-xs-12 col-md-7">
+                                        <h4 class="card-title fs-2">${response.data.hits[i].recipe.label}</h4>
+
+                                        <p class="card-text fs-3">${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)} Calories </p>
+                                            <ul class="my-3">
+                                                <li class="protein">Protein: ${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                <li class="fat">Fat: ${(response.data.hits[i].recipe.totalNutrients.FAT.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                            </ul>
+                                        </p>
+                                        <form action="insertFoodCalories.php" method="post">
+                                          <input type="hidden" style="display:none;" name="username" value="${username}">
+                                          <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
+                                          <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                          <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
+                                          <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                          <input type="submit" onclick="alert('Calories Consumed has been entered into the system')"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                        
-                        `;
-                        
-                    }
-                foodRecognitionCarouselButtons.innerHTML+=`
-                <button class="carousel-control-prev" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-                
-                
-                `
                     
-                }).catch(error=>{
+                    `;
 
-                    console.log(error)
-                })
+                    
+                }
+            foodRecognitionCarouselButtons.innerHTML+=`
+            <button class="carousel-control-prev" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            
+            
+            `
+                
+            }).catch(error=>{
 
-        
+                console.log(error)
+            })
+
+    
 
 
-        });
-      });
-    }));
+    });
+  });
+}));
 
 
 
 function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        var uploadedImage = document.getElementById('uploadedImage');
-        uploadedImage.innerHTML=`<h2>Selected Image (Give it a few seconds!)</h2>`;
-        reader.onload = function (e) {
-            $('#imageResult')
-                .attr('src', e.target.result);
-        };
+if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var uploadedImage = document.getElementById('uploadedImage');
+    uploadedImage.innerHTML=`<h2>Selected Image (Give it a few seconds!)</h2>`;
+    reader.onload = function (e) {
+        $('#imageResult')
+            .attr('src', e.target.result);
+    };
 
-        reader.readAsDataURL(input.files[0]);
-    }
+    reader.readAsDataURL(input.files[0]);
+}
 }
 
 $(function () {
-    $('#upload').on('change', function () {
-        readURL(input);
-    });
+$('#upload').on('change', function () {
+    readURL(input);
+});
 });
 
 
 
 function getloc (q){
-  
 
-  var food = q        //////////////////////////////////////////////////////////////////////////////CHANGE THE VARIABLE NAME HERE/////////////////////////////////////////
 
-  
-   $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: "https://tih-api.stb.gov.sg/content/v1/food-beverages/search?keyword="+ food +"&language=en&apikey=Hbjt6beOzjpqSGAq9KKKbVBf5YtyzozN",
-    crossDomain: true,
+var food = q        //////////////////////////////////////////////////////////////////////////////CHANGE THE VARIABLE NAME HERE/////////////////////////////////////////
+
+
+$.ajax({
+type: "GET",
+dataType: "json",
+url: "https://tih-api.stb.gov.sg/content/v1/food-beverages/search?keyword="+ food +"&language=en&apikey=Hbjt6beOzjpqSGAq9KKKbVBf5YtyzozN",
+crossDomain: true,
 //     beforeSend: function(request) {
 //     request.setRequestHeader("apikey", "Hbjt6beOzjpqSGAq9KKKbVBf5YtyzozN");
 //   },
@@ -689,274 +776,276 @@ function getloc (q){
 //         keyword : "chicken rice",
 
 //     },
-    success: function(response) {
-      console.log(response)
-      var locations = []
-      document.getElementById('locationresult').innerHTML='';
-      for (i in response.data){
-        document.getElementById('locationresult').innerHTML += ` <div class="row" style="border-top-style: solid" >
-                                                                    <div class="col-8 col-sm-8"  style="border-right-style: solid">
-                                                                      <strong>`+response.data[i].name +` </strong> -  <i> `+response.data[i].description +` </i> <br><br> `+response.data[i].body +`
-                                                                    </div>
-                                                                    <div class="col-4 col-sm-4"  >
-                                                                      `+response.data[i].address.streetName +` ` + response.data[i].address.postalCode + ` <br>
-                                                                      <button type="button" onclick="getthere(`+response.data[i].location.latitude+`,`+response.data[i].location.longitude +`,'`+response.data[i].name +`')" 
-                                                                      class="btn btn-primary">Get there</button>
-                                                                    </div>
-                                                                  </div>`
-        locations.push([response.data[i].name, response.data[i].location.latitude,  response.data[i].location.longitude,i+1])      
-      }
+success: function(response) {
+  console.log(response)
+  var locations = []
+  document.getElementById('locationresult').innerHTML='';
+  for (i in response.data){
+    document.getElementById('locationresult').innerHTML += ` <div class="row" style="border-top-style: solid" >
+                                                                <div class="col-8 col-sm-8"  style="border-right-style: solid">
+                                                                  <strong>`+response.data[i].name +` </strong> -  <i> `+response.data[i].description +` </i> <br><br> `+response.data[i].body +`
+                                                                </div>
+                                                                <div class="col-4 col-sm-4"  >
+                                                                  `+response.data[i].address.streetName +` ` + response.data[i].address.postalCode + ` <br>
+                                                                  <button type="button" onclick="getthere(`+response.data[i].location.latitude+`,`+response.data[i].location.longitude +`,'`+response.data[i].name +`')" 
+                                                                  class="btn btn-primary getThereButton" href="#map">Get there</button>
+                                                                </div>
+                                                              </div>`
+    locations.push([response.data[i].name, response.data[i].location.latitude,  response.data[i].location.longitude,i+1])      
+  }
 
-          var geocoder;
-          var map;
-          var directionsDisplay;
-          var directionsService = new google.maps.DirectionsService();
-          console.log(locations)
+      var geocoder;
+      var map;
+      var directionsDisplay;
+      var directionsService = new google.maps.DirectionsService();
+      console.log(locations)
 
-                directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay = new google.maps.DirectionsRenderer();
 
 
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: new google.maps.LatLng(1.301591, 103.861949),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          });
-          
-        
-
-          
-          directionsDisplay.setMap(map);
-          var infowindow = new google.maps.InfoWindow();
-
-          function addMarker(props){
-              var marker1 = new google.maps.Marker({
-                position:props.coords,
-                map:map,
-                icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-                animation: google.maps.Animation.DROP
-              });
-            }
-
-          if (navigator.geolocation) {
-            var infowindow = new google.maps.InfoWindow();
-              navigator.geolocation.getCurrentPosition(function(position) {
-              var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-              localStorage.setItem("latitude",pos.lat)
-              localStorage.setItem("longitude",pos.lng)
-              infowindow.setPosition(pos);
-              addMarker({
-                coords: pos,
-                content:'YOU ARE HERE'
-              });  
-              // if you want this, center the map.  Else remove next line
-              map.setCenter(pos);          
-            })
-      }
-
-          var marker, i;
-          var request = {
-            travelMode: google.maps.TravelMode.DRIVING
-          };
-          for (i = 0; i < locations.length; i++) {
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-              map: map
-            });
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-              return function() {
-                infowindow.setContent(locations[i][0]);
-                infowindow.open(map, marker);
-                console.log(this.position)
-                
-
-                let directionsService = new google.maps.DirectionsService();
-                let directionsRenderer = new google.maps.DirectionsRenderer();
-                directionsRenderer.setMap(null);
-                directionsRenderer.setMap(map);
-
-                  // request.origin = marker.getPosition();
-                  // request.destination = marker.getPosition();
-                  // console.log(marker.getPosition())
-                  var latitude = localStorage.getItem("latitude")
-                  var longitude = localStorage.getItem("longitude")
-                  console.log(latitude)
-                  const route = {
-                    
-                    origin:  {lat: parseFloat(latitude), lng: parseFloat(longitude)},
-                    destination:{lat: this.position.lat(), lng: this.position.lng()},
-                    travelMode: 'DRIVING'
-                  }
-
-                  directionsService.route(route,
-        function(response, status) { // anonymous function to capture directions
-        if (status !== 'OK') {
-            window.alert('Directions request failed due to ' + status);
-            return;
-        } else {
-            directionsRenderer.setDirections(response); // Add route to the map
-            console.log(response)
-            console.log(response.routes[0].summary
-            )
-            var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
-            if (!directionsData) {
-            window.alert('Directions request failed');
-            return;
-            }
-            else {
-            document.getElementById('distance').innerHTML += "<br/><b>Destination:</b> " +  + "<br/>Walking distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
-            
-            //Nutrition API get distance travelled to calculate calorie burned
-            // var distance = directionsData.distance.text
-            // nutritionCalorie(distance)
-            }
-      }
-    });
-               
-              }
-            })(marker, i));
-      }
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 11,
+        center: new google.maps.LatLng(1.301591, 103.861949),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      
     
 
-    },
-    error: function(xhr) {
+      
+      directionsDisplay.setMap(map);
+      var infowindow = new google.maps.InfoWindow();
 
-    }
-  });
+      function addMarker(props){
+          var marker1 = new google.maps.Marker({
+            position:props.coords,
+            map:map,
+            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            animation: google.maps.Animation.DROP
+          });
+        }
+
+      if (navigator.geolocation) {
+        var infowindow = new google.maps.InfoWindow();
+          navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          localStorage.setItem("latitude",pos.lat)
+          localStorage.setItem("longitude",pos.lng)
+          infowindow.setPosition(pos);
+          addMarker({
+            coords: pos,
+            content:'YOU ARE HERE'
+          });  
+          // if you want this, center the map.  Else remove next line
+          map.setCenter(pos);          
+        })
+  }
+
+      var marker, i;
+      var request = {
+        travelMode: google.maps.TravelMode.DRIVING
+      };
+      for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+            console.log(this.position)
+            
+
+            let directionsService = new google.maps.DirectionsService();
+            let directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(null);
+            directionsRenderer.setMap(map);
+
+              // request.origin = marker.getPosition();
+              // request.destination = marker.getPosition();
+              // console.log(marker.getPosition())
+              var latitude = localStorage.getItem("latitude")
+              var longitude = localStorage.getItem("longitude")
+              console.log(latitude)
+              const route = {
+                
+                origin:  {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+                destination:{lat: this.position.lat(), lng: this.position.lng()},
+                travelMode: 'DRIVING'
+              }
+
+              directionsService.route(route,
+    function(response, status) { // anonymous function to capture directions
+    if (status !== 'OK') {
+        window.alert('Directions request failed due to ' + status);
+        return;
+    } else {
+        directionsRenderer.setDirections(response); // Add route to the map
+        console.log(response)
+        console.log(response.routes[0].summary
+        )
+        var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
+        if (!directionsData) {
+        window.alert('Directions request failed');
+        return;
+        }
+        else {
+        document.getElementById('distance').innerHTML += "<br/><b>Destination:</b> " +  + "<br/>Walking distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
+        
+        //Nutrition API get distance travelled to calculate calorie burned
+        // var distance = directionsData.distance.text
+        // nutritionCalorie(distance)
+        }
+  }
+});
+           
+          }
+        })(marker, i));
+  }
+
+
+},
+error: function(xhr) {
+
+}
+});
 }
 
 
 function getthere(markerlatitude,markerlongitude,name){
-  var name= name
-  var map = new google.maps.Map(document.getElementById('map'))
-        let directionsService = new google.maps.DirectionsService();
-                let directionsRenderer = new google.maps.DirectionsRenderer();
-                directionsRenderer.setMap(null);
-                directionsRenderer.setMap(map);
 
-                  // request.origin = marker.getPosition();
-                  // request.destination = marker.getPosition();
-                  // console.log(marker.getPosition())
-                  var latitude = localStorage.getItem("latitude")
-                  var longitude = localStorage.getItem("longitude")
-                  console.log(latitude)
-                  const route = {
-                    
-                    origin:  {lat: parseFloat(latitude), lng: parseFloat(longitude)},
-                    destination:{lat: markerlatitude, lng: markerlongitude},
-                    travelMode: 'DRIVING'
-                  }
 
-                  directionsService.route(route,
-        function(response, status) { // anonymous function to capture directions
-        if (status !== 'OK') {
-            window.alert('Directions request failed due to ' + status);
-            return;
-        } else {
-            directionsRenderer.setDirections(response); // Add route to the map
-            console.log(response)
-            console.log(response.routes[0].summary
-            )
-            var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
-            if (!directionsData) {
-            window.alert('Directions request failed');
-            return;
-            }
-            else {
-            document.getElementById('distance').innerHTML = "<br/><b>Destination:</b> " + name + "<br/>Driving distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
-            
-            //Nutrition API get distance travelled to calculate calorie burned
-            // var distance = directionsData.distance.text
-            // nutritionCalorie(distance)
-            }
-      }
-    });  
-    }
+var name= name
+var map = new google.maps.Map(document.getElementById('map'))
+    let directionsService = new google.maps.DirectionsService();
+            let directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(null);
+            directionsRenderer.setMap(map);
+
+              // request.origin = marker.getPosition();
+              // request.destination = marker.getPosition();
+              // console.log(marker.getPosition())
+              var latitude = localStorage.getItem("latitude")
+              var longitude = localStorage.getItem("longitude")
+              console.log(latitude)
+              const route = {
+                
+                origin:  {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+                destination:{lat: markerlatitude, lng: markerlongitude},
+                travelMode: 'DRIVING'
+              }
+
+              directionsService.route(route,
+    function(response, status) { // anonymous function to capture directions
+    if (status !== 'OK') {
+        window.alert('Directions request failed due to ' + status);
+        return;
+    } else {
+        directionsRenderer.setDirections(response); // Add route to the map
+        console.log(response)
+        console.log(response.routes[0].summary
+        )
+        var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
+        if (!directionsData) {
+        window.alert('Directions request failed');
+        return;
+        }
+        else {
+        document.getElementById('distance').innerHTML = "<br/><b>Destination:</b> " + name + "<br/>Driving distance is " + directionsData.distance.text + " (" + directionsData.duration.text + ").";
+        
+        //Nutrition API get distance travelled to calculate calorie burned
+        // var distance = directionsData.distance.text
+        // nutritionCalorie(distance)
+        }
+  }
+});  
+}
 
 
 
 //////////////////////////////////////////////////FODD IMAGE RECOGNITION///////////////////////////
 
 function closeCamera(){
-  $("#cam").fadeOut();
-  player.srcObject.getVideoTracks().forEach(track => track.stop());
+$("#cam").fadeOut();
+player.srcObject.getVideoTracks().forEach(track => track.stop());
 };
 
 function onCamera(){
-  console.log('on camera')
-  $("#cam").fadeIn();
+console.log('on camera')
+$("#cam").fadeIn();
 
-          const player = document.getElementById('player');
-          const canvas = document.getElementById('canvas');
-          const context = canvas.getContext('2d');
-          const captureButton = document.getElementById('capture');
+      const player = document.getElementById('player');
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      const captureButton = document.getElementById('capture');
 
-            const constraints = {
-            video: true,
-          };
+        const constraints = {
+        video: true,
+      };
 
-          navigator.mediaDevices.getUserMedia(constraints)
-            .then((stream) => {
-              player.srcObject = stream;
-            });
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+          player.srcObject = stream;
+        });
 
 
-          captureButton.addEventListener('click', () => {
-            // Draw the video frame to the canvas.
-            context.drawImage(player, 0, 0, canvas.width, canvas.height);
-            var Pic = canvas.toDataURL("image/png");
-            //Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
-          $.ajax({
-          type: "POST",
-          dataType: "json",
-          url: "https://api.foodai.org/v4.1/classify",
-          crossDomain: true,
-          data: {
-            image_url: Pic,
-            num_tag: 5,
-            api_key:"62f40985765435783d123372c0bd5dc29a4b5da0"
-          },
-          success: function(foodAIResponse){
-            console.log(foodAIResponse)
-            console.log(foodAIResponse.food_results[0][0])
-            if (foodAIResponse.food_results[0][0] == "Non Food"){
-              document.getElementById("listOfFoodFromFoodAI").innerHTML =  "<div class='text-danger'>Please capture a proper food leh</div>"
-            }
-            else{
-              document.getElementById("resultsFromFoodAIScanning").innerHTML=`Results:<h4>Click on any text to search for it's list of calorie count!</h4>`;
-              document.getElementById("listOfFoodFromFoodAI").innerHTML= ""
+      captureButton.addEventListener('click', () => {
+        // Draw the video frame to the canvas.
+        context.drawImage(player, 0, 0, canvas.width, canvas.height);
+        var Pic = canvas.toDataURL("image/png");
+        //Pic = Pic.replace(/^data:image\/(png|jpg);base64,/, "")
+      $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "https://api.foodai.org/v4.1/classify",
+      crossDomain: true,
+      data: {
+        image_url: Pic,
+        num_tag: 5,
+        api_key:"62f40985765435783d123372c0bd5dc29a4b5da0"
+      },
+      success: function(foodAIResponse){
+        console.log(foodAIResponse)
+        console.log(foodAIResponse.food_results[0][0])
+        if (foodAIResponse.food_results[0][0] == "Non Food"){
+          document.getElementById("listOfFoodFromFoodAI").innerHTML =  "<div class='text-danger'>Please capture a proper food leh</div>"
+        }
+        else{
+          document.getElementById("resultsFromFoodAIScanning").innerHTML=`Results:<h4>Click on any title of food to search for it's list of nutritional count below!</h4>`;
+          document.getElementById("listOfFoodFromFoodAI").innerHTML= ""
 
-              for (i in foodAIResponse.food_results){
-                // document.getElementById("listOfFoodFromFoodAI").innerHTML += "<div class='listOfPossibleFood' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer;vertical-align:middle; max-width: 100px;padding: 5px;text-align: center;'>"+ foodAIResponse.food_results[i][0] +"</div>"
-                var percentage = (foodAIResponse.food_results[i][1]*100).toFixed(2)
-                var nameOfFood = foodAIResponse.food_results[i][0]
-                document.getElementById("listOfFoodFromFoodAI").innerHTML+=`
+          for (i in foodAIResponse.food_results){
+            // document.getElementById("listOfFoodFromFoodAI").innerHTML += "<div class='listOfPossibleFood' style='border-style: groove;display:inline-block;color:#444;border:1px solid #CCC;background:#DDD;box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);cursor:pointer;vertical-align:middle; max-width: 100px;padding: 5px;text-align: center;'>"+ foodAIResponse.food_results[i][0] +"</div>"
+            var percentage = (foodAIResponse.food_results[i][1]*100).toFixed(2)
+            var nameOfFood = foodAIResponse.food_results[i][0]
+            document.getElementById("listOfFoodFromFoodAI").innerHTML+=`
 
-                <div class="row">
-                  <div class="col-xs-12">
-                    <h4 class="listOfPossibleFood">${nameOfFood}</h4>
-                  </div>
-                  <div class="progress col-md-8 col-xs-8">
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;">
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-xs-4">${percentage}</div>
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 class="listOfPossibleFood">${nameOfFood}</h4>
+              </div>
+              <div class="progress col-md-8 col-xs-8">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;">
                 </div>
+              </div>
+              <div class="col-md-4 col-xs-4">${percentage}%</div>
+            </div>
 
 
 
-                `;
+            `;
 
 
 
-              }
-            }
-            
-          
-          $('.listOfPossibleFood').click(function() {
+          }
+        }
+        
+      
+        $('.listOfPossibleFood').click(function() {
               var text = $(this).text();
               console.log(text)
               // do something with the text
@@ -969,62 +1058,77 @@ function onCamera(){
             axios.get(foodDatabaseUrl)
                 .then(response=>{
                     console.log(response);
-          
-            for (var i = 0;i<response.data.hits.length;i++){
-                            console.log(response.data.hits[i]);
+                    $('#loader').removeClass('hidden');
+                    setTimeout(function(){ $('#loader').addClass('hidden');; }, 1000);
+                    if(response.data.hits.length<1){
+                      console.log("No food recipe available")
+                      foodRecognitionCarouselButtons.innerHTML=``;
+                      foodRecognitionResults.innerHTML=`
+                      <div class="carousel-item active">
+                        <img class="d-block w-100 h-100" src="assets/img/noResultsFound.png" alt="Sorry! No recipe available">
+                      </div>
+                      
+                      `
 
-                            if ( i == 0){
-                                var active = "active"
-                            }
-                            else{
-                                var active = ""
-                            }
-                            foodRecognitionResults.innerHTML+=`
+                    }else{
+                      for (var i = 0;i<response.data.hits.length;i++){
+                          console.log(response.data.hits[i]);
 
-                            <div class="carousel-item ${active}">
+                          if ( i == 0){
+                              var active = "active"
+                          }
+                          else{
+                              var active = ""
+                          }
+                          foodRecognitionResults.innerHTML+=`
 
-                              <div class="col-md-6 col-sm-12 mx-auto" >
-                                    <div class="card py-3 px-3 ">
-                                        <img class="card-img-top" src="${response.data.hits[i].recipe.image}" alt="Card image cap">
-                                        
-                                        <div class="card-body">
-                                            <h4 class="card-title fs-2">${response.data.hits[i].recipe.label}</h4>
+                          <div class="carousel-item ${active}">
 
-                                            <p class="card-text fs-3">${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)} Calories </p>
-                                                <ul class="my-3">
-                                                    <li class="protein">Protein: ${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}</li>
-                                                    <li class="fat">Fat: ${(response.data.hits[i].recipe.totalNutrients.FAT.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
-                                                    <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
-                                                </ul>
-                                            </p>
-                                            
-                                            <form action="insertFoodCalories.php" method="post">
-                                              <input type="hidden" style="display:none;" name="username" value="${username}">
-                                              <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
-                                              <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
-                                              <input type="submit" onclick="alert('Calories Consumed has been entered into the system')"  type="button" class="btn btn-primary" value="Submit Calorie Count">
-                                            </form>                                        
-                                    </div>
-                                </div>
-                            </div>
+                            <div class=" mx-auto" >
+                                  <div class="card py-3 px-3 ">
+                                      <div class="row">
+                                        <div class="col-xs-12 col-md-5">
+                                          <img class="card-img-top" src="${response.data.hits[i].recipe.image}" alt="Card image cap">
+                                        </div>
+                                        <div class="card-body col-xs-12 col-md-7">
+                                          <h4 class="card-title fs-2">${response.data.hits[i].recipe.label}</h4>
 
-                        
-                        `;
-                        
-                    }
-                foodRecognitionCarouselButtons.innerHTML+=`
-                <button class="carousel-control-prev" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button> 
-                `    
-        
+                                          <p class="card-text fs-3">${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)} Calories </p>
+                                              <ul class="my-3">
+                                                  <li class="protein">Protein: ${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                  <li class="fat">Fat: ${(response.data.hits[i].recipe.totalNutrients.FAT.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                                  <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
+                                              </ul>
+                                          </p>
+                                          
+                                          <form action="insertFoodCalories.php" method="post">
+                                            <input type="hidden" style="display:none;" name="username" value="${username}">
+                                            <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
+                                            <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                            <input type="hidden" style="display:none;" name="protein" value="${(response.data.hits[i].recipe.totalNutrients.PROCNT.quantity/response.data.hits[i].recipe.yield).toFixed(0)}">
+                                            <input type="hidden" style="display:none;" name="carbohydrate" value="${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}">
+                                            <input type="submit" onclick="alert('Calories Consumed has been entered into the system')"  type="button" class="btn btn-primary" value="Submit Calorie Count">
+                                          </form> 
+                                        </div>                                      
+                                  </div>
+                              </div>
+                          </div>
+
+                          
+                          `;
+                          
+                      }
+                      foodRecognitionCarouselButtons.innerHTML+=`
+                      <button class="carousel-control-prev" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#foodRecognitionCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button> 
+                      `    
+                  }
         }).catch(error=>{
 
         console.log(error)
@@ -1045,20 +1149,37 @@ function onCamera(){
    };    
 
 
+  
+
+</script>
 
 
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/618c85f46885f60a50bb4533/1fk6emh5m';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
   </script>
-  </body>
+  <!--End of Tawk.to Script-->
 
-  <!-- Template Main JS File -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
-  integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
-  crossorigin="anonymous"></script>
+  <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
+
+  <!-- Template Main JS File -->
   <script src='style.js'></script>
+
+  <script src="assets/js/main.js"></script>
+  <script src='c.js'></script>
+
+</body>
+
 </html>

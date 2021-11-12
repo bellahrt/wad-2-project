@@ -466,7 +466,7 @@ section {
 }
 
 .section-bg {
-  background-color: #f8fcf9;
+  /* background-color: #f8fcf9; */
 }
 
 .section-title {
@@ -504,7 +504,7 @@ section {
 .section-title p {
   margin-bottom: 0;
   font-size: 14px;
-  color: #919191;
+  /* color: #919191; */
 }
 
 /*--------------------------------------------------------------
@@ -519,6 +519,7 @@ section {
 .featured-services .icon-box-bg {
   background-image: linear-gradient(0deg, #222222 0%, #2f2f2f 50%, #222222 100%);
 }
+
 .featured-services .icon {
   margin-bottom: 15px;
 }

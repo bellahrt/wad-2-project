@@ -242,6 +242,7 @@ data() {
             localStorage.setItem('Carbohydrates', " ");
           localStorage.setItem('Calories', "  " )
           localStorage.setItem('Protein', "  ")
+          document.getElementById("result") = "<div class='text-danger'>Food cant be detected, please key in calories yourself</div>"
           }
           else{
           localStorage.setItem('Carbohydrates', response.hits[0].recipe.totalNutrients.CHOCDF.quantity);
@@ -326,7 +327,7 @@ template: `
               <textarea class="form-control" :value="Carbohydrates" id="Carbohydrates" name="Carbohydrates"></textarea>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="display:none;">
               <label>Event Color</label>
               <select class="form-control" name="ecolor">
                 <option value="fc-bg-default">fc-bg-default</option>
@@ -336,7 +337,7 @@ template: `
                 <option value="fc-bg-deepskyblue">fc-bg-deepskyblue</option>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group"  style="display:none;">
               <label>Event Icon</label>
               <select class="form-control" name="eicon">
                 <option value="circle">circle</option>
@@ -404,7 +405,7 @@ $("#oncam").click(function(){
           data: {
             image_url: Pic,
             num_tag: 5,
-            api_key:"03123fb19ceaba0f1a7c658a23fb610af005c2a0"
+            api_key:"62f40985765435783d123372c0bd5dc29a4b5da0"
           },
           success: function(respones){
             console.log(respones)
@@ -547,11 +548,11 @@ jQuery(document).ready(function(){
       axios.get("server/insertcalender.php",
       {params:{
         username: username,
-        className :values.ecolor,
+        className :"fc-bg-default",
         starts:date1,
         ends: date1,
         descriptions: {"Calories":values.Calories, "Protein":values.Protein, "Carbohydrates":values.Carbohydrates},
-        icon: values.eicon,
+        icon: "circle",
         title: values.ename
       }}).then(response=>{
         console.log(response.data)
@@ -765,6 +766,7 @@ var num = 0;
                     success:function(msg){ 
 
                         msg = JSON.parse(msg)   
+                        
                         
                         if (msg.length == 0){
                           Protein.push(0)

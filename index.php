@@ -52,6 +52,8 @@ if (!isset ($_SESSION["username"])){
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase3.min.js'></script>
     <script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script>
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script> 
 
   <!-- =======================================================
   * Template Name: Green - v4.6.0
@@ -59,10 +61,64 @@ if (!isset ($_SESSION["username"])){
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  
+
 </head>
 
 <body>
+
+<!----------------------------------------------------Loading PAGE ------------------------------>
+<style>
+  body{
+    background: url(assets/img/wallpaper.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  color: white;
+  }
+  #services{
+  	background: url(assets/img/section.gif)no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  }
+  #team{
+    background: url(assets/img/team.jpg)no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  }
+
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(assets/img/orderloading.gif) center no-repeat #fff;
+}
+  </style>
+<div class="se-pre-con"><div class="loader-wrapper">
+  <div class="loader-box">
+    <div class="icon">
+      <i class="fas fa-utensils"></i>
+    </div>
+  </div>
+</div></div>
+
+
+<script>
+	$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	}); 
+</script>
+<!----------------------------------------------------Loading PAGE ------------------------------>
 
 <input type="hidden" id="username" value = "<?=$username?>">
         <script>
@@ -258,13 +314,20 @@ function logout() {
     </section><!-- End Featured Services Section -->
 
     <!-- ======= About Us Section ======= -->
-      <section id="about" class="about" style="justify-content: center;">
+      <section id="about" class="about animate__animated animate__fadeInDown" style="justify-content: center; ">
         <div class="container" >
   
 
 
 
-        <div class='h-auto d-inline-block' style="z-index: -1; position: absolute; height: 100vh;  width: 50%; margin:auto; opacity:0.8;">
+       
+
+
+
+
+
+          <div class="section-title" >
+          <!-- <div class='h-auto d-inline-block' style="z-index: -1; position: absolute; height: 100vh;  width: 300px; margin:auto; opacity:0.8;">
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:serif="http://www.serif.com/" width="100%" height="100%" viewBox="-50 0 600 525" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;" opacity=0>
 
@@ -408,14 +471,8 @@ function logout() {
 
 <path id="plus-symbol" opacity=0 d="M269.266,83.213L259.867,83.213L259.867,73.814L252.475,73.814L252.475,83.213L243.076,83.213L243.076,90.606L252.475,90.606L252.475,100.004L259.867,100.004L259.867,90.606L269.266,90.606L269.266,83.213Z" style="fill:rgb(255,54,18);fill-rule:nonzero;" />
 </svg>
-</div>
+</div> -->
 
-
-
-
-
-
-          <div class="section-title" >
             <h2>About Us</h2>
             <p>Health advice you can trust</p>
           </div>
@@ -518,7 +575,7 @@ function logout() {
 
     <!-- ======= Services Section VueJs Component ======= -->
  <section id="services" class="services">
-  <div class="container">
+  <div class="container" style="text-align: center;">
 
     <div class="section-title">
       <h2>Calories Trackers</h2>
@@ -527,17 +584,17 @@ function logout() {
 
     <div id='content' class="row">
 
-          <trackers-content iconcolour="icon-box iconbox-blue" context="Don't give in to food temptations! Track food calories with this function!" title='Food Calorie Tracker' 
+          <trackers-content iconcolour="icon-box iconbox-blue" style="color:black;" context="Don't give in to food temptations! Track food calories with this function!" title='Food Calorie Tracker' 
           delayvalue="100" iclass="bx bxl-dribbble" link="foodCalorieTrackerPage.html"
           dvalue="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"></trackers-content>
       
 
-          <trackers-content iconcolour="icon-box iconbox-orange" context='Schedule . Plan your schedule today! What do you have in mind?' title='Calendar' 
+          <trackers-content iconcolour="icon-box iconbox-orange"  style="color:black;" context='Schedule . Plan your schedule today! What do you have in mind?' title='Calendar' 
           delayvalue="200" iclass="bx bx-file" link="profile.html"
           dvalue="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></trackers-content>
       
 
-          <trackers-content iconcolour="icon-box iconbox-pink" context='Track how much calories you have burned from walking from distance A to B!' title='Walking Distance Tracker' 
+          <trackers-content iconcolour="icon-box iconbox-pink" style="color:black;" context='Track how much calories you have burned from walking from distance A to B!' title='Walking Distance Tracker' 
           delayvalue="300" iclass="bx bx-tachometer" link="anotherplace.html"
           dvalue="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"></trackers-content>
       
@@ -851,7 +908,7 @@ function logout() {
 
           </div>
 
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="color:black;">
             <form action="./forms/emailing.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">

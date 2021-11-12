@@ -1220,7 +1220,7 @@ function logout() {
                // $username = $_GET["username"];
 // document.getElementById("myBtn").onclick = displayDate;
 //                     function updateUserProfile( ){
-                    axios.get("updateUserProfile.php",
+                    axios.get("server/updateUserProfile.php",
                         {params:{
                             username: username,
                             weight :inputWeight,

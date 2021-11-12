@@ -17,13 +17,7 @@ app.component('navbar', {
                             <p id="paragLogo">Your personal nutrition tracker</p>
                         </div>
                     
-                        <nav id="navUl">
-                            <ul id="ulNav">
-                                <li class="liNav"><a class="aNav" href="">ABOUT</a></li>        
-                                <li class="liNav"><a class="aNav" href="">CONTACT</a></li>
-                                <li class="liNav"><a class="aNav" href="">LOG IN</a></li>
-                            </ul>
-                        </nav>
+                    
                     </div>
                 </div>`
 } )

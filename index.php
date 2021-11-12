@@ -48,8 +48,8 @@ if (!isset ($_SESSION["username"])){
   <script src="https://unpkg.com/vue@next"></script>
   <!-- anime script -->
   <script src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.2/gsap.min.js'></script>
-    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js'></script>
-    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase3.min.js'></script>
+    <!-- <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase3.min.js'></script> -->
     <script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

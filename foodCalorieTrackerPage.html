@@ -408,7 +408,7 @@ function searchForRecipe() {
   $.ajax({
   type: "GET",
   dataType: "json",
-  url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ q +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91",
+  url: "https://api.edamam.com/api/recipes/v2?type=public&q="+ q +"&app_id=ceab8e8d&app_key=47eb4eb907ee1c0de070c5858ab46d49",
   crossDomain: true,
   success: function(response) {
     console.log(response.hits)
@@ -594,6 +594,7 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
   console.log(file)
   form_data.append("image", file);
   $('#loader').removeClass('hidden');
+  setTimeout(function(){ $('#loader').addClass('hidden');; }, 1000);
 
   var settings = {
       "url": "https://api.logmeal.es/v2/image/recognition/complete",
@@ -603,7 +604,8 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
           // "Authorization": "Bearer 508e03b3ded586a8db21d5d9fe32dfba931a66b7"
           // "Authorization": "Bearer d60fa9b324fdfa3a8d45732668f9bde841bca737"
           // "Authorization": "Bearer 1c04875b04746ce36a3e805f561d2624e91a8d00"
-          "Authorization": "Bearer 52744bbf5f50721d4f7acaa191fed7a67d581938"
+          // "Authorization": "Bearer 52744bbf5f50721d4f7acaa191fed7a67d581938"
+          "Authorization": "Bearer adc001659623151ea767e7d333bff1ea43f23fd7"
           // "Authorization": "Bearer 4c2c6c3b5e365fac4b147bb23d03489be58c1bfc "
           // "Authorization": "Bearer a19e01c759e220b231baad328f1046e72d61d5fa"
           // "Authorization": "Bearer 87fa0a2477fbe157f8f7b8cf36fb94ffe3d8a62f"
@@ -646,7 +648,6 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
 
       `;
     }
-    setTimeout(function(){ $('#loader').addClass('hidden');; }, 1000);
 
     $('.listOfPossibleFood').click(function() {
         $('#loader').removeClass('hidden');
@@ -657,7 +658,7 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
         var foodRecognitionResults = document.getElementById('foodRecognitionResults');
         foodRecognitionResults.innerHTML = ""
 
-        var foodDatabaseUrl ="https://api.edamam.com/api/recipes/v2?type=public&q="+ confirmedDish +"&app_id=01b3b5d9&app_key=388ac25dc41e876768b68fa8fa57df91"
+        var foodDatabaseUrl ="https://api.edamam.com/api/recipes/v2?type=public&q="+ confirmedDish +"&app_id=ceab8e8d&app_key=47eb4eb907ee1c0de070c5858ab46d49"
         axios.get(foodDatabaseUrl)
             .then(response=>{
               setTimeout(function(){ $('#loader').addClass('hidden');; }, 1000);
@@ -787,8 +788,8 @@ success: function(response) {
                                                                 </div>
                                                                 <div class="col-4 col-sm-4"  >
                                                                   `+response.data[i].address.streetName +` ` + response.data[i].address.postalCode + ` <br>
-                                                                  <button type="button" onclick="getthere(`+response.data[i].location.latitude+`,`+response.data[i].location.longitude +`,'`+response.data[i].name +`')" 
-                                                                  class="btn btn-primary getThereButton" href="#map">Get there</button>
+
+                                                                  <a style="color:white;" class="btn btn-primary" href="#map" onclick="getthere(`+response.data[i].location.latitude+`,`+response.data[i].location.longitude +`,'`+response.data[i].name +`')">Get there</a>
                                                                 </div>
                                                               </div>`
     locations.push([response.data[i].name, response.data[i].location.latitude,  response.data[i].location.longitude,i+1])      

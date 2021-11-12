@@ -384,7 +384,7 @@ var username = localStorage.getItem("username");
 
 function insertCal(calorie, exercise ){
  
-  axios.get("insertexercise.php",
+  axios.get("server/insertexercise.php",
       {params:{
         username: username,
         caloriesBurned :calorie,

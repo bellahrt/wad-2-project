@@ -544,7 +544,7 @@ jQuery(document).ready(function(){
       var date = values.edate
       var date1 = date.substring(0, date.length-3);
 
-      axios.get("insertcalender.php",
+      axios.get("server/insertcalender.php",
       {params:{
         username: username,
         className :values.ecolor,
@@ -581,7 +581,7 @@ var username = localStorage.getItem("username");
     // Calendar
     // ------------------------------------------------------ //
     $.ajax({
-    url:"getcalender.php",
+    url:"server/getcalender.php",
     data: {
         "username": username
     },
@@ -662,7 +662,7 @@ var year = today.getFullYear()
 var date = today.getMonth() +1
 console.log(date)
 $.ajax({
-    url:"getnultrition.php",
+    url:"server/getnultrition.php",
     data: {
         "username": username,
         "date": date,
@@ -699,7 +699,7 @@ $.ajax({
 
 
   $.ajax({
-           url:"getCaloriesBurn.php",
+           url:"server/getCaloriesBurn.php",
             data: {
                   "username": username,
                   "date": date,
@@ -753,7 +753,7 @@ var num = 0;
         var TotalProtein = 0
         var TotalCarb = 0
                 $.ajax({
-                    url:"getnultrition.php",
+                    url:"server/getnultrition.php",
                     data: {
                         "username": username,
                         "date": z,
@@ -843,7 +843,7 @@ var year = today1.getFullYear()
 console.log(year)
 var pieData = []
 $.ajax({
-    url:"getnultrition.php",
+    url:"server/getnultrition.php",
     data: {
         "username": username,
         "date": date,
@@ -869,7 +869,7 @@ $.ajax({
         pieData.push(TotalCalories)
         var CalBurn = 0
                     $.ajax({
-                        url:"getCaloriesBurn.php",
+                        url:"server/getCaloriesBurn.php",
                         data: {
                             "username": username,
                             "date": date,

@@ -72,7 +72,7 @@
       </div> -->
   
       <div class="profile-card__cnt js-profile-cnt">
-        <H2>Welcome! </H2>
+        <H2 style="margin-top: 50px;">Welcome! </H2>
         <div class="profile-card__name" id="username"></div>
         <div class="profile-card__txt">This is your Monthly Nultrition Count:</div>
      
@@ -744,33 +744,33 @@ $.ajax({
 
 var username = localStorage.getItem("username");
 const today2 = new Date()
-var date = today2.getMonth() +1
+//var date = today2.getMonth() +1
 var year = today2.getFullYear()
 console.log(year)
-var Protein = [];
-var Carbohydrates = [];
-var num = 0;
-      for (let z = 1; z <= 12; z++){   
+var Protein1 = [];
+var Carbohydrates1 = [];
+//var num = 0;
+      for (let q = 1; q <= 12; q++){  
+          
         var TotalProtein = 0
         var TotalCarb = 0
                 $.ajax({
                     url:"server/getnultrition.php",
                     data: {
                         "username": username,
-                        "date": z,
+                        "date": q,
                         "year": year
                     },
                     type:"POST",
                     crossDomain:true,
-                    
                     success:function(msg){ 
-
+                        alert(q)
                         msg = JSON.parse(msg)   
-                        
+                       console.log(msg)
                         
                         if (msg.length == 0){
-                          Protein.push(0)
-                          Carbohydrates.push(0)
+                          Protein1[q-1] = 0
+                          Carbohydrates1[q-1] = 0
                         }
                         else{
                           TotalProtein = 0
@@ -781,8 +781,8 @@ var num = 0;
                                 TotalProtein += parseFloat(eachNultrition.Protein)
                                 TotalCarb += parseFloat(eachNultrition.Carbohydrates)
                                 }
-                                Protein.push(TotalProtein)
-                                Carbohydrates.push(TotalCarb)
+                                Protein1[q-1] = TotalProtein
+                                Carbohydrates1[q-1] = TotalCarb
                             // if (msg.length == 0){
                             //   average_calories.push(0)
                             //   total_calories.push(0)
@@ -792,8 +792,8 @@ var num = 0;
                             //   total_calories.push(TotalCalories)
                             //   //average_calories.push(average)
                             // }
-                            // console.log(average_calories)
-                            // console.log(total_calories)
+                            // console.log(Protein)
+                            // console.log(Carbohydrates)
 
                         }
                         
@@ -811,13 +811,13 @@ var chart = new Chart(ctx, {
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,
         label: "Protein",
-        data: Protein
+        data: Protein1
       },
 
       {
         type: "bar",
         label: "Carbohydrates",
-        data: Carbohydrates,
+        data: Carbohydrates1,
         lineTension: 0, 
         fill: true 
       }

@@ -473,7 +473,7 @@ function searchForRecipe() {
                               </div>
                               <div class="modal-footer">
                                 <a href="${response.hits[i].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
-                                <form action="insertFoodCalories.php" method="post">
+                                <form action="server/insertFoodCalories.php" method="post">
                                   <input type="hidden" style="display:none;" name="username" value="${username}">
                                   <input type="hidden" style="display:none;" name="foodName" value="${response.hits[i].recipe.label}">
                                   <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[i].recipe.calories/ response.hits[i].recipe.yield).toFixed(0)}">
@@ -549,7 +549,7 @@ function searchForRecipe() {
                               </div>
                               <div class="modal-footer">
                                 <a href="${response.hits[0].recipe.url}" class="btn btn-info" role="button">Link to Recipe</a>
-                                <form action="insertFoodCalories.php" method="post">
+                                <form action="server/insertFoodCalories.php" method="post">
                                   <input type="hidden" style="display:none;" name="username" value="${username}">
                                   <input type="hidden" style="display:none;" name="foodName" value="${response.hits[0].recipe.label}">
                                   <input type="hidden" style="display:none;" name="calorie" value="${(response.hits[0].recipe.calories/ response.hits[0].recipe.yield).toFixed(0)}">
@@ -691,7 +691,7 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
                                                 <li class="carbs">Carbs: ${(response.data.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.data.hits[i].recipe.yield).toFixed(0)}</li>
                                             </ul>
                                         </p>
-                                        <form action="insertFoodCalories.php" method="post">
+                                        <form action="server/insertFoodCalories.php" method="post">
                                           <input type="hidden" style="display:none;" name="username" value="${username}">
                                           <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
                                           <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">
@@ -1101,7 +1101,7 @@ $("#cam").fadeIn();
                                               </ul>
                                           </p>
                                           
-                                          <form action="insertFoodCalories.php" method="post">
+                                          <form action="server/insertFoodCalories.php" method="post">
                                             <input type="hidden" style="display:none;" name="username" value="${username}">
                                             <input type="hidden" style="display:none;" name="foodName" value="${response.data.hits[i].recipe.label}">
                                             <input type="hidden" style="display:none;" name="calorie" value="${(response.data.hits[i].recipe.calories/ response.data.hits[i].recipe.yield).toFixed(0)}">

@@ -764,7 +764,7 @@ var Carbohydrates1 = [];
                     type:"POST",
                     crossDomain:true,
                     success:function(msg){ 
-                        alert(q)
+                       
                         msg = JSON.parse(msg)   
                        console.log(msg)
                         
@@ -783,15 +783,7 @@ var Carbohydrates1 = [];
                                 }
                                 Protein1[q-1] = TotalProtein
                                 Carbohydrates1[q-1] = TotalCarb
-                            // if (msg.length == 0){
-                            //   average_calories.push(0)
-                            //   total_calories.push(0)
-                            // }
-                            // else{
-                            //   var average = TotalCalories / msg.length;
-                            //   total_calories.push(TotalCalories)
-                            //   //average_calories.push(average)
-                            // }
+                        
                             // console.log(Protein)
                             // console.log(Carbohydrates)
 

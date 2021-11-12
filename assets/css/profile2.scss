@@ -12,6 +12,12 @@ html {
 body {
   font-family: 'Quicksand', sans-serif;
   color: #324e63;
+  background: url(assets/img/wallpaper.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  
 }
 
 a, a:hover {
@@ -35,10 +41,10 @@ a, a:hover {
   padding: 50px 20px;
   padding-top: 100px;
   display: flex;
-  background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+  // background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
 
   display: flex;
-  background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+  // background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%); 
 
   @media screen and (max-width: 768px) {
     height: auto;

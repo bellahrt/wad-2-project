@@ -52,7 +52,6 @@ if (!isset ($_SESSION["username"])){
     <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase3.min.js'></script>
     <script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script>
     <script src="https://unpkg.com/vue@next"></script>
-    <!-- <link href="c.css" rel="stylesheet"> -->
 
   <!-- =======================================================
   * Template Name: Green - v4.6.0
@@ -953,7 +952,7 @@ function logout() {
   <script src='style.js'></script>
 
   <script src="assets/js/main.js"></script>
-  <script src='c.js'></script>
+  <script src='assets/js/c.js'></script>
 
 </body>
 

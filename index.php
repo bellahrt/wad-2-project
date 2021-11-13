@@ -474,14 +474,14 @@ function logout() {
 </div> -->
 
             <h2>About Us</h2>
-            <p>Health advice you can trust</p>
+            <p class="text-white"><b>Health advice you can trust</b></p>
           </div>
   
           <div class="row">
             <!-- <div class="col-lg-6 order-1 order-lg-2">
               <img src="assets/img/about.jpg" class="img-fluid" alt="">
             </div> -->
-            <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <div class="bg-dark bg-opacity-90 col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content">
               <h3>What we’re about</h3>
               <p class="fst-italic">
                 The key to good health is good nutrition. HealthYou enables you to keep track of your food calories count and work on achieving a more active and healthier lifestyle!
@@ -577,9 +577,9 @@ function logout() {
  <section id="services" class="services">
   <div class="container" style="text-align: center;">
 
-    <div class="section-title">
+    <div class="section-title bg-secondary bg-opacity-50">
       <h2>Calories Trackers</h2>
-      <p>Lead a healthy lifestyle. Start by making little changes, track your intake calories, gradually increase exercise routine to live a healthier and happier life!</p>
+      <p class="text-white"><b>Lead a healthy lifestyle. Start by making little changes, track your intake calories, gradually increase exercise routine to live a healthier and happier life!</b></p>
     </div>
 
     <div id='content' class="row">
@@ -797,7 +797,7 @@ function logout() {
 
         <div class="section-title">
           <h2>Team</h2>
-          <p>Our Fabulous Team</p>
+          <p style='color: white;'><b>Our Fabulous Team</b></p>
         </div>
 
         <div class="row">
@@ -879,7 +879,7 @@ function logout() {
 
         <div class="section-title">
           <h2>Contact</h2>
-          <p>Feel free to contact us! Feedbacks are welcome too!</p>
+          <p class="text-white"><b>Feel free to contact us! Feedbacks are welcome too!</b></p>
         </div>
 
         <div class="row">

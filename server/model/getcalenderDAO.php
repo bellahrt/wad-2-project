@@ -27,7 +27,6 @@ class getcalenderDAO {
             $connMgr->handleError( $stmt, $sql );
         }
         
-
         $stmt = null;
         $conn = null;        
         
@@ -225,7 +224,31 @@ class getcalenderDAO {
         return $result;
     }
 
+    function deleteFoodRecord($username,$foodName,$starts) {
+        //$result = true;
 
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+        $sql = "delete from usercalender WHERE username = :username AND foodName = :foodName AND starts = :starts ";
+        //$sql = "INSERT INTO exercise (username, caloriesBurned) VALUES (:username, :caloriesBurned)";
+        
+        $stmt = $conn->prepare($sql);
+
+ 
+
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":foodName", $foodName, PDO::PARAM_STR);   
+        $stmt->bindParam(":starts", $starts, PDO::PARAM_STR);
+ 
+        print_r($stmt);
+        $result = $stmt->execute();
+
+        
+        $stmt = null;
+        $conn = null;        
+        
+        return $result;
+    }
    
 
 

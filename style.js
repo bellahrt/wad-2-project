@@ -83,8 +83,8 @@ app.component('navhead', {
                     <li class="dropdown"><a :class="tracker"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                         <li><a href="foodCalorieTrackerPage.html">Food Calorie Tracker</a></li>
-                        <li><a href="profile.html">Calendar</a></li>
-                        <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="anotherplace.html">Exercise Tracker</a></li>
                         </ul>
                     </li>
                     <li><a :class="team" href="index.php#team">Team</a></li>

@@ -48,28 +48,7 @@
 <div id='navHead'>
   <navhead index='nav-link scrollto' about='nav-link scrollto' tracker='nav-link scrollto active' team='nav-link scrollto' contact='nav-link scrollto'></navhead>
 </div>
-        <!-- <nav class="navbar navbar-expand-lg navbar-light m-1" id="navbar">
-            <div class="container-fluid">
-                <header id="headerOne">	
-                    <div id="divLogo">
-                        <h2 id="headlineLogo" style="margin-top: 10px;">EATGREENS</h2>           
-                    </div>
-                </header>
-              <button class="navbar-toggler  " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./home.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./places.html">Walking-trail</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>  -->
+
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
 
 
@@ -84,9 +63,7 @@
         <p class='bg-dark text-info mb-0'>Enable map location access to tell us where your location is right now!</p>
         <p class='bg-dark text-warning mb-0'> Click on a monument marker to select a place you like to visit!</p>
     </div>
-                        <!-- TO DO: take out width -->
     <div class = 'img-fluid mt-0 w-100' id="map-canvas"  style="height:500px;"></div> 
-
     <div class="d-grid gap-2 d-md-flex justify-content-md-center text-warning mt-2">
       <h5 class='pt-3'><b id="modeOfTravel">Default Mode: Walking.</b> <b class='text-danger'>Click</b> to select Exercise Mode</h5><br/>    
       <button class="btn one text-white" type="button" style='padding-right:40px;margin-left: 40px;' onclick='getTravelValue("WALKING")'><span></span><span></span><span></span>
@@ -102,29 +79,15 @@
 
 <div class='container'>
   <br/>
-
   <div class="card text-dark bg-dark mb-3" >
-    <!-- <div class="card-header">Path</div> -->
     <div class="card-body ">
       <h5 class="card-title text-info mb-0 text-center">Distance Travelled, Calories Burn</h5>
       <div class="row card-text text-warning text-center" id="location">
-        <!-- <div class="col" id="try1"></div>
-        <div class="col" id="try2"></div>
-        <div class="col" id="try3"></div> -->
-        <!-- <p id='location'class="card-text text-warning text-center"></p> -->
-      </div>
+    </div>
     </div>
 
   </div>
 
-  <!-- <div id="robot" style='width:20%;'>
-    <div class="head"></div>
-    <div class="arm l"><div><div></div></div></div>
-    <div class="leg l"><div><div></div></div></div>
-    <div class="leg r"><div><div></div></div></div>
-    <div class="arm r"><div><div></div></div></div>
-  </div>
-  <div class="shadow"></div> -->
 
 
 
@@ -180,7 +143,6 @@ error: function(xhr) {
 console.log(xhr)
 }
 });
-//AIzaSyA2jsy7nXp1UmSBHbyqjBkuCiEVFZPwttQ
 
 window.onload = getMyLocation;
 
@@ -208,7 +170,6 @@ createMarker(latLng, latitude, longitude);
 
 //Also setting the latitude and longitude values in another div.
 var div = document.getElementById('location');
-//div.innerHTML = 'You are at Latitude: ' + latitude + ', Longitude: ' + longitude;
 }
 
 function showMap(latLng) {
@@ -222,11 +183,6 @@ mapTypeId: google.maps.MapTypeId.ROADMAP
 //Creating the Map instance and assigning the HTML div element to render it in.
 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
-
-
-
-//map()
-
 
 function createMarker(latLng, latitude, longitude, placeResult) {
 var infowindow = new google.maps.InfoWindow();
@@ -263,7 +219,6 @@ infowindow.open(map, marker);
 }
 })(marker, i));
 }
-//console.log(latLng)
 var markerOptions = {
 position: latLng,
 map: map,
@@ -279,7 +234,6 @@ let origin = false
 addInfoWindow(marker, latLng, content);
 }
 else {
-//var content = 'You are here: ' + latLng.lat() + ', ' + latLng.lng();
 var content = 'You are here';
 let origin = true
 addInfoWindow(marker, latLng, content,origin);
@@ -350,6 +304,7 @@ function directionService(latitude,longitude, lat1, lon2, destination){
               document.getElementById('location').innerHTML += `<div style="position:relative" class='d-flex flex-column col-md mt-2 border border-info me-1 rounded-3' id=${trying}><br/><b>Destination:</b> ` + destination + "<br/>Distance is " + directionsData.distance.text + ".";
               document.getElementById('try1').setAttribute('class', 'd-flex flex-column col-md mt-2 border border-info me-1 rounded-3')
             }
+            
             //Nutrition API get distance travelled to calculate calorie burned
             var distance = directionsData.distance.text
             nutritionCalorie(distance)

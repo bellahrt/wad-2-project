@@ -26,22 +26,18 @@
   
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/button.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <!-- <link href="c.css" rel="stylesheet"> -->
+    <!-- VueJs -->
+    <script src="https://unpkg.com/vue@next"></script>
 
-  <!-- VueJs -->
-  <script src="https://unpkg.com/vue@next"></script>
-  <!-- anime script -->
+    <!-- anime script -->
     <script src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.2/gsap.min.js'></script>
-
     <script src='https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js'></script>
     <script src="https://unpkg.com/vue@next"></script>
-    <!-- <link href="c.css" rel="stylesheet"> -->
 
   <!-- =======================================================
   * Template Name: Green - v4.6.0
@@ -220,10 +216,10 @@
 
 <!---------------------END NAV BAR (DUN TOUCH HERE)-------------------->
 
-<div class="container-xl ">
+<div class="container-xl bg-dark bg-opacity-90">
   <div class="row">
     
-      <h1 style="color:white;">What do you want to eat today?</h1>
+      <h2 class='text-warning text-center mt-3'>What do you want to eat today?</h2>
       <!---------------------START Search -------------------->
     <!-- Food search  -->
     <div class="bar my-2">
@@ -285,7 +281,7 @@
 
 
       <div class="row">
-        <h1 style="color:white;">Find out the nutrition count of the food you're eating!</h1>
+        <h3 class='text-warning text-center my-3'>Find out the nutrition count of the food you're eating!</h3>
 
 
       </div>
@@ -295,10 +291,10 @@
   <div class="row">
     <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active foodRecognitionButtons" style="color:#1ed263" id="uploadImage-tab" data-bs-toggle="tab" data-bs-target="#uploadImage" type="button" role="tab" aria-controls="uploadImage" aria-selected="true">Upload Image</button>
+        <button class="one nav-link active foodRecognitionButtons" id="uploadImage-tab" data-bs-toggle="tab" data-bs-target="#uploadImage" type="button" role="tab" aria-controls="uploadImage" aria-selected="true">Upload Image</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link foodRecognitionButtons " style="color:#1ed263" id="webCamera-tab" data-bs-toggle="tab" data-bs-target="#webCamera" type="button" role="tab" aria-controls="webCamera" aria-selected="false">On Camera</button>
+        <button class="nav-link foodRecognitionButtons text-info" id="webCamera-tab" data-bs-toggle="tab" data-bs-target="#webCamera" type="button" role="tab" aria-controls="webCamera" aria-selected="false">On Camera</button>
       </li>
 
     </ul>
@@ -456,8 +452,8 @@ function searchForRecipe() {
                                 <li class="carbs">Carbs: ${(response.hits[i].recipe.totalNutrients.CHOCDF.quantity/ response.hits[i].recipe.yield).toFixed(0)}</li>
                               </ul>
                                 <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
-                              <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${i}">Recipe</a>
-                              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[i].recipe.label +`')">Get Location </button>
+                              <button style="background:blue;" class="btn one btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${i}">Recipe<span></span><span></span><span></span><span></span></button>
+                              <button type="button" class="text-white btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[i].recipe.label +`')">Get Location<span></span><span></span><span></span><span></span></button>
                             </div>
                           </div>
                         </div>
@@ -532,7 +528,7 @@ function searchForRecipe() {
                                 <li class="carbs">Carbs: ${(response.hits[0].recipe.totalNutrients.CHOCDF.quantity/ response.hits[0].recipe.yield).toFixed(0)}</li>
                               </ul>
                                 <p class="card-text">You can find their recipe or location to eat it at the buttons below! </p>
-                              <a class="btn btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${0}">Recipe</a>
+                              <button class="btn one btn-success recipeBtn"  data-bs-toggle="modal" data-bs-target="#exampleModal${0}">Recipe</button>
                               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" id="getlocation" onclick="getloc('`+ response.hits[0].recipe.label +`')">Get Location </button>
                             </div>
                           </div>

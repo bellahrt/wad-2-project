@@ -87,7 +87,7 @@ if (isset ($_SESSION["login_page"])){
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
-					<input id="pass" type="text" class="input">
+					<input id="pass" type="text" class="input" name="email" >
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Sign Up">

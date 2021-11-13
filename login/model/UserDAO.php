@@ -41,7 +41,7 @@ class UserDAO {
         $conn = $connMgr->connect();
         
 
-        $sql = "SELECT username, password_hash  FROM useraccount WHERE username = :username";
+        $sql = "SELECT username, password_hash,email  FROM useraccount WHERE username = :username";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
             
@@ -49,7 +49,7 @@ class UserDAO {
         if ( $stmt->execute() ) {
             
             while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-                $user = new User($row["username"], $row["password_hash"]);
+                $user = new User($row["username"], $row["password_hash"], $row["email"]);
             }
             
         }
@@ -72,14 +72,15 @@ class UserDAO {
         $conn = $connMgr->connect();
         
 
-        $sql = "INSERT INTO useraccount (username, password_hash) VALUES (:username, :passwordHash)";
+        $sql = "INSERT INTO useraccount (username, password_hash, email) VALUES (:username, :passwordHash, :email)";
         $stmt = $conn->prepare($sql);
         
         $username = $user->getUsername();
         $passwordHash = $user->getPasswordHash();
-
+        $email=$user->getEmail();
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->bindParam(":passwordHash", $passwordHash, PDO::PARAM_STR);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         
 
         $result = $stmt->execute();
@@ -94,36 +95,32 @@ class UserDAO {
         
         return $result;
     }
-
-
-    function update($user) {
-        $result = true;
-
-
-        $connMgr = new ConnectionManager();
-        $conn = $connMgr->connect();
+    // function check( $email ) {
+        
+    //     $connMgr = new ConnectionManager();
+    //     $conn = $connMgr->connect();
         
 
-        $sql = "UPDATE useraccount SET password_hash = :passwordHash  WHERE username = :username";
-        $stmt = $conn->prepare($sql);
+    //     $sql = "SELECT username, password_hash,email  FROM useraccount WHERE email = :email";
+    //     $stmt = $conn->prepare($sql);
+    //     $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+            
+    //     $user = null;
+    //     if ( $stmt->execute() ) {
+            
+    //         while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+    //             $user = new User($row["username"], $row["password_hash"], $row["email"]);
+    //         }
+            
+    //     }
+    //     else {
+    //         $connMgr->handleError( $stmt, $sql );
+    //     }
         
-        $username = $user->getUsername();
-        $passwordHash = $user->getPasswordHash();
 
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":passwordHash", $passwordHash, PDO::PARAM_STR);
+    //     $stmt = null;
+    //     $conn = null;        
         
-
-        $result = $stmt->execute();
-        if (! $result ){ 
-            $parameters = [ "user" => $user, ];
-            $connMgr->handleError( $stmt, $sql, $parameters );
-        }
-        
-
-        $stmt = null;
-        $conn = null;        
-        
-        return $result;
-    }
+    //     return $user;
+    // }
 }

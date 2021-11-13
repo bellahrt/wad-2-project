@@ -83,8 +83,8 @@ app.component('navhead', {
                     <li class="dropdown"><a :class="tracker"  href="#services"><span>Calories Tracker</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                         <li><a href="foodCalorieTrackerPage.html">Food Calorie Tracker</a></li>
-                        <li><a href="profile.html">Calendar</a></li>
-                        <li><a href="anotherplace.html">Walking Distance Tracker</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="anotherplace.html">Exercise Tracker</a></li>
                         </ul>
                     </li>
                     <li><a :class="team" href="index.php#team">Team</a></li>
@@ -134,7 +134,7 @@ const test = Vue.createApp({
         axios.get('https://bodybuilding-quotes1.p.rapidapi.com/quotes',{
             headers:{
                 "x-rapidapi-host": "bodybuilding-quotes1.p.rapidapi.com",
-                "x-rapidapi-key": "2ec3dc195fmsh6764d68994bddcap11837cjsnbaf79804358e"
+                "x-rapidapi-key": "640bb4b515mshf3e831708c5a3e9p10a21bjsnee89eb2b6ed8"
             },
             params:{
                 page: this.newpage
@@ -154,7 +154,9 @@ const test = Vue.createApp({
         })
         .catch(error => {
             console.log(error)
-            this.messages = [{ entry: 'There was an error: ' + error.message }]
+            // this.messages = [{ entry: 'There was an error: ' + error.message }]
+            // this.message =[{ entry: 'Sorry' }]
+            this.messages.push('The best investment you can ever make is your own health');
         })
     }
 })

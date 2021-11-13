@@ -171,6 +171,39 @@ class getcalenderDAO {
     }
 
 
+    function getUserDetail ($username ) {
+        $result = true;
+
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        $sql = " select username, weight , height  ,age ,sex  ,recommendedCalories  ,recommendedCarbs ,	recommendedProtein from useraccount where  username = :username;";
+        $stmt = $conn->prepare($sql);
+ 
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+    
+    
+        $nul = array();
+        if ( $stmt->execute() ) {
+            while ( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+              
+                 array_push($nul,new userprofile ($row["username"], $row["weight"], $row["height"], $row["age"],$row["sex"] , $row["recommendedCalories"],$row["recommendedCarbs"],$row["recommendedProtein"]  ));
+            }
+        }
+        else {
+            $connMgr->handleError( $stmt, $sql );
+        }
+        
+
+        $stmt = null;
+        $conn = null;        
+        
+        return $nul;
+    }
+
+
+
+
 
 
     function insertExercise($user) {

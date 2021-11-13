@@ -25,7 +25,11 @@ class userprofile {
        
        
     }
-
+    public function getDetails(){
+    
+        $obj = ["username"=>$this->username, "weight"=>$this->weight , "height"=>$this->height , "age"=>$this->age , "sex"=>$this->sex , "recoCal"=>$this->recoCal , "recoCarbs"=>$this->recoCarbs, "recoProt"=>$this->recoProt];
+          return $obj;
+      }
     // public function getUsername(){
     //  //$data = $this->username + $this->title + $this->descriptions;
     //  // $obj = {$this->title,$this->title;};

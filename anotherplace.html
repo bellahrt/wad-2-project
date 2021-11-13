@@ -340,6 +340,8 @@ function directionService(latitude,longitude, lat1, lon2, destination){
             if (pathCount > 5){
               document.getElementById('location').innerHTML = ""
               pathCount = 1
+              window.alert('You have hit the maximum path! Please refresh to try again!')
+              window.location.reload();
             }
             var trying = 'try' + pathCount
             if(pathCount ==1){

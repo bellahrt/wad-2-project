@@ -89,11 +89,11 @@
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-center bg-dark text-warning">
       <h5 class='pt-2'><b id="modeOfTravel">Default Mode: Walking.</b> <b class='text-danger'>Click</b> to select Exercise Mode</h5><br/>    
-      <button class="btn one text-white" type="button" href="#" style='padding-right:40px;margin-left: 40px;' onclick='getTravelValue("WALKING")'><span></span><span></span><span></span>
+      <button class="btn one text-white" type="button" style='padding-right:40px;margin-left: 40px;' onclick='getTravelValue("WALKING")'><span></span><span></span><span></span>
         <span></span>Walking</button>
-      <button class="btn two text-white" type="button" href="#" onclick='getTravelValue("JOGGING")' style="padding-right: 40px;margin-left: 40px;"><span></span><span></span><span></span>
+      <button class="btn two text-white" type="button" onclick='getTravelValue("JOGGING")' style="padding-right: 40px;margin-left: 40px;"><span></span><span></span><span></span>
         <span></span>Jogging</button>
-      <button class="btn text-white" type="button" href="#" onclick='getTravelValue("CYCLING")' style="padding-right:40px;margin-left: 40px;"><span></span><span></span><span></span>
+      <button class="btn text-white" type="button" onclick='getTravelValue("CYCLING")' style="padding-right:40px;margin-left: 40px;"><span></span><span></span><span></span>
         <span></span>Cycling</button>
     </div>
     <br/>
@@ -297,6 +297,7 @@ position: latLng
 var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 if(origin){
 infoWindow.open(map);
+marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
 }
 else{
 google.maps.event.addListener(marker, 'click', function() {
@@ -336,8 +337,17 @@ function directionService(latitude,longitude, lat1, lon2, destination){
             return;
             }
             else {
+            if (pathCount > 5){
+              document.getElementById('location').innerHTML = ""
+              pathCount = 1
+            }
             var trying = 'try' + pathCount
-            document.getElementById('location').innerHTML += `<div class='d-flex flex-column col-md border border-info me-1 rounded-3' id=${trying}><br/><b>Destination:</b> ` + destination + "<br/>Distance is " + directionsData.distance.text + ".";
+            if(pathCount ==1){
+              document.getElementById('location').innerHTML += `<div style="position:relative" class='d-flex flex-column col-md-4 mx-auto mt-2 border border-info rounded-3' id=${trying}><br/><b>Destination:</b> ` + destination + "<br/>Distance is " + directionsData.distance.text + ".";
+            }else{
+              document.getElementById('location').innerHTML += `<div style="position:relative" class='d-flex flex-column col-md mt-2 border border-info me-1 rounded-3' id=${trying}><br/><b>Destination:</b> ` + destination + "<br/>Distance is " + directionsData.distance.text + ".";
+              document.getElementById('try1').setAttribute('class', 'd-flex flex-column col-md mt-2 border border-info me-1 rounded-3')
+            }
             //Nutrition API get distance travelled to calculate calorie burned
             var distance = directionsData.distance.text
             nutritionCalorie(distance)
@@ -350,8 +360,16 @@ var travelish = 'WALKING'
 
 function getTravelValue(mode){
   travelish = mode
+  let modes = ''
   var modeOfTravel = document.getElementById('modeOfTravel');
-  modeOfTravel.innerHTML='Travel Mode: ' + '<b class="text-info">' + mode + '</b>'
+  if(mode == 'WALKING'){
+    modes = '<b style="color:#90ee90;">' + mode + '</b>'
+  }else if(mode == 'JOGGING'){
+    modes = '<b style="color:#FF69B4;">' + mode + '</b>'
+  }else {
+    modes = '<b class="text-info">' + mode + '</b>'
+  }
+  modeOfTravel.innerHTML='Travel Mode: ' + modes
 }
 
 function nutritionCalorie(distance) {
@@ -388,7 +406,7 @@ function nutritionCalorie(distance) {
     var duration = data.exercises[0]['duration_min']    // duration
     var name = data.exercises[0]['name'] 
     var trying = 'try' + pathCount
-    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `</b>: Burned ` + calorie + ` calories in ` + duration +` minutes<br/> <br> <div class="align-self-center btn btn-outline-info text-info"onclick="insertCal('` + calorie + `')">Go there now</div><br><br></div>`
+    var calorieResult = `<br/><b>Exercise: </b>` + travelish +`<br/><b>Path ` + pathCount + `:</b> Burned ` + calorie + ` calories in ` + duration +` minutes<br/> <br> <div style="position:absolute; bottom: 0;margin-bottom:20px" class="align-self-center btn btn-outline-info text-info"onclick="insertCal('` + calorie + `')">Go there now</div><br><br></div>`
     document.getElementById(trying).innerHTML += calorieResult
     pathCount++
 

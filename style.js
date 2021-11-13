@@ -134,7 +134,7 @@ const test = Vue.createApp({
         axios.get('https://bodybuilding-quotes1.p.rapidapi.com/quotes',{
             headers:{
                 "x-rapidapi-host": "bodybuilding-quotes1.p.rapidapi.com",
-                "x-rapidapi-key": "2ec3dc195fmsh6764d68994bddcap11837cjsnbaf79804358e"
+                "x-rapidapi-key": "faac38eeffmshdb5f7dc62c0fd9dp1072fbjsndb01b216b4e1"
             },
             params:{
                 page: this.newpage
@@ -154,8 +154,7 @@ const test = Vue.createApp({
         })
         .catch(error => {
             console.log(error)
-            this.messages = [{ entry: 'There was an error: ' + error.message }]
-        })
+            this.messages.push('The best investment you can ever make is your own health');        })
     }
 })
 test.mount('#mainCarousel')

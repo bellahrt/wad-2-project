@@ -58,7 +58,11 @@
 
 
 <style>
+  body{
 
+    background: url(assets/img/wallpaper.jpg) no-repeat center center fixed;
+    
+  }
   ul {
     list-style: none; /* Remove default bullets */
   }
@@ -219,7 +223,7 @@
 <div class="container-xl ">
   <div class="row">
     
-      <h1>What do you want to eat today?</h1>
+      <h1 style="color:white;">What do you want to eat today?</h1>
       <!---------------------START Search -------------------->
     <!-- Food search  -->
     <div class="bar my-2">
@@ -281,7 +285,7 @@
 
 
       <div class="row">
-        <h1>Find out the nutrition count of the food you're eating!</h1>
+        <h1 style="color:white;">Find out the nutrition count of the food you're eating!</h1>
 
 
       </div>
@@ -291,10 +295,10 @@
   <div class="row">
     <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active foodRecognitionButtons" id="uploadImage-tab" data-bs-toggle="tab" data-bs-target="#uploadImage" type="button" role="tab" aria-controls="uploadImage" aria-selected="true">Upload Image</button>
+        <button class="nav-link active foodRecognitionButtons" style="color:#1ed263" id="uploadImage-tab" data-bs-toggle="tab" data-bs-target="#uploadImage" type="button" role="tab" aria-controls="uploadImage" aria-selected="true">Upload Image</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link foodRecognitionButtons" id="webCamera-tab" data-bs-toggle="tab" data-bs-target="#webCamera" type="button" role="tab" aria-controls="webCamera" aria-selected="false">On Camera</button>
+        <button class="nav-link foodRecognitionButtons " style="color:#1ed263" id="webCamera-tab" data-bs-toggle="tab" data-bs-target="#webCamera" type="button" role="tab" aria-controls="webCamera" aria-selected="false">On Camera</button>
       </li>
 
     </ul>
@@ -614,7 +618,7 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
     var response = JSON.parse(response).recognition_results;
     
 
-    document.getElementById("resultsFromLogMealScanning").innerHTML=`Results:<h4>Click on any title of food to search for it's nutritional count below!</h4>`;
+    document.getElementById("resultsFromLogMealScanning").innerHTML=`<p style="color:white;">Results:</p><h4 style="color:white;">Click on any title of food to search for it's nutritional count below!</h4>`;
     document.getElementById("listOfFoodFromLogMeal").innerHTML= ""
 
     for (i in response){
@@ -627,12 +631,12 @@ $("#singleDishImageUploadForm").on('change',(function(e) {
 
             <div class="row">
               <div class="col-xs-12">
-                <h4 class="listOfPossibleFood">${nameOfFood}</h4>
+                <h4 class="listOfPossibleFood" style="color:white;">${nameOfFood}</h4>
               </div>
               <div class="progress col-md-8 col-xs-8">
                 <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;"></div>
               </div>
-              <div class="col-md-4 col-xs-4">${percentage}%</div>
+              <div class="col-md-4 col-xs-4" style="color:white;">${percentage}%</div>
             </div>
 
 
@@ -733,7 +737,7 @@ function readURL(input) {
 if (input.files && input.files[0]) {
     var reader = new FileReader();
     var uploadedImage = document.getElementById('uploadedImage');
-    uploadedImage.innerHTML=`<h2>Selected Image (Give it a few seconds!)</h2>`;
+    uploadedImage.innerHTML=`<h2 style="color:white;">Selected Image (Give it a few seconds!)</h2>`;
     reader.onload = function (e) {
         $('#imageResult')
             .attr('src', e.target.result);
@@ -1008,7 +1012,7 @@ $("#cam").fadeIn();
           document.getElementById("listOfFoodFromFoodAI").innerHTML =  "<div class='text-danger'>Please capture a proper food leh</div>"
         }
         else{
-          document.getElementById("resultsFromFoodAIScanning").innerHTML=`Results:<h4>Click on any title of food to search for it's list of nutritional count below!</h4>`;
+          document.getElementById("resultsFromFoodAIScanning").innerHTML=`<p style="color:white;">Results:</p><h4 style="color:white;">Click on any title of food to search for it's list of nutritional count below!</h4>`;
           document.getElementById("listOfFoodFromFoodAI").innerHTML= ""
 
           for (i in foodAIResponse.food_results){
@@ -1019,13 +1023,13 @@ $("#cam").fadeIn();
 
             <div class="row">
               <div class="col-xs-12">
-                <h4 class="listOfPossibleFood">${nameOfFood}</h4>
+                <h4 class="listOfPossibleFood" style="color:white;">${nameOfFood}</h4>
               </div>
               <div class="progress col-md-8 col-xs-8">
-                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;">
+                <div class="progress-bar bg-success" role="progressbar" style="color:white;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%;">
                 </div>
               </div>
-              <div class="col-md-4 col-xs-4">${percentage}%</div>
+              <div class="col-md-4 col-xs-4" style="color:white;">${percentage}%</div>
             </div>
 
 

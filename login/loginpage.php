@@ -27,7 +27,7 @@ if (isset ($_SESSION["login_page"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Document</title>
+    <title>Login Page</title>
     
     <link rel="stylesheet" type="text/css" href="login.css">
 	<script src="https://unpkg.com/vue@next"></script>
@@ -37,6 +37,8 @@ if (isset ($_SESSION["login_page"])){
 </head>
 
 <body>
+
+<div class="container">
 	<form action="process_login.php" method="post">
 <div class="login-wrap">
 	<div class="login-html">
@@ -100,7 +102,7 @@ if (isset ($_SESSION["login_page"])){
 	</div>
 </div>
 </form>
-
+</div>
 
 </body>
 </html>

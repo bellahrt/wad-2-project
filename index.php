@@ -803,9 +803,9 @@ function logout() {
         <div class="row">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="assets/img/yk.png" alt="">
-              <h4>Lim Yi Kiat</h4>
-              <span>Chief Executive Officer</span>
+              <img src="assets/img/yk.png" alt=""  style="height:120px">
+              <h4 class="text-dark">Lim Yi Kiat</h4>
+              <span style="color:#aaaaaa">Chief Executive Officer</span>
               <p>
                 Graduated from Harvard-MIT Program in Health Sciences and Technology.
               </p>
@@ -820,9 +820,9 @@ function logout() {
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member">
-              <img src="assets/img/elmer.png" alt="">
-              <h4>Elmer Yeo</h4>
-              <span>Product Manager</span>
+              <img src="assets/img/elmer.png" alt=""  style="height:120px">
+              <h4 class="text-dark">Elmer Yeo</h4>
+              <span  style="color:#aaaaaa">Product Manager</span>
               <p>
                 Graduated from Massachusetts Institute of Technology (MIT) Engineering.
               </p>
@@ -837,9 +837,9 @@ function logout() {
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member pt-5">
-              <img src="assets/img/glenna.png" alt="">
-              <h4>Glenna Ong</h4>
-              <span>CTO</span>
+              <img src="assets/img/glenna.png" alt=""  style="height:100px">
+              <h4 class="text-dark">Glenna Ong</h4>
+              <span style="color:#aaaaaa">CTO</span>
               <p>
                 Graduated from University of Cambridge. Major in Computer Science.
               </p>
@@ -854,9 +854,9 @@ function logout() {
 
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member pt-5">
-              <img src="assets/img/bella.png" alt="">
-              <h4>Bella Tan</h4>
-              <span>Big Boss</span>
+              <img src="assets/img/bella.png" alt="" style="height:100px">
+              <h4 class="text-dark">Bella Tan</h4>
+              <span style="color:#aaaaaa">Big Boss</span>
               <p>
                 Graduated from University of Cambridge. Major in Computer Science.
               </p>

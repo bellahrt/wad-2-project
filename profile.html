@@ -148,6 +148,8 @@
     
   </select>
   <canvas id="oilChart" width="600" height="400"></canvas>
+  <canvas id="oilChart1"  width="600" height="400"></canvas>
+  <canvas id="oilChart2"  width="600" height="400"></canvas>
     
 <!-------------------------- End Of Chart ---------------------------------------------->
 
@@ -941,6 +943,9 @@ $.ajax({
         
         msg = JSON.parse(msg)                    
         if (changes == "calories"){
+          document.getElementById("oilChart").style.display = "block";
+          document.getElementById("oilChart2").style.display = "none";
+          document.getElementById("oilChart1").style.display = "none";
           for (let i = 0; i < msg.length; i++){
           var eachNultrition = JSON.parse(msg[i].description)
           TotalCalories += parseFloat(eachNultrition.Calories)
@@ -1006,6 +1011,10 @@ var pieChart = new Chart(oilCanvas, {
         }
 
         else if( changes == "carbs" ){
+          document.getElementById("oilChart").style.display = "none";
+          document.getElementById("oilChart2").style.display = "none";
+          document.getElementById("oilChart1").style.display = "block";
+          
           var TotalCarb = 0
           for (let i = 0; i < msg.length; i++){
           var eachNultrition = JSON.parse(msg[i].description)
@@ -1020,7 +1029,7 @@ var pieChart = new Chart(oilCanvas, {
                     
                        
                         console.log(pieData)
-        var oilCanvas = document.getElementById("oilChart");
+        var oilCanvas = document.getElementById("oilChart1");
 
                     var oilData = {
                         labels: [
@@ -1048,6 +1057,9 @@ var pieChart = new Chart(oilCanvas, {
 
 
           else if( changes == "protein" ){
+            document.getElementById("oilChart").style.display = "none";
+          document.getElementById("oilChart2").style.display = "block";
+          document.getElementById("oilChart1").style.display = "none";
           var TotalProtein = 0
           for (let i = 0; i < msg.length; i++){
           var eachNultrition = JSON.parse(msg[i].description)
@@ -1062,7 +1074,7 @@ var pieChart = new Chart(oilCanvas, {
                     
                        
                         console.log(pieData)
-        var oilCanvas = document.getElementById("oilChart");
+        var oilCanvas = document.getElementById("oilChart2");
 
                     var oilData = {
                         labels: [
@@ -1097,7 +1109,7 @@ var pieChart = new Chart(oilCanvas, {
 
 
 }
-piechart("protein")
+piechart("calories")
 
 
     </script>

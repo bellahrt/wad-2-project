@@ -13,7 +13,7 @@ app.component('navbar', {
     template: `<div>
                     <div id="headerOne">
                         <div id="divLogo">
-                            <h2 id="headlineLogo">EATGREENS</h2>
+                            <h2 id="headlineLogo">HealthYou</h2>
                             <p id="paragLogo">Your personal nutrition tracker</p>
                         </div>
                     
@@ -31,7 +31,7 @@ app.component('home-navbar', {
                         <div class="container-fluid">
                             <header id="headerOne">	
                                 <div id="divLogo">
-                                    <h2 id="headlineLogo" >EATGREENS</h2>           
+                                    <h2 id="headlineLogo" >HealthYou</h2>           
                                 </div>
                             </header>
                         <button class="navbar-toggler  " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

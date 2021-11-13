@@ -13,10 +13,7 @@ require_once "common.php";
     if ( strlen($password) == 0 ) {
         $errors[] = "Password cannot be empty nor blank.";
     }
-    $email = $_POST['email'];
-    if ( strlen($email) == 0 ) {
-        $errors[] = "Email cannot be empty nor blank.";
-    }
+
     $confirm_password = $_POST["confirmPassword"];
 
 
@@ -34,10 +31,6 @@ require_once "common.php";
         }
     }
 
-    if(strpos($email, '@') == False){
-        $errors[] = "The email is invalid.";
-    }
-    
     if ( count($errors) > 0 ) {
 
         $_SESSION["errorspw"] = $errors;
@@ -49,7 +42,7 @@ require_once "common.php";
     
 
 $hashed = password_hash($password, PASSWORD_DEFAULT);
-$new_user = new User($username, $hashed, $email);
+$new_user = new User($username, $hashed);
 $dao = new UserDAO();
 
 $status = $dao->create($new_user);

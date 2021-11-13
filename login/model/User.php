@@ -3,12 +3,11 @@
 class User {
     private $username;
     private $passwordHash;
-    private $email;
 
-    function __construct($username, $passwordHash, $email) {
+
+    function __construct($username, $passwordHash) {
         $this->username = $username;
         $this->passwordHash = $passwordHash;
-        $this->email = $email;
     }
 
     public function getUsername(){
@@ -18,9 +17,7 @@ class User {
     public function getPasswordHash(){
         return $this->passwordHash;
     }
-    public function getEmail(){
-        return $this->email;
-    }
+
     public function setPasswordHash($hashed){
         $this->passwordHash = $hashed;
     }

@@ -16,6 +16,7 @@ Under the wad-2-project/login/model/ConnectionManager.php file, for mac users, c
 Open <a href="http://localhost/wad-2-project/index.php">http://localhost/wad-2-project/index.php</a>.
 This will redirect you to <a href="http://localhost/wad-2-project/login/loginpage.php">http://localhost/wad-2-project/login/loginpage.php</a>.
 Use the following username and password to sign in: 
+
 <p>username: testing12<br>
 password: </p>
 

@@ -134,7 +134,7 @@ const test = Vue.createApp({
         axios.get('https://bodybuilding-quotes1.p.rapidapi.com/quotes',{
             headers:{
                 "x-rapidapi-host": "bodybuilding-quotes1.p.rapidapi.com",
-                "x-rapidapi-key": "640bb4b515mshf3e831708c5a3e9p10a21bjsnee89eb2b6ed8"
+                "x-rapidapi-key": "2ec3dc195fmsh6764d68994bddcap11837cjsnbaf79804358e"
             },
             params:{
                 page: this.newpage

@@ -12,7 +12,7 @@ Under the wad-2-project/login/model/ConnectionManager.php file, for mac users, c
 <ol><li>Force quit Chrome by going to the mac menu and pressing “force quit” (or pressing command Q).</li>
 <li>Then run this command to open Chrome with web security disabled </li>
 <b>open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome — args — user-data-dir=”/tmp/chrome_dev_test” — disable-web-security</b>
-</ol></p>
+</ol><p>OR download google chrome extension "Allow CORS: Access-Control-Allow-Origin" </p></p>
 Open <a href="http://localhost/wad-2-project/index.php">http://localhost/wad-2-project/index.php</a>.
 This will redirect you to <a href="http://localhost/wad-2-project/login/loginpage.php">http://localhost/wad-2-project/login/loginpage.php</a>.
 Use the following username and password to sign in: 

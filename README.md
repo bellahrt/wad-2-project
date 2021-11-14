@@ -16,11 +16,9 @@ Under the wad-2-project/login/model/ConnectionManager.php file, for mac users, c
 Open <a href="http://localhost/wad-2-project/index.php">http://localhost/wad-2-project/index.php</a>.
 This will redirect you to <a href="http://localhost/wad-2-project/login/loginpage.php">http://localhost/wad-2-project/login/loginpage.php</a>.
 Use the following username and password to sign in: 
-<p>username: elvis<br>
-password: 123456 </p>
-Use the following username and password to sign in: </br>
-
-
+<br/>
+<p>username:elvis<br>
+password:123456</p>
 
 <h1>Features</h1>
 <li>In <a href="http://localhost/wad-2-project/foodCalorieTrackerPage.html">http://localhost/wad-2-project/foodCalorieTrackerPage.html</a>, users can track the calorie count of the food they eat or obtain the recipes and location of the food they wish to eat</li>

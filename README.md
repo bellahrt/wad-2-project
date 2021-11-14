@@ -18,7 +18,7 @@ This will redirect you to <a href="http://localhost/wad-2-project/login/loginpag
 Use the following username and password to sign in: 
 <br/>
 <p>username:elvis<br>
-password:123456</p>
+password:123456 </p>
 
 <h1>Features</h1>
 <li>In <a href="http://localhost/wad-2-project/foodCalorieTrackerPage.html">http://localhost/wad-2-project/foodCalorieTrackerPage.html</a>, users can track the calorie count of the food they eat or obtain the recipes and location of the food they wish to eat</li>

@@ -2,7 +2,7 @@
 This is a Fitness Webpage customised to help our user, YiKiat Lim. Yi Kiat Lim had set a goal to lose 10 pounds in the upcoming 3 months, however, he finds difficulty tracking calories for meals and often gives in to temptation. Hence, this application aims to problem-solve Yi Kiat Lim lack of disciplinary issue through tracking calories for him and enable him to stay on track to his desired goal weight!
 
 # How to set up your application based on the submitted file
-Open http://localhost/phpmyadmin/index.php and create a database name call "newnew" then import the database.sql which can be found in 2 folders under wad-2-project/login folder and wad-2-project/server folder where it is located within the folders at ConnectionManager.php file, for mac users, change the password from "" to "root" in both files.
+Open http://localhost/phpmyadmin/index.php and create a database name call "newnew" then import the database.sql which can be found in wad-2-project/login folder. For mac users, change the password from "" to "root" in 2 of the ConnectionManager.php files where it is located in wad-2-project/login/model folder and wad-2-project/server/model folder.
 
 <h1>How to run your application</h1>
 <p>For windows users, the application can be used with the inbuilt Run app on your desktop. Key<br> 
@@ -16,8 +16,8 @@ Open <a href="http://localhost/wad-2-project/index.php">http://localhost/wad-2-p
 This will redirect you to <a href="http://localhost/wad-2-project/login/loginpage.php">http://localhost/wad-2-project/login/loginpage.php</a>.
 Use the following username and password to sign in: 
 <br/>
-<p>username:elvis<br>
-password:123456 </p>
+<p>username: elvis<br>
+password: 123456 </p>
 
 <h1>Features</h1>
 <li>In <a href="http://localhost/wad-2-project/foodCalorieTrackerPage.html">http://localhost/wad-2-project/foodCalorieTrackerPage.html</a>, users can track the calorie count of the food they eat or obtain the recipes and location of the food they wish to eat</li>
